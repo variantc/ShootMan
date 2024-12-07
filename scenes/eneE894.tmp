@@ -1,0 +1,48 @@
+[gd_scene load_steps=11 format=3 uid="uid://b51lbdgysvfq1"]
+
+[ext_resource type="Script" path="res://scripts/enemy_standard.gd" id="1_5if6k"]
+[ext_resource type="Shader" path="res://shaders/enemy_standard.gdshader" id="3_bwe03"]
+[ext_resource type="Texture2D" uid="uid://byxxpwsjctwmn" path="res://sprites/pawn_0.png" id="3_y4vii"]
+[ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_tp4ts"]
+[ext_resource type="AudioStream" uid="uid://rw6vkwrnn4jm" path="res://sounds/explosions/explosion (2).wav" id="5_smh3g"]
+[ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="6_0ay5f"]
+[ext_resource type="AudioStream" uid="uid://dv2ay24mst4c7" path="res://sounds/explosions/explosion (4).wav" id="7_poka7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
+radius = 15.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfkgk"]
+shader = ExtResource("3_bwe03")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yj0ii"]
+streams_count = 4
+stream_0/stream = ExtResource("4_tp4ts")
+stream_1/stream = ExtResource("5_smh3g")
+stream_2/stream = ExtResource("6_0ay5f")
+stream_3/stream = ExtResource("7_poka7")
+
+[node name="EnemyStandard" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_5if6k")
+speed = 20.0
+ang_acc = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gelfa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_sfkgk")
+position = Vector2(1, -1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_y4vii")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_top = -2.0
+offset_right = 15.0
+offset_bottom = 2.0
+color = Color(1, 0, 0, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_yj0ii")
+autoplay = true

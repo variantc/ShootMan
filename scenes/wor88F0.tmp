@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvihe5bwamex7"]
+
+[ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
+[ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
+[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="1_irc5a"]
+[ext_resource type="PackedScene" uid="uid://bg3jhepeqaqn1" path="res://scenes/player.tscn" id="2_gkc74"]
+[ext_resource type="PackedScene" uid="uid://b51lbdgysvfq1" path="res://scenes/enemy_standard.tscn" id="3_6vcwx"]
+
+[node name="World" type="Node2D"]
+
+[node name="SoundManager" type="Node" parent="."]
+script = ExtResource("1_hjijg")
+
+[node name="EnemySpawner" type="Node" parent="."]
+script = ExtResource("1_irc5a")
+enemy_standard_scene = ExtResource("3_6vcwx")
+spawn_time = 0.1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 11550.0
+offset_bottom = 6700.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_b545p")
+stretch_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("2_gkc74")]
+position = Vector2(575, 350)
+shot_time = 0.2
+
+[node name="Enemy" parent="." instance=ExtResource("3_6vcwx")]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg3jhepeqaqn1"]
+[gd_scene load_steps=6 format=3 uid="uid://bg3jhepeqaqn1"]
 
 [ext_resource type="Texture2D" uid="uid://byxxpwsjctwmn" path="res://sprites/pawn_0.png" id="1_53m1k"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rrtky"]
 [ext_resource type="PackedScene" uid="uid://b8rvbitfa8jom" path="res://scenes/bullet.tscn" id="2_qp317"]
+[ext_resource type="PackedScene" uid="uid://cx2lutrqoqoro" path="res://scenes/components/movement_component.tscn" id="4_4x1rb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
 radius = 15.0
@@ -30,3 +31,5 @@ offset_top = -2.0
 offset_right = 15.0
 offset_bottom = 2.0
 color = Color(1, 0, 0, 1)
+
+[node name="MovementComponent" parent="." instance=ExtResource("4_4x1rb")]

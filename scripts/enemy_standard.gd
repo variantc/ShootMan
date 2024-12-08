@@ -6,6 +6,8 @@ class_name EnemyStandard
 @export var ang_acc : float
 @export var health : float
 
+@onready var movement_component = $MovementComponent as MovementComponent
+
 var player : Player
 var sound_manager : SoundManager
 
@@ -20,19 +22,18 @@ func _ready():
 
 
 func _process(delta):
+	#move_and_rotate(delta)
 	_move_and_rotate(delta)
+	
 
 	
 func _move_and_rotate(delta):
-	var player_pos = player.global_position
-	var target_angle = get_angle_to(player_pos)
-
-	# Limit the rotation based on ang_acc
-	var rotate_amount = clamp(target_angle, -ang_acc * delta, ang_acc * delta)
-	rotation += rotate_amount
-
-	velocity = (player_pos - global_position).normalized() * speed
-	move_and_slide()
+	movement_component.move_and_rotate(
+		delta, 
+		self, 
+		player.global_position,
+		speed,
+		ang_acc)
 	
 
 func hit(bullet : Bullet):

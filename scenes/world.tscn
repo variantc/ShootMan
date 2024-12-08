@@ -1,13 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=8 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="1_irc5a"]
+[ext_resource type="Script" path="res://scenes/references.gd" id="1_rlksj"]
 [ext_resource type="PackedScene" uid="uid://bg3jhepeqaqn1" path="res://scenes/player.tscn" id="2_gkc74"]
 [ext_resource type="PackedScene" uid="uid://b51lbdgysvfq1" path="res://scenes/enemy_standard.tscn" id="3_6vcwx"]
 [ext_resource type="Script" path="res://scripts/score_text.gd" id="6_86sgh"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_rlksj")
 
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("1_hjijg")
@@ -17,7 +19,7 @@ script = ExtResource("1_irc5a")
 enemy_standard_scene = ExtResource("3_6vcwx")
 spawn_time = 0.5
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Ground" type="TextureRect" parent="."]
 offset_right = 11550.0
 offset_bottom = 6700.0
 scale = Vector2(0.2, 0.2)
@@ -33,3 +35,5 @@ offset_bottom = 40.0
 text = "Points: 0
 "
 script = ExtResource("6_86sgh")
+
+[node name="GUI" type="Node" parent="."]

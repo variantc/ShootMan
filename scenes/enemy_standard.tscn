@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b51lbdgysvfq1"]
+[gd_scene load_steps=15 format=3 uid="uid://b51lbdgysvfq1"]
 
 [ext_resource type="Script" path="res://scripts/enemy_standard.gd" id="1_5if6k"]
 [ext_resource type="Shader" path="res://shaders/enemy_standard.gdshader" id="3_bwe03"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dbbxvnqc0l2b4" path="res://sounds/explosions/explosion (5).wav" id="8_k8jct"]
 [ext_resource type="AudioStream" uid="uid://45ndai6jryhf" path="res://sounds/explosions/explosion (6).wav" id="9_0q1f1"]
 [ext_resource type="AudioStream" uid="uid://cwxjmr02t3n7u" path="res://sounds/explosions/explosion (7).wav" id="10_dgjgp"]
+[ext_resource type="PackedScene" uid="uid://cx2lutrqoqoro" path="res://scenes/components/movement_component.tscn" id="11_0l3cy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
 radius = 15.0
@@ -53,5 +54,7 @@ color = Color(1, 0, 0, 1)
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_yj0ii")
+
+[node name="MovementComponent" parent="." instance=ExtResource("11_0l3cy")]
 
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

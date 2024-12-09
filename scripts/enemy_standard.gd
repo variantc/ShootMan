@@ -2,39 +2,38 @@ extends CharacterBody2D
 class_name EnemyStandard
 
 
+signal enemy_killed(enemy : EnemyStandard, audio : AudioStreamPlayer2D)
+
 @export var speed : float
 @export var ang_acc : float
 @export var health : float
 
 @onready var movement_component = $MovementComponent as MovementComponent
 
-var player : Player
-var sound_manager : SoundManager
-
-
-func _ready():
-	player = get_tree().root.get_child(0).find_child('Player')
-	if player == null:
-		print("ERROR: No Player found")
-	sound_manager = get_tree().root.get_child(0).find_child('SoundManager')
-	if sound_manager == null:
-		print("ERROR: No SoundManager found")
+var world : World
 
 
 func _process(delta):
 	#move_and_rotate(delta)
 	_move_and_rotate(delta)
 	
-
 	
 func _move_and_rotate(delta):
+	if world == null:
+		print("Error: EnemyStandard.world not assigned - has .enemy_setup() run?")
+	
 	movement_component.move_and_rotate(
 		delta, 
 		self, 
-		player.global_position,
+		world.player.global_position,
 		speed,
 		ang_acc)
 	
+
+func enemy_setup(world: World, position):
+	self.world = world
+	global_position = position
+
 
 func hit(bullet : Bullet):
 	var bullet_damage = health
@@ -45,12 +44,7 @@ func hit(bullet : Bullet):
 	
 
 func die():
-		# Play death sound which will signal queue_free on finished
-		sound_manager.play_sound(%AudioStreamPlayer2D.stream)
-		var score_text = get_tree().root.get_child(0).find_child('ScoreText')
-		if score_text == null:
-			print("ERROR: EnemyStandard cannot find 'ScoreText' in world")
-		score_text.update_points_by(1)
+		enemy_killed.emit(self, %AudioStreamPlayer2D)
 		queue_free()
 
 

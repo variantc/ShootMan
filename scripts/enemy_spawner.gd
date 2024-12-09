@@ -1,18 +1,33 @@
 extends Node
+class_name EnemySpawner
 
+
+signal enemy_spawned(enemy : EnemyStandard)
+
+@export var world : World
 @export var enemy_standard_scene : PackedScene
 @export var spawn_time : float
+@export var spawn_inc_time : float
 
-var counter = 0
+
+var spawn_counter = 0
+var inc_counter = 0
 
 
 func _process(delta):
-	counter += delta
-	if counter > spawn_time:
-		counter = 0
+	spawn_counter += delta
+	if spawn_counter > spawn_time:
+		spawn_counter = 0
 		var enemy = enemy_standard_scene.instantiate()
-		enemy.global_position = _get_random_edge_position()
+		enemy.enemy_setup(world, _get_random_edge_position())
 		self.add_child(enemy)
+		enemy_spawned.emit(enemy)
+		
+	inc_counter += delta
+	if inc_counter >= spawn_inc_time:
+		inc_counter = 0
+		spawn_time *= 0.9
+		print(spawn_time)
 
 
 func _get_random_edge_position():

@@ -30,7 +30,7 @@ stretch_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_gkc74")]
 position = Vector2(575, 350)
-shot_time = 0.5
+shot_time = 0.75
 
 [node name="ScoreText" type="RichTextLabel" parent="."]
 offset_right = 199.0

@@ -18,5 +18,6 @@ func _on_enemy_killed(enemy, audio):
 	drop_spawner.spawn_drop(enemy.global_position)
 
 
-func _on_drop_pickedup():
+func _on_drop_pickedup(audio : AudioStreamPlayer2D):
+	sound_manager.play_sound(audio.stream)
 	score_text.update_points_by(1)

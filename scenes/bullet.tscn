@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://xdyva7qo10dk" path="res://sounds/shots/shot_ (9).wav" id="10_miipn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx2ns"]
-size = Vector2(8, 8)
+size = Vector2(4, 4)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_k4n72"]
 streams_count = 9

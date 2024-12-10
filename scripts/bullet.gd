@@ -19,7 +19,8 @@ func setup( pos,
 			rot, 
 			new_speed : float, 
 			new_strength : float, 
-			new_spread : int = 0):
+			new_spread : int = 0,
+			new_scale : float = 1.0):
 
 	global_position = pos
 	rotation = rot
@@ -27,6 +28,7 @@ func setup( pos,
 	strength = new_strength
 	orig_strength = strength
 	spread = new_spread
+	scale = Vector2(new_scale, new_scale)
 	direction = Vector2(cos(rotation), sin(rotation)).normalized()
 	
 

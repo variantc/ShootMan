@@ -10,6 +10,8 @@ class_name Player
 @export var shot_speed : float
 @export var shot_strength : float
 @export var shot_time : float
+@export var shot_number : int
+@export var shot_spread : float
 
 @onready var movement_component = $MovementComponent as MovementComponent
 
@@ -22,17 +24,24 @@ func _ready():
 func _process(delta):
 	_move_and_rotate(delta)
 	_check_collision()
-	_shoot(shot_speed, shot_strength, delta)
+	_shoot(shot_speed, shot_strength, delta, shot_number, shot_spread)
 	
 	
-func _shoot(spd, strength, delta):
+func _shoot(spd, strength, delta, number=1, spread=0):
 	counter += delta
+	var rad_spread = spread * PI/180
 	if counter > shot_time:
-		var bullet = bullet_scene.instantiate() as Bullet
-		bullet.setup(global_position, rotation, spd, strength, 3)
-		
-		world.add_child(bullet)
 		counter = 0.0
+		for i in range(number):
+			var bullet = bullet_scene.instantiate() as Bullet
+			bullet.setup(
+				global_position, 
+				rotation - (rad_spread)/4 + i*rad_spread/number, 
+				spd, 
+				strength, 
+				3)
+			
+			world.add_child(bullet)
 	
 	
 func _move_and_rotate(delta):

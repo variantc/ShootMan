@@ -56,5 +56,3 @@ unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_yj0ii")
 
 [node name="MovementComponent" parent="." instance=ExtResource("11_0l3cy")]
-
-[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

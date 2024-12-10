@@ -14,7 +14,6 @@ var world : World
 
 
 func _process(delta):
-	#move_and_rotate(delta)
 	_move_and_rotate(delta)
 	
 	
@@ -46,7 +45,3 @@ func hit(bullet : Bullet):
 func die():
 		enemy_killed.emit(self, %AudioStreamPlayer2D)
 		queue_free()
-
-
-func _on_audio_stream_player_2d_finished():
-	self.queue_free()

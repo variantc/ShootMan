@@ -35,3 +35,4 @@ RMB={
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Bullet"
 2d_physics/layer_4="BulletDestroyer"
+2d_physics/layer_5="Drop"

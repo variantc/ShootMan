@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhy2erh2732mq"]
+
+[ext_resource type="Script" path="res://scripts/drop_standard.gd" id="1_rs0tx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6v8u"]
+size = Vector2(11, 11)
+
+[node name="drop_standard" type="Area2D" groups=["Drop"]]
+collision_layer = 16
+script = ExtResource("1_rs0tx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_u6v8u")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+color = Color(0, 0.183333, 1, 1)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

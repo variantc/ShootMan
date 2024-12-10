@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=13 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
@@ -6,8 +6,10 @@
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_rlksj"]
 [ext_resource type="PackedScene" uid="uid://bg3jhepeqaqn1" path="res://scenes/player.tscn" id="2_gkc74"]
 [ext_resource type="PackedScene" uid="uid://b51lbdgysvfq1" path="res://scenes/enemy_standard.tscn" id="3_6vcwx"]
+[ext_resource type="Script" path="res://scripts/drop_spawner.gd" id="5_2b576"]
 [ext_resource type="Script" path="res://scripts/score_text.gd" id="6_86sgh"]
-[ext_resource type="Script" path="res://scenes/bullet_destroyers.gd" id="8_o2mvc"]
+[ext_resource type="PackedScene" uid="uid://dhy2erh2732mq" path="res://scenes/drop_standard.tscn" id="6_llsii"]
+[ext_resource type="Script" path="res://scripts/bullet_destroyers.gd" id="8_o2mvc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4173a"]
 size = Vector2(40.5, 701)
@@ -17,6 +19,13 @@ size = Vector2(1195, 32)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_rlksj")
+
+[node name="Ground" type="TextureRect" parent="."]
+offset_right = 11550.0
+offset_bottom = 6700.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_b545p")
+stretch_mode = 1
 
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("1_hjijg")
@@ -28,12 +37,9 @@ enemy_standard_scene = ExtResource("3_6vcwx")
 spawn_time = 1.0
 spawn_inc_time = 10.0
 
-[node name="Ground" type="TextureRect" parent="."]
-offset_right = 11550.0
-offset_bottom = 6700.0
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_b545p")
-stretch_mode = 1
+[node name="DropSpawner" type="Node" parent="."]
+script = ExtResource("5_2b576")
+drop_scene = ExtResource("6_llsii")
 
 [node name="Player" parent="." instance=ExtResource("2_gkc74")]
 position = Vector2(575, 350)

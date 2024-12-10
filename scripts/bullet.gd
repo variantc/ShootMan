@@ -13,7 +13,6 @@ var life_counter : float = 0
 
 func _ready():
 	world = get_tree().root.get_child(0)
-	print(world)
 
 
 func setup( pos, 

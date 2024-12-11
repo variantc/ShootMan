@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=3 uid="uid://d264gao7bbsgt"]
+
+[ext_resource type="PackedScene" uid="uid://b51lbdgysvfq1" path="res://scenes/enemy_standard.tscn" id="1_xiih4"]
+[ext_resource type="Shader" path="res://shaders/enemy_standard.gdshader" id="2_216x1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5k1w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q65ld"]
+shader = ExtResource("2_216x1")
+shader_parameter/shade_color = Color(0.0674999, 0.81, 0, 1)
+shader_parameter/shade_intensity = 0.5
+
+[node name="attack_group" type="Node2D"]
+position = Vector2(557, 328)
+
+[node name="EnemyStandard" parent="." instance=ExtResource("1_xiih4")]
+material = SubResource("ShaderMaterial_w5k1w")
+position = Vector2(615, 335)
+speed = 80.0
+health = 25.0
+
+[node name="Sprite2D" parent="EnemyStandard" index="1"]
+material = SubResource("ShaderMaterial_q65ld")
+
+[node name="ColorRect" parent="EnemyStandard" index="2"]
+color = Color(1, 1, 1, 1)
+
+[node name="EnemyStandard2" parent="." instance=ExtResource("1_xiih4")]
+material = SubResource("ShaderMaterial_w5k1w")
+position = Vector2(615, -340)
+speed = 80.0
+health = 25.0
+
+[node name="Sprite2D" parent="EnemyStandard2" index="1"]
+material = SubResource("ShaderMaterial_q65ld")
+
+[node name="ColorRect" parent="EnemyStandard2" index="2"]
+color = Color(1, 1, 1, 1)
+
+[node name="EnemyStandard3" parent="." instance=ExtResource("1_xiih4")]
+material = SubResource("ShaderMaterial_w5k1w")
+position = Vector2(-572, -341)
+speed = 80.0
+health = 25.0
+
+[node name="Sprite2D" parent="EnemyStandard3" index="1"]
+material = SubResource("ShaderMaterial_q65ld")
+
+[node name="ColorRect" parent="EnemyStandard3" index="2"]
+color = Color(1, 1, 1, 1)
+
+[node name="EnemyStandard4" parent="." instance=ExtResource("1_xiih4")]
+material = SubResource("ShaderMaterial_w5k1w")
+position = Vector2(-576, 341)
+speed = 80.0
+health = 25.0
+
+[node name="Sprite2D" parent="EnemyStandard4" index="1"]
+material = SubResource("ShaderMaterial_q65ld")
+
+[node name="ColorRect" parent="EnemyStandard4" index="2"]
+color = Color(1, 1, 1, 1)
+
+[node name="EnemyStandard5" parent="." instance=ExtResource("1_xiih4")]
+material = SubResource("ShaderMaterial_w5k1w")
+position = Vector2(-577, -2)
+speed = 80.0
+health = 25.0
+
+[node name="Sprite2D" parent="EnemyStandard5" index="1"]
+material = SubResource("ShaderMaterial_q65ld")
+
+[node name="ColorRect" parent="EnemyStandard5" index="2"]
+color = Color(1, 1, 1, 1)
+
+[node name="EnemyStandard6" parent="." instance=ExtResource("1_xiih4")]
+material = SubResource("ShaderMaterial_w5k1w")
+position = Vector2(-6, -348)
+speed = 80.0
+health = 25.0
+
+[node name="Sprite2D" parent="EnemyStandard6" index="1"]
+material = SubResource("ShaderMaterial_q65ld")
+
+[node name="ColorRect" parent="EnemyStandard6" index="2"]
+color = Color(1, 1, 1, 1)
+
+[node name="EnemyStandard7" parent="." instance=ExtResource("1_xiih4")]
+material = SubResource("ShaderMaterial_w5k1w")
+position = Vector2(13, 342)
+speed = 80.0
+health = 25.0
+
+[node name="Sprite2D" parent="EnemyStandard7" index="1"]
+material = SubResource("ShaderMaterial_q65ld")
+
+[node name="ColorRect" parent="EnemyStandard7" index="2"]
+color = Color(1, 1, 1, 1)
+
+[editable path="EnemyStandard"]
+[editable path="EnemyStandard2"]
+[editable path="EnemyStandard3"]
+[editable path="EnemyStandard4"]
+[editable path="EnemyStandard5"]
+[editable path="EnemyStandard6"]
+[editable path="EnemyStandard7"]

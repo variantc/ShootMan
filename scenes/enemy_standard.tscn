@@ -17,6 +17,8 @@ radius = 15.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sfkgk"]
 shader = ExtResource("3_bwe03")
+shader_parameter/shade_color = Color(0.81, 0, 0, 1)
+shader_parameter/shade_intensity = 0.5
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yj0ii"]
 streams_count = 7

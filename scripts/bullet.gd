@@ -6,7 +6,7 @@ class_name Bullet
 var speed : float = 0.0
 var strength : float = 0.0
 var orig_strength : float = 0.0
-var spread : int = 0
+var scatter : int = 0
 var direction : Vector2 = Vector2.ZERO
 var lifetime : float = 5
 var life_counter : float = 0
@@ -19,7 +19,7 @@ func setup( pos,
 			rot, 
 			new_speed : float, 
 			new_strength : float, 
-			new_spread : int = 0,
+			new_scatter : int = 0,
 			new_scale : float = 1.0):
 
 	global_position = pos
@@ -27,7 +27,7 @@ func setup( pos,
 	speed = new_speed
 	strength = new_strength
 	orig_strength = strength
-	spread = new_spread
+	scatter = new_scatter
 	scale = Vector2(new_scale, new_scale)
 	direction = Vector2(cos(rotation), sin(rotation)).normalized()
 	
@@ -50,19 +50,19 @@ func _on_body_entered(body):
 
 
 func split_bullets():
-	if spread > 0:
-		for i in range(spread):
+	if scatter > 0:
+		for i in range(scatter):
 			var new_bullet = world.player.bullet_scene.instantiate() as Bullet
 			world.add_child(new_bullet)
 			# Calculate spread rotation
-			var spread_angle = deg_to_rad(randf()*360)  # You can adjust this base spread angle
-			var new_rot = rotation + spread_angle * (i - (spread - 1) / 2.0)
+			var scatter_angle = deg_to_rad(randf()*360)  # You can adjust this base spread angle
+			var new_rot = rotation + scatter_angle * (i - (scatter - 1) / 2.0)
 			
 			new_bullet.setup(global_position, 
 							new_rot, 
 							speed, 
 							orig_strength, 
-							max(spread-1,0))
+							max(scatter-1, 0))
 			# Recalculate direction for the new bullet
 			new_bullet.direction = Vector2(cos(new_bullet.rotation), sin(new_bullet.rotation)).normalized()
 

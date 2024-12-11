@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=14 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/score_text.gd" id="6_86sgh"]
 [ext_resource type="PackedScene" uid="uid://dhy2erh2732mq" path="res://scenes/drop_standard.tscn" id="6_llsii"]
 [ext_resource type="Script" path="res://scripts/bullet_destroyers.gd" id="8_o2mvc"]
+[ext_resource type="PackedScene" uid="uid://d264gao7bbsgt" path="res://scenes/attack_group.tscn" id="11_x2le3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4173a"]
 size = Vector2(40.5, 701)
@@ -74,7 +75,9 @@ script = ExtResource("1_irc5a")
 world = NodePath("..")
 enemy_standard_scene = ExtResource("3_6vcwx")
 spawn_time = 1.0
+spawn_group_time = 10.0
 spawn_inc_time = 10.0
+attack_group_scene = ExtResource("11_x2le3")
 
 [node name="DropSpawner" type="Node" parent="."]
 script = ExtResource("5_2b576")
@@ -82,10 +85,11 @@ drop_scene = ExtResource("6_llsii")
 
 [node name="Player" parent="." instance=ExtResource("2_gkc74")]
 position = Vector2(575, 350)
-shot_time = 0.5
-shot_number = 2
+speed = 100.0
+ang_acc = 5.0
+shot_number = 1
 shot_spread = 30.0
-bullet_scale = 2.5
+bullet_scale = 1.0
 
 [node name="ScoreText" type="RichTextLabel" parent="."]
 offset_right = 199.0

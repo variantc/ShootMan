@@ -13,6 +13,7 @@ class_name Player
 @export var shot_number : int
 @export var shot_spread : float
 @export var bullet_scale : float
+@export var scatter : int
 
 @onready var movement_component = $MovementComponent as MovementComponent
 
@@ -28,7 +29,7 @@ func _process(delta):
 	_shoot(shot_speed, shot_strength, delta, shot_number, shot_spread, bullet_scale)
 	
 	
-func _shoot(spd, strength, delta, number=1, spread=0, bul_scale=1):
+func _shoot(spd, strength, delta, number=1, spread=0.0, bul_scale=1.0):
 	counter += delta
 	var rad_spread = spread * PI/180
 	if counter > shot_time:
@@ -43,7 +44,7 @@ func _shoot(spd, strength, delta, number=1, spread=0, bul_scale=1):
 				rot, 
 				spd, 
 				strength, 
-				3,
+				scatter,
 				bul_scale)
 			
 			world.add_child(bullet)

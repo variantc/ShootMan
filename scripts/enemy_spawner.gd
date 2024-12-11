@@ -8,33 +8,63 @@ signal enemy_killed(enemy : EnemyStandard, audio_stream : AudioStreamPlayer2D)
 @export var world : World
 @export var enemy_standard_scene : PackedScene
 @export var spawn_time : float
+@export var spawn_group_time : float
 @export var spawn_inc_time : float
+
+@export var attack_group_scene : PackedScene
 
 var enemy_list : Array[EnemyStandard]
 
 var spawn_counter = 0
+var spawn_group_counter = 0
 var inc_counter = 0
 
 
 func _process(delta):
+	_run_spawn_timer(delta)
+	_run_spawn_group_timer(delta)
+	_run_spawn_increment_timer(delta)
+
+
+func _run_spawn_timer(delta):
 	spawn_counter += delta
 	if spawn_counter > spawn_time:
 		spawn_counter = 0
-		spawn_enemy()
+		_spawn_enemy()
 		
+	
+func _run_spawn_group_timer(delta):
+	spawn_group_counter += delta
+	if spawn_group_counter > spawn_group_time:
+		spawn_group_counter = 0
+		_spawn_attack_group()
+		
+		
+func _run_spawn_increment_timer(delta):
 	inc_counter += delta
 	if inc_counter >= spawn_inc_time:
 		inc_counter = 0
 		spawn_time *= 0.9
+	
 		
+func _spawn_attack_group():
+	var attack_group = attack_group_scene.instantiate()
+	self.add_child(attack_group)
+	for enemy : EnemyStandard in attack_group.get_children():
+		print('blah')
+		enemy.enemy_setup(world, enemy.global_position)
+		enemy_spawned.emit(enemy)
+		enemy_list.append(enemy)
+	
 		
-func spawn_enemy():
+func _spawn_enemy():
 	var enemy = enemy_standard_scene.instantiate() as EnemyStandard
 	enemy.enemy_killed.connect(_on_enemy_killed)
 	enemy.enemy_setup(world, _get_random_edge_position())
 	self.add_child(enemy)
 	enemy_spawned.emit(enemy)
 	enemy_list.append(enemy)
+	
 
 func _get_random_edge_position():
 	var viewport_rect = get_viewport().get_visible_rect()

@@ -7,11 +7,10 @@ signal enemy_killed(enemy : EnemyStandard, audio_stream : AudioStreamPlayer2D)
 
 @export var world : World
 @export var enemy_standard_scene : PackedScene
+@export var attack_group_scene : PackedScene
 @export var spawn_time : float
 @export var spawn_group_time : float
 @export var spawn_inc_time : float
-
-@export var attack_group_scene : PackedScene
 
 var enemy_list : Array[EnemyStandard]
 
@@ -51,19 +50,20 @@ func _spawn_attack_group():
 	var attack_group = attack_group_scene.instantiate()
 	self.add_child(attack_group)
 	for enemy : EnemyStandard in attack_group.get_children():
-		print('blah')
-		enemy.enemy_setup(world, enemy.global_position)
-		enemy_spawned.emit(enemy)
-		enemy_list.append(enemy)
+		_setup_enemy(enemy, enemy.global_position)
 	
 		
 func _spawn_enemy():
 	var enemy = enemy_standard_scene.instantiate() as EnemyStandard
-	enemy.enemy_killed.connect(_on_enemy_killed)
-	enemy.enemy_setup(world, _get_random_edge_position())
 	self.add_child(enemy)
+	_setup_enemy(enemy, _get_random_edge_position())
+	
+
+func _setup_enemy(enemy, spawn_pos : Vector2):
+	enemy.enemy_killed.connect(_on_enemy_killed)
 	enemy_spawned.emit(enemy)
 	enemy_list.append(enemy)
+	enemy.enemy_setup(world, spawn_pos)
 	
 
 func _get_random_edge_position():

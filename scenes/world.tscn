@@ -74,10 +74,10 @@ script = ExtResource("1_hjijg")
 script = ExtResource("1_irc5a")
 world = NodePath("..")
 enemy_standard_scene = ExtResource("3_6vcwx")
-spawn_time = 1.0
-spawn_group_time = 10.0
-spawn_inc_time = 10.0
 attack_group_scene = ExtResource("11_x2le3")
+spawn_time = 1.0
+spawn_group_time = 2.0
+spawn_inc_time = 10.0
 
 [node name="DropSpawner" type="Node" parent="."]
 script = ExtResource("5_2b576")

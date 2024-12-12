@@ -8,6 +8,9 @@ func move_and_rotate(delta,
 		speed: float, 
 		ang_acc: float,
 		reverse: bool = false):
+
+	if speed < 0.001:
+		print(body.name + ": has zero speed, is this intentional?")
 			
 	var target_angle = body.get_angle_to(target)
 

@@ -7,29 +7,40 @@ signal enemy_killed(enemy : EnemyStandard, audio_stream : AudioStreamPlayer2D)
 
 @export var world : World
 @export var enemy_standard_scene : PackedScene
+@export var enemy_spiral_scene : PackedScene
 @export var attack_group_scene : PackedScene
-@export var spawn_time : float
+@export var spawn_enemy_standard_time : float
+@export var spawn_enemy_spiral_time : float
 @export var spawn_group_time : float
 @export var spawn_inc_time : float
 
 var enemy_list : Array[EnemyStandard]
 
-var spawn_counter = 0
+var spawn_enemy_standard_counter = 0
+var spawn_enemy_spiral_counter = 0
 var spawn_group_counter = 0
 var inc_counter = 0
 
 
 func _process(delta):
-	_run_spawn_timer(delta)
+	_run_spawn_enemy_standard_timer(delta)
+	_run_spawn_enemy_spiral_timer(delta)
 	_run_spawn_group_timer(delta)
 	_run_spawn_increment_timer(delta)
 
 
-func _run_spawn_timer(delta):
-	spawn_counter += delta
-	if spawn_counter > spawn_time:
-		spawn_counter = 0
-		_spawn_enemy()
+func _run_spawn_enemy_standard_timer(delta):
+	spawn_enemy_standard_counter += delta
+	if spawn_enemy_standard_counter > spawn_enemy_standard_time:
+		spawn_enemy_standard_counter = 0
+		_spawn_enemy(enemy_standard_scene)
+		
+		
+func _run_spawn_enemy_spiral_timer(delta):
+	spawn_enemy_spiral_counter += delta
+	if spawn_enemy_spiral_counter > spawn_enemy_spiral_time:
+		spawn_enemy_spiral_counter = 0
+		_spawn_enemy(enemy_spiral_scene)
 		
 	
 func _run_spawn_group_timer(delta):
@@ -43,7 +54,8 @@ func _run_spawn_increment_timer(delta):
 	inc_counter += delta
 	if inc_counter >= spawn_inc_time:
 		inc_counter = 0
-		spawn_time *= 0.9
+		spawn_enemy_standard_time *= 0.9
+		spawn_enemy_spiral_counter *= 0.9
 	
 		
 func _spawn_attack_group():
@@ -53,8 +65,8 @@ func _spawn_attack_group():
 		_setup_enemy(enemy, enemy.global_position)
 	
 		
-func _spawn_enemy():
-	var enemy = enemy_standard_scene.instantiate() as EnemyStandard
+func _spawn_enemy(enemy_scene : PackedScene):
+	var enemy = enemy_scene.instantiate() #as EnemyStandard
 	self.add_child(enemy)
 	_setup_enemy(enemy, _get_random_edge_position())
 	

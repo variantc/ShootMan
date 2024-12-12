@@ -1,14 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://d264gao7bbsgt"]
+[gd_scene load_steps=14 format=3 uid="uid://d264gao7bbsgt"]
 
 [ext_resource type="PackedScene" uid="uid://b51lbdgysvfq1" path="res://scenes/enemy_standard.tscn" id="1_xiih4"]
 [ext_resource type="Shader" path="res://shaders/enemy_standard.gdshader" id="2_216x1"]
+[ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_dwtdw"]
+[ext_resource type="AudioStream" uid="uid://rw6vkwrnn4jm" path="res://sounds/explosions/explosion (2).wav" id="5_jcu4q"]
+[ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="6_xwq0e"]
+[ext_resource type="AudioStream" uid="uid://dv2ay24mst4c7" path="res://sounds/explosions/explosion (4).wav" id="7_indn6"]
+[ext_resource type="AudioStream" uid="uid://dbbxvnqc0l2b4" path="res://sounds/explosions/explosion (5).wav" id="8_dp2pb"]
+[ext_resource type="AudioStream" uid="uid://45ndai6jryhf" path="res://sounds/explosions/explosion (6).wav" id="9_axiaq"]
+[ext_resource type="AudioStream" uid="uid://cwxjmr02t3n7u" path="res://sounds/explosions/explosion (7).wav" id="10_ychg5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w5k1w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
+radius = 15.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q65ld"]
 shader = ExtResource("2_216x1")
 shader_parameter/shade_color = Color(0.0674999, 0.81, 0, 1)
 shader_parameter/shade_intensity = 0.5
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yj0ii"]
+streams_count = 7
+stream_0/stream = ExtResource("4_dwtdw")
+stream_1/stream = ExtResource("5_jcu4q")
+stream_2/stream = ExtResource("6_xwq0e")
+stream_3/stream = ExtResource("7_indn6")
+stream_4/stream = ExtResource("8_dp2pb")
+stream_5/stream = ExtResource("9_axiaq")
+stream_6/stream = ExtResource("10_ychg5")
 
 [node name="attack_group" type="Node2D"]
 position = Vector2(557, 328)
@@ -16,7 +36,11 @@ position = Vector2(557, 328)
 [node name="EnemyStandard" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
 position = Vector2(615, 335)
-speed = 80.0
+speed = 70.0
+health = 20.0
+
+[node name="CollisionShape2D" parent="EnemyStandard" index="0"]
+shape = SubResource("CircleShape2D_gelfa")
 
 [node name="Sprite2D" parent="EnemyStandard" index="1"]
 material = SubResource("ShaderMaterial_q65ld")
@@ -24,10 +48,17 @@ material = SubResource("ShaderMaterial_q65ld")
 [node name="ColorRect" parent="EnemyStandard" index="2"]
 color = Color(1, 1, 1, 1)
 
+[node name="AudioStreamPlayer2D" parent="EnemyStandard" index="3"]
+stream = SubResource("AudioStreamRandomizer_yj0ii")
+
 [node name="EnemyStandard2" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
 position = Vector2(615, -340)
-speed = 80.0
+speed = 70.0
+health = 20.0
+
+[node name="CollisionShape2D" parent="EnemyStandard2" index="0"]
+shape = SubResource("CircleShape2D_gelfa")
 
 [node name="Sprite2D" parent="EnemyStandard2" index="1"]
 material = SubResource("ShaderMaterial_q65ld")
@@ -35,10 +66,17 @@ material = SubResource("ShaderMaterial_q65ld")
 [node name="ColorRect" parent="EnemyStandard2" index="2"]
 color = Color(1, 1, 1, 1)
 
+[node name="AudioStreamPlayer2D" parent="EnemyStandard2" index="3"]
+stream = SubResource("AudioStreamRandomizer_yj0ii")
+
 [node name="EnemyStandard3" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
 position = Vector2(-572, -341)
-speed = 80.0
+speed = 70.0
+health = 20.0
+
+[node name="CollisionShape2D" parent="EnemyStandard3" index="0"]
+shape = SubResource("CircleShape2D_gelfa")
 
 [node name="Sprite2D" parent="EnemyStandard3" index="1"]
 material = SubResource("ShaderMaterial_q65ld")
@@ -46,10 +84,17 @@ material = SubResource("ShaderMaterial_q65ld")
 [node name="ColorRect" parent="EnemyStandard3" index="2"]
 color = Color(1, 1, 1, 1)
 
+[node name="AudioStreamPlayer2D" parent="EnemyStandard3" index="3"]
+stream = SubResource("AudioStreamRandomizer_yj0ii")
+
 [node name="EnemyStandard4" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
 position = Vector2(-576, 341)
-speed = 80.0
+speed = 70.0
+health = 20.0
+
+[node name="CollisionShape2D" parent="EnemyStandard4" index="0"]
+shape = SubResource("CircleShape2D_gelfa")
 
 [node name="Sprite2D" parent="EnemyStandard4" index="1"]
 material = SubResource("ShaderMaterial_q65ld")
@@ -57,10 +102,17 @@ material = SubResource("ShaderMaterial_q65ld")
 [node name="ColorRect" parent="EnemyStandard4" index="2"]
 color = Color(1, 1, 1, 1)
 
+[node name="AudioStreamPlayer2D" parent="EnemyStandard4" index="3"]
+stream = SubResource("AudioStreamRandomizer_yj0ii")
+
 [node name="EnemyStandard5" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
 position = Vector2(-577, -2)
-speed = 80.0
+speed = 70.0
+health = 20.0
+
+[node name="CollisionShape2D" parent="EnemyStandard5" index="0"]
+shape = SubResource("CircleShape2D_gelfa")
 
 [node name="Sprite2D" parent="EnemyStandard5" index="1"]
 material = SubResource("ShaderMaterial_q65ld")
@@ -68,10 +120,17 @@ material = SubResource("ShaderMaterial_q65ld")
 [node name="ColorRect" parent="EnemyStandard5" index="2"]
 color = Color(1, 1, 1, 1)
 
+[node name="AudioStreamPlayer2D" parent="EnemyStandard5" index="3"]
+stream = SubResource("AudioStreamRandomizer_yj0ii")
+
 [node name="EnemyStandard6" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
 position = Vector2(-6, -348)
-speed = 80.0
+speed = 70.0
+health = 20.0
+
+[node name="CollisionShape2D" parent="EnemyStandard6" index="0"]
+shape = SubResource("CircleShape2D_gelfa")
 
 [node name="Sprite2D" parent="EnemyStandard6" index="1"]
 material = SubResource("ShaderMaterial_q65ld")
@@ -79,16 +138,26 @@ material = SubResource("ShaderMaterial_q65ld")
 [node name="ColorRect" parent="EnemyStandard6" index="2"]
 color = Color(1, 1, 1, 1)
 
+[node name="AudioStreamPlayer2D" parent="EnemyStandard6" index="3"]
+stream = SubResource("AudioStreamRandomizer_yj0ii")
+
 [node name="EnemyStandard7" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
 position = Vector2(13, 342)
-speed = 80.0
+speed = 70.0
+health = 20.0
+
+[node name="CollisionShape2D" parent="EnemyStandard7" index="0"]
+shape = SubResource("CircleShape2D_gelfa")
 
 [node name="Sprite2D" parent="EnemyStandard7" index="1"]
 material = SubResource("ShaderMaterial_q65ld")
 
 [node name="ColorRect" parent="EnemyStandard7" index="2"]
 color = Color(1, 1, 1, 1)
+
+[node name="AudioStreamPlayer2D" parent="EnemyStandard7" index="3"]
+stream = SubResource("AudioStreamRandomizer_yj0ii")
 
 [editable path="EnemyStandard"]
 [editable path="EnemyStandard2"]

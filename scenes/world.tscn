@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=15 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/drop_spawner.gd" id="5_2b576"]
 [ext_resource type="Script" path="res://scripts/score_text.gd" id="6_86sgh"]
 [ext_resource type="PackedScene" uid="uid://dhy2erh2732mq" path="res://scenes/drop_standard.tscn" id="6_llsii"]
+[ext_resource type="PackedScene" uid="uid://ckskkkn4w07o3" path="res://scenes/enemy_spiral.tscn" id="7_gpqxu"]
 [ext_resource type="Script" path="res://scripts/bullet_destroyers.gd" id="8_o2mvc"]
 [ext_resource type="PackedScene" uid="uid://d264gao7bbsgt" path="res://scenes/attack_group.tscn" id="11_x2le3"]
 
@@ -74,10 +75,12 @@ script = ExtResource("1_hjijg")
 script = ExtResource("1_irc5a")
 world = NodePath("..")
 enemy_standard_scene = ExtResource("3_6vcwx")
+enemy_spiral_scene = ExtResource("7_gpqxu")
 attack_group_scene = ExtResource("11_x2le3")
-spawn_time = 1.0
-spawn_group_time = 2.0
-spawn_inc_time = 10.0
+spawn_enemy_standard_time = 1.5
+spawn_enemy_spiral_time = 3.0
+spawn_group_time = 10.0
+spawn_inc_time = 30.0
 
 [node name="DropSpawner" type="Node" parent="."]
 script = ExtResource("5_2b576")
@@ -87,6 +90,8 @@ drop_scene = ExtResource("6_llsii")
 position = Vector2(575, 350)
 speed = 100.0
 ang_acc = 5.0
+shot_speed = 750.0
+shot_time = 0.25
 shot_number = 1
 shot_spread = 30.0
 bullet_scale = 1.0

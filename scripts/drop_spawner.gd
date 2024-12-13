@@ -5,6 +5,11 @@ signal drop_picked_up(audio : AudioStreamPlayer2D)
 
 @export var drop_scene : PackedScene
 
+var world : World
+
+func _ready():
+	world = get_parent() as World
+
 
 func spawn_drop(position : Vector2):
 	var drop = drop_scene.instantiate() as DropStandard

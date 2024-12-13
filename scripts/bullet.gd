@@ -20,6 +20,7 @@ func setup( pos,
 			new_speed : float, 
 			new_strength : float, 
 			new_scatter : int = 0,
+			new_lifetime : float = 5,    # CURRENTLY UNUSED
 			new_scale : float = 1.0):
 
 	global_position = pos
@@ -28,6 +29,7 @@ func setup( pos,
 	strength = new_strength
 	orig_strength = strength
 	scatter = new_scatter
+	lifetime = new_lifetime
 	scale = Vector2(new_scale, new_scale)
 	direction = Vector2(cos(rotation), sin(rotation)).normalized()
 	

@@ -29,9 +29,9 @@ func _move_and_rotate(delta):
 		ang_acc)
 	
 
-func enemy_setup(game_world: World, position):
+func enemy_setup(game_world: World, pos : Vector2):
 	self.world = game_world
-	global_position = position
+	global_position = pos
 
 
 func hit(bullet : Bullet):

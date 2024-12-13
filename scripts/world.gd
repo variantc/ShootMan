@@ -8,6 +8,7 @@ class_name World
 @onready var enemy_spawner := $EnemySpawner as EnemySpawner
 @onready var score_text := $ScoreText as RichTextLabel
 
+
 func _ready():
 	drop_spawner.drop_to_player.connect(_on_drop_to_player)
 	drop_spawner.drop_picked_up.connect(_on_drop_pickedup)

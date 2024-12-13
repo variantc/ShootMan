@@ -9,9 +9,9 @@ signal drop_picked_up(audio : AudioStreamPlayer2D)
 
 func spawn_drop(position : Vector2):
 	var drop = drop_scene.instantiate() as DropStandard
+	call_deferred("add_child", drop)
 	drop.drop_picked_up.connect(_on_drop_picked_up)
 	drop.drop_to_player.connect(_on_drop_to_player)
-	add_child(drop)
 	drop.global_position = position
 
 

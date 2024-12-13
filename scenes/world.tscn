@@ -91,7 +91,6 @@ position = Vector2(575, 350)
 speed = 100.0
 ang_acc = 5.0
 shot_speed = 750.0
-shot_strength = 100.0
 shot_time = 0.25
 shot_number = 1
 shot_spread = 30.0

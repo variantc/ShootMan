@@ -14,7 +14,7 @@ func _ready():
 	%CollisionShape2D.shape.radius = pickup_radius
 
 
-func _process(delta):
+func _process(_delta):
 	if player:
 		_move_to_player()
 

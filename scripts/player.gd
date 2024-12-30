@@ -14,6 +14,7 @@ class_name Player
 @export var shot_spread : float
 @export var bullet_scale : float
 @export var scatter : int
+@export var repeat_scatter : bool
 
 @onready var movement_component = $MovementComponent as MovementComponent
 
@@ -26,7 +27,14 @@ func _ready():
 func _process(delta):
 	_move_and_rotate(delta)
 	_check_collision()
-	_shoot(shot_speed, shot_strength, delta, shot_number, shot_spread, bullet_scale)
+	_shoot(
+		shot_speed, 
+		shot_strength, 
+		delta, 
+		shot_number, 
+		shot_spread, 
+		bullet_scale
+	)
 	
 	
 func _shoot(spd, strength, delta, number=1, spread=0.0, bul_scale=1.0):

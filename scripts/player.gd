@@ -53,6 +53,7 @@ func _shoot(spd, strength, delta, number=1, spread=0.0, bul_scale=1.0):
 				spd, 
 				strength, 
 				scatter,
+				repeat_scatter,
 				bul_scale)
 			
 			world.add_child(bullet)

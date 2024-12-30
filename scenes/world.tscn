@@ -91,11 +91,10 @@ position = Vector2(575, 350)
 speed = 100.0
 ang_acc = 5.0
 shot_speed = 750.0
-shot_time = 0.25
 shot_number = 1
 shot_spread = 30.0
 bullet_scale = 1.5
-scatter = 2
+scatter = 4
 
 [node name="ScoreText" type="RichTextLabel" parent="."]
 offset_right = 199.0

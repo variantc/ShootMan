@@ -10,6 +10,7 @@ var scatter : int = 0
 var direction : Vector2 = Vector2.ZERO
 var lifetime : float = 5
 var life_counter : float = 0
+var repeat_scatter : bool = false
 
 func _ready():
 	world = get_tree().root.get_child(0)
@@ -20,6 +21,7 @@ func setup( pos,
 			new_speed : float, 
 			new_strength : float, 
 			new_scatter : int = 0,
+			new_repeat_scatter : bool = false,
 			new_scale : float = 1.0,
 			new_lifetime : float = 5):    # new_lifetime CURRENTLY UNUSED
 
@@ -29,6 +31,7 @@ func setup( pos,
 	strength = new_strength
 	orig_strength = strength
 	scatter = new_scatter
+	repeat_scatter = new_repeat_scatter
 	scale = Vector2(new_scale, new_scale)
 	lifetime = new_lifetime
 	direction = Vector2(cos(rotation), sin(rotation)).normalized()
@@ -60,11 +63,14 @@ func split_bullets():
 			var scatter_angle = deg_to_rad(randf()*360)  # You can adjust this base spread angle
 			var new_rot = rotation + scatter_angle * (i - (scatter - 1) / 2.0)
 			
+			# Check if we want repeat scattering:
+			var sub_scatter = scatter-1 if repeat_scatter else 0
+			
 			new_bullet.setup(global_position, 
 							new_rot, 
 							speed, 
 							orig_strength, 
-							max(scatter-1, 0))
+							max(sub_scatter, 0))
 			# Recalculate direction for the new bullet
 			new_bullet.direction = Vector2(cos(new_bullet.rotation), sin(new_bullet.rotation)).normalized()
 

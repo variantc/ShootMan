@@ -12,28 +12,23 @@ var lifetime : float = 5
 var life_counter : float = 0
 var repeat_scatter : bool = false
 
+var bullet_resource : BulletResource
+
 func _ready():
 	world = get_tree().root.get_child(0)
 
 
-func setup( pos, 
-			rot, 
-			new_speed : float, 
-			new_strength : float, 
-			new_scatter : int = 0,
-			new_repeat_scatter : bool = false,
-			new_scale : float = 1.0,
-			new_lifetime : float = 5):    # new_lifetime CURRENTLY UNUSED
+func setup( bullet_stats ):    # new_lifetime CURRENTLY UNUSED
 
-	global_position = pos
-	rotation = rot
-	speed = new_speed
-	strength = new_strength
+	global_position = bullet_stats.position
+	rotation = bullet_stats.rotation
+	speed = bullet_stats.speed
+	strength = bullet_stats.strength
 	orig_strength = strength
-	scatter = new_scatter
-	repeat_scatter = new_repeat_scatter
-	scale = Vector2(new_scale, new_scale)
-	lifetime = new_lifetime
+	scatter = bullet_stats.scatter
+	repeat_scatter = bullet_stats.repeat_scatter
+	scale = Vector2(bullet_stats.scale, bullet_stats.scale)
+	lifetime = bullet_stats.lifetime
 	direction = Vector2(cos(rotation), sin(rotation)).normalized()
 	
 
@@ -61,19 +56,18 @@ func split_bullets():
 			world.add_child(new_bullet)
 			# Calculate spread rotation
 			var scatter_angle = deg_to_rad(randf()*360)  # You can adjust this base spread angle
-			var new_rot = rotation + scatter_angle * (i - (scatter - 1) / 2.0)
+			var new_rot = global_rotation + scatter_angle * (i - (scatter - 1) / 2.0)
 			
 			# Check if we want repeat scattering:
 			var sub_scatter = scatter-1 if repeat_scatter else 0
 			
-			new_bullet.setup(global_position, 
-							new_rot, 
-							speed, 
-							orig_strength, 
-							max(sub_scatter, 0),
-							false,
-							1.0,
-							1.5)
+			var bullet_stats = load("res://resources/bullet.tres") as BulletResource
+			bullet_stats.posisiton = global_position
+			bullet_stats.rotation = new_rot
+			bullet_stats.speed = speed
+			bullet_stats.strength = orig_strength
+			bullet_stats.scatter = scatter
+			new_bullet.setup(bullet_stats)
 			# Recalculate direction for the new bullet
 			new_bullet.direction = Vector2(cos(new_bullet.rotation), sin(new_bullet.rotation)).normalized()
 

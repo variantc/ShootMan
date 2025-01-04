@@ -48,14 +48,16 @@ func _shoot(spd, strength, delta, number=1, spread=0.0, bul_scale=1.0):
 				rot = rotation - (rad_spread)/2 + (i * rad_spread)/number
 			var bullet = bullet_scene.instantiate() as Bullet
 			world.add_child(bullet)
-			bullet.setup(
-				global_position, 
-				rot, 
-				spd, 
-				strength, 
-				scatter,
-				repeat_scatter,
-				bul_scale)
+			var bullet_stats = load("res://resources/bullet.tres") as BulletResource
+			bullet_stats.posisiton = global_position
+			bullet_stats.rotation = global_rotation
+			bullet_stats.speed = spd
+			bullet_stats.strength = strength
+			bullet_stats.scatter = scatter
+			bullet_stats.repeat_scatter = repeat_scatter
+			bullet_stats.scale = bul_scale
+			
+			bullet.setup(bullet_stats)
 			
 	
 	

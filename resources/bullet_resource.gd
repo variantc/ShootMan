@@ -3,7 +3,7 @@ class_name BulletResource
 
 @export var id: String
 @export var posisiton : Vector2 
-@export var rotation : Vector2 
+@export var rotation : float 
 @export var speed : float
 @export var strength : float
 @export var scatter : int = 0

@@ -88,13 +88,18 @@ drop_scene = ExtResource("6_llsii")
 
 [node name="Player" parent="." instance=ExtResource("2_gkc74")]
 position = Vector2(575, 350)
+slide_on_ceiling = false
+floor_stop_on_slope = false
+floor_block_on_wall = false
+floor_max_angle = 0.0
+floor_snap_length = 0.0
 speed = 100.0
-ang_acc = 5.0
-shot_speed = 750.0
-shot_number = 1
+ang_acc = 10.0
+shot_time = 0.2
+shot_number = 5
 shot_spread = 30.0
-bullet_scale = 1.5
-scatter = 40
+bullet_scale = 1.0
+scatter = 4
 
 [node name="ScoreText" type="RichTextLabel" parent="."]
 offset_right = 199.0

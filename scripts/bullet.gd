@@ -73,7 +73,7 @@ func split_bullets():
 							max(sub_scatter, 0),
 							false,
 							1.0,
-							0.1)
+							1.5)
 			# Recalculate direction for the new bullet
 			new_bullet.direction = Vector2(cos(new_bullet.rotation), sin(new_bullet.rotation)).normalized()
 

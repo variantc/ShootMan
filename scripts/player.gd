@@ -45,8 +45,9 @@ func _shoot(spd, strength, delta, number=1, spread=0.0, bul_scale=1.0):
 		for i in range(number):
 			var rot = rotation
 			if number != 1:
-				rot = rotation - (rad_spread)/4 + i*rad_spread/number
+				rot = rotation - (rad_spread)/2 + (i * rad_spread)/number
 			var bullet = bullet_scene.instantiate() as Bullet
+			world.add_child(bullet)
 			bullet.setup(
 				global_position, 
 				rot, 
@@ -56,7 +57,6 @@ func _shoot(spd, strength, delta, number=1, spread=0.0, bul_scale=1.0):
 				repeat_scatter,
 				bul_scale)
 			
-			world.add_child(bullet)
 	
 	
 func _move_and_rotate(delta):

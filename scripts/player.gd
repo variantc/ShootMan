@@ -38,19 +38,25 @@ func _process(delta):
 	
 	
 func _shoot(spd, strength, delta, number=1, spread=0.0, bul_scale=1.0):
+	if number == 0:
+		print("ERROR: Shot number is zero!")
+		return
+		
 	counter += delta
 	var rad_spread = spread * PI/180
 	if counter > shot_time:
 		counter = 0.0
 		for i in range(number):
-			var rot = rotation
-			if number != 1:
-				rot = rotation - (rad_spread)/2 + (i * rad_spread)/number
+			var rot = global_rotation
+			if number > 1:
+				rot = global_rotation - (rad_spread)/2 + i * rad_spread/(number-1)
 			var bullet = bullet_scene.instantiate() as Bullet
 			world.add_child(bullet)
+			
 			var bullet_stats = load("res://resources/bullet.tres") as BulletResource
-			bullet_stats.posisiton = global_position
-			bullet_stats.rotation = global_rotation
+			
+			bullet_stats.bullet_position = global_position
+			bullet_stats.rotation = rot
 			bullet_stats.speed = spd
 			bullet_stats.strength = strength
 			bullet_stats.scatter = scatter

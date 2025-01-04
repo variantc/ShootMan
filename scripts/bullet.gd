@@ -18,9 +18,9 @@ func _ready():
 	world = get_tree().root.get_child(0)
 
 
-func setup( bullet_stats ):    # new_lifetime CURRENTLY UNUSED
+func setup( bullet_stats : BulletResource ):    # new_lifetime CURRENTLY UNUSED
 
-	global_position = bullet_stats.position
+	global_position = bullet_stats.bullet_position
 	rotation = bullet_stats.rotation
 	speed = bullet_stats.speed
 	strength = bullet_stats.strength
@@ -62,7 +62,7 @@ func split_bullets():
 			var sub_scatter = scatter-1 if repeat_scatter else 0
 			
 			var bullet_stats = load("res://resources/bullet.tres") as BulletResource
-			bullet_stats.posisiton = global_position
+			bullet_stats.bullet_position = global_position
 			bullet_stats.rotation = new_rot
 			bullet_stats.speed = speed
 			bullet_stats.strength = orig_strength

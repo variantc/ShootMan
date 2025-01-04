@@ -2,7 +2,7 @@ extends Resource
 class_name BulletResource
 
 @export var id: String
-@export var posisiton : Vector2 
+@export var bullet_position : Vector2 
 @export var rotation : float 
 @export var speed : float
 @export var strength : float

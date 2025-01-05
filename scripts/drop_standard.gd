@@ -1,8 +1,6 @@
 extends Area2D
 class_name DropStandard
 
-signal drop_to_player(drop : DropStandard)
-signal drop_picked_up(audio : AudioStreamPlayer2D)
 
 @export var pickup_radius : int
 @export var pickup_speed = 2
@@ -20,7 +18,7 @@ func _process(_delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
-		drop_to_player.emit(self)
+		SignalBus.drop_to_player.emit(self)
 
 
 func _move_to_player():
@@ -30,5 +28,5 @@ func _move_to_player():
 		
 	
 func picked_up():
-	drop_picked_up.emit(%AudioStreamPlayer2D)
+	SignalBus.drop_picked_up.emit(%AudioStreamPlayer2D)
 	queue_free()

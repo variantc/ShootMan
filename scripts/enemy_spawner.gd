@@ -2,9 +2,6 @@ extends Node
 class_name EnemySpawner
 
 
-signal enemy_spawned(enemy : EnemyStandard)
-signal enemy_killed(enemy : EnemyStandard, audio_stream : AudioStreamPlayer2D)
-
 @export var world : World
 @export var enemy_standard_scene : PackedScene
 @export var enemy_spiral_scene : PackedScene
@@ -72,8 +69,7 @@ func _spawn_enemy(enemy_scene : PackedScene):
 	
 
 func _setup_enemy(enemy, spawn_pos : Vector2):
-	enemy.enemy_killed.connect(_on_enemy_killed)
-	enemy_spawned.emit(enemy)
+	SignalBus.enemy_spawned.emit(enemy)
 	enemy_list.append(enemy)
 	enemy.enemy_setup(world, spawn_pos)
 	
@@ -96,6 +92,5 @@ func _get_random_edge_position():
 			return Vector2(screen_width + offset, randf() * screen_height)
 				
 
-func _on_enemy_killed(enemy : EnemyStandard, audio_stream : AudioStreamPlayer2D):
+func _on_enemy_killed(enemy : EnemyStandard):
 	enemy_list.remove_at(enemy_list.find(enemy))
-	enemy_killed.emit(enemy, audio_stream)

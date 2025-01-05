@@ -2,8 +2,6 @@ extends CharacterBody2D
 class_name EnemyStandard
 
 
-signal enemy_killed(enemy : EnemyStandard, audio : AudioStreamPlayer2D)
-
 @export var speed : float
 @export var ang_acc : float
 @export var health : float
@@ -43,5 +41,5 @@ func hit(bullet : Bullet):
 	
 
 func die():
-		enemy_killed.emit(self, %AudioStreamPlayer2D)
+		SignalBus.enemy_killed.emit(self, %AudioStreamPlayer2D)
 		queue_free()

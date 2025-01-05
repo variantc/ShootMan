@@ -7,14 +7,12 @@ class_name Player
 @export var speed : float
 @export var ang_acc : float
 
-@export var shot_speed : float
-@export var shot_strength : float
+
 @export var shot_time : float
 @export var shot_number : int
 @export var shot_spread : float
-@export var bullet_scale : float
-@export var scatter : int
-@export var repeat_scatter : bool
+
+@export var current_bullet : BulletResource
 
 @onready var movement_component = $MovementComponent as MovementComponent
 
@@ -27,17 +25,10 @@ func _ready():
 func _process(delta):
 	_move_and_rotate(delta)
 	_check_collision()
-	_shoot(
-		shot_speed, 
-		shot_strength, 
-		delta, 
-		shot_number, 
-		shot_spread, 
-		bullet_scale
-	)
+	_shoot(delta, shot_number, shot_spread, current_bullet)
 	
 	
-func _shoot(spd, strength, delta, number=1, spread=0.0, bul_scale=1.0):
+func _shoot(delta, number, spread, bullet_resource : BulletResource):
 	if number == 0:
 		print("ERROR: Shot number is zero!")
 		return
@@ -53,15 +44,10 @@ func _shoot(spd, strength, delta, number=1, spread=0.0, bul_scale=1.0):
 			var bullet = bullet_scene.instantiate() as Bullet
 			world.add_child(bullet)
 			
-			var bullet_stats = load("res://resources/bullet.tres") as BulletResource
-			
+			#var bullet_stats = load("res://resources/bullet.tres") as BulletResource
+			var bullet_stats = bullet_resource.duplicate() as BulletResource
 			bullet_stats.bullet_position = global_position
 			bullet_stats.rotation = rot
-			bullet_stats.speed = spd
-			bullet_stats.strength = strength
-			bullet_stats.scatter = scatter
-			bullet_stats.repeat_scatter = repeat_scatter
-			bullet_stats.scale = bul_scale
 			
 			bullet.setup(bullet_stats)
 			

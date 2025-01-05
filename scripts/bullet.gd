@@ -15,7 +15,7 @@ var repeat_scatter : bool = false
 var bullet_resource : BulletResource
 
 func _ready():
-	world = get_tree().root.get_child(0)
+	world = get_tree().root.get_child(1)
 
 
 func setup( bullet_stats : BulletResource ):    # new_lifetime CURRENTLY UNUSED

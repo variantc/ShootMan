@@ -10,9 +10,9 @@ class_name World
 
 
 func _ready():
-	drop_spawner.drop_to_player.connect(_on_drop_to_player)
-	drop_spawner.drop_picked_up.connect(_on_drop_pickedup)
-	enemy_spawner.enemy_killed.connect(_on_enemy_killed)
+	SignalBus.drop_to_player.connect(_on_drop_to_player)
+	SignalBus.drop_picked_up.connect(_on_drop_pickedup)
+	SignalBus.enemy_killed.connect(_on_enemy_killed)
 	
 
 func _on_enemy_killed(enemy, audio):

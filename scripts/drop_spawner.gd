@@ -1,8 +1,6 @@
 extends Node
 class_name DropSpawner
 
-signal drop_to_player(drop : DropStandard)
-signal drop_picked_up(audio : AudioStreamPlayer2D)
 
 @export var drop_scene : PackedScene
 
@@ -10,17 +8,7 @@ signal drop_picked_up(audio : AudioStreamPlayer2D)
 func spawn_drop(position : Vector2):
 	var drop = drop_scene.instantiate() as DropStandard
 	call_deferred("add_child", drop)
-	drop.drop_picked_up.connect(_on_drop_picked_up)
-	drop.drop_to_player.connect(_on_drop_to_player)
 	drop.global_position = position
-
-
-func _on_drop_picked_up(audio : AudioStreamPlayer2D):
-	drop_picked_up.emit(audio)
-
-
-func _on_drop_to_player(drop : DropStandard):
-	drop_to_player.emit(drop)
 
 
 func set_player_for_drop(drop : DropStandard, player : Player):

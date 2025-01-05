@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=19 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/bullet_destroyers.gd" id="8_o2mvc"]
 [ext_resource type="PackedScene" uid="uid://d264gao7bbsgt" path="res://scenes/attack_group.tscn" id="11_x2le3"]
 [ext_resource type="Script" path="res://resources/bullet_resource.gd" id="12_wuvgv"]
+[ext_resource type="Script" path="res://resources/gun_resource.gd" id="13_ysug8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4173a"]
 size = Vector2(40.5, 701)
@@ -20,17 +21,23 @@ size = Vector2(40.5, 701)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5iijj"]
 size = Vector2(1195, 32)
 
-[sub_resource type="Resource" id="Resource_a2pbc"]
+[sub_resource type="Resource" id="Resource_4d4ci"]
 script = ExtResource("12_wuvgv")
-id = "starting"
-bullet_position = Vector2(0, 0)
-rotation = 0.0
-speed = 250.0
+id = "starting bullet"
+speed = 750.0
 strength = 10.0
 scatter = 0
 repeat_scatter = false
 scale = 1.0
 lifetime = 5.0
+
+[sub_resource type="Resource" id="Resource_mhkgy"]
+script = ExtResource("13_ysug8")
+id = "starting gun"
+shot_time = 0.5
+shot_number = 5
+shot_spread = 5
+current_bullet = SubResource("Resource_4d4ci")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_rlksj")
@@ -106,9 +113,7 @@ floor_stop_on_slope = false
 floor_block_on_wall = false
 floor_max_angle = 0.0
 floor_snap_length = 0.0
-shot_number = 4
-shot_spread = 30.0
-current_bullet = SubResource("Resource_a2pbc")
+current_gun = SubResource("Resource_mhkgy")
 
 [node name="ScoreText" type="RichTextLabel" parent="."]
 offset_right = 199.0

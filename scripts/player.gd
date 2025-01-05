@@ -7,12 +7,7 @@ class_name Player
 @export var speed : float
 @export var ang_acc : float
 
-
-@export var shot_time : float
-@export var shot_number : int
-@export var shot_spread : float
-
-@export var current_bullet : BulletResource
+@export var current_gun : GunResource
 
 @onready var movement_component = $MovementComponent as MovementComponent
 
@@ -25,27 +20,27 @@ func _ready():
 func _process(delta):
 	_move_and_rotate(delta)
 	_check_collision()
-	_shoot(delta, shot_number, shot_spread, current_bullet)
+	_shoot(delta, current_gun)
 	
 	
-func _shoot(delta, number, spread, bullet_resource : BulletResource):
-	if number == 0:
+func _shoot(delta, gun_resource : GunResource):
+	if gun_resource.shot_number == 0:
 		print("ERROR: Shot number is zero!")
 		return
 		
 	counter += delta
-	var rad_spread = spread * PI/180
-	if counter > shot_time:
+	var rad_spread = gun_resource.shot_spread * PI/180
+	if counter > gun_resource.shot_time:
 		counter = 0.0
-		for i in range(number):
+		for i in range(gun_resource.shot_number):
 			var rot = global_rotation
-			if number > 1:
-				rot = global_rotation - (rad_spread)/2 + i * rad_spread/(number-1)
+			if gun_resource.shot_number > 1:
+				rot = global_rotation - (rad_spread)/2 + i * rad_spread/(gun_resource.shot_number-1)
 			var bullet = bullet_scene.instantiate() as Bullet
 			world.add_child(bullet)
 			
 			#var bullet_stats = load("res://resources/bullet.tres") as BulletResource
-			var bullet_stats = bullet_resource.duplicate() as BulletResource
+			var bullet_stats = gun_resource.current_bullet
 			bullet_stats.bullet_position = global_position
 			bullet_stats.rotation = rot
 			

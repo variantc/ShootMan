@@ -14,8 +14,6 @@ script = ExtResource("1_rrtky")
 bullet_scene = ExtResource("2_qp317")
 speed = 50.0
 ang_acc = 2.0
-shot_time = 1.0
-shot_number = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gelfa")

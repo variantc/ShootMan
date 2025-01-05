@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://essjjlaf2xfv"]
+
+[ext_resource type="Script" path="res://resources/gun_resource.gd" id="1_lli1i"]
+
+[resource]
+script = ExtResource("1_lli1i")
+shot_time = 1.0
+shot_number = 1
+shot_spread = 5

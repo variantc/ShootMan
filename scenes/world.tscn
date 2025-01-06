@@ -145,8 +145,20 @@ layout_mode = 2
 tooltip_text = "Add Shot"
 text = "Add Shot"
 
+[node name="TimeButton" type="Button" parent="GUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Add Shot"
+text = "Reduce Shot Time"
+
 [node name="SpreadButton" type="Button" parent="GUI/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Add Shot"
 text = "Add Spread"
+
+[node name="LifetimeButton" type="Button" parent="GUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Add Shot"
+text = "Add Range"

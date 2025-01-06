@@ -2,20 +2,24 @@ extends Node
 
 
 @export var score_text : ScoreText
+@export var upgrade_cost := 1
 
+
+# Define upgrade properties
+const UPGRADE_VALUES = {
+	"shot_number": {"amount": 1.0, "type": "add"},
+	"shot_time": {"amount": -0.05, "type": "add"},
+	"shot_spread": {"amount": 10.0, "type": "add"},
+	"shot_lifetime": {"amount": 0.25, "type": "add"}
+}
 
 func _ready():
-	SignalBus.button_shot_number_up.connect(_on_button_shot_number)
-	SignalBus.button_shot_spread_up.connect(_on_button_spread)
+	SignalBus.upgrade_button_pressed.connect(_on_upgrade_button_pressed)
 
-	
-func _on_button_shot_number():
-	if score_text.score >= 2:
-		score_text.score -= 2
-		SignalBus.change_shot_number.emit(1)
-
-
-func _on_button_spread():
-	if score_text.score >= 2:
-		score_text.score -= 2
-		SignalBus.change_shot_spread.emit(10)
+func _on_upgrade_button_pressed(upgrade_type: String):
+	if score_text.score >= upgrade_cost:
+		score_text.score -= upgrade_cost
+		SignalBus.apply_upgrade.emit(
+			upgrade_type, 
+			UPGRADE_VALUES[upgrade_type]["amount"]
+		)

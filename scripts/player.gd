@@ -14,17 +14,19 @@ class_name Player
 var counter := 0.0
 
 func _ready():
-	SignalBus.change_shot_number.connect(_on_change_shot_number)
-	SignalBus.change_shot_spread.connect(_on_change_shot_spread)
+	SignalBus.apply_upgrade.connect(_on_apply_upgrade)
 
-
-func _on_change_shot_number(amt : int):
-	current_gun.shot_number += amt
-	current_gun.shot_spread += 5
-	
-
-func _on_change_shot_spread(amt : float):
-	current_gun.shot_spread += amt
+func _on_apply_upgrade(upgrade_type: String, amount: float):
+	match upgrade_type:
+		"shot_number":
+			current_gun.shot_number += amount
+			current_gun.shot_spread += 5
+		"shot_time":
+			current_gun.shot_time += amount
+		"shot_spread":
+			current_gun.shot_spread += amount
+		"shot_lifetime":
+			current_gun.current_bullet.lifetime += amount
 	
 
 func _process(delta):

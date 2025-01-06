@@ -1,14 +1,18 @@
+# GUI_Controller.gd
 extends Node
 
+var upgrades = {}  # Start with empty dictionary
 
 func _ready():
-	%ShotButton.button_up.connect(_on_shot_button_up)
-	%SpreadButton.button_up.connect(_on_spread_button_up)
-
-
-func _on_shot_button_up():
-	SignalBus.button_shot_number_up.emit()
-
-
-func _on_spread_button_up():
-	SignalBus.button_shot_spread_up.emit()
+	# Initialize dictionary in _ready when nodes are available
+	upgrades = {
+		"shot_number": %ShotButton,
+		"shot_time": %TimeButton,
+		"shot_spread": %SpreadButton,
+		"shot_lifetime": %LifetimeButton
+	}
+	
+	for upgrade_type in upgrades:
+		upgrades[upgrade_type].button_up.connect(
+			func(): SignalBus.upgrade_button_pressed.emit(upgrade_type)
+		)

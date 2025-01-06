@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=21 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_rlksj"]
 [ext_resource type="PackedScene" uid="uid://bg3jhepeqaqn1" path="res://scenes/player.tscn" id="2_gkc74"]
 [ext_resource type="PackedScene" uid="uid://b51lbdgysvfq1" path="res://scenes/enemy_standard.tscn" id="3_6vcwx"]
+[ext_resource type="Script" path="res://scripts/upgrade_manager.gd" id="4_88rj6"]
 [ext_resource type="Script" path="res://scripts/drop_spawner.gd" id="5_2b576"]
 [ext_resource type="Script" path="res://scripts/score_text.gd" id="6_86sgh"]
 [ext_resource type="PackedScene" uid="uid://dhy2erh2732mq" path="res://scenes/drop_standard.tscn" id="6_llsii"]
@@ -14,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://d264gao7bbsgt" path="res://scenes/attack_group.tscn" id="11_x2le3"]
 [ext_resource type="Script" path="res://resources/bullet_resource.gd" id="12_wuvgv"]
 [ext_resource type="Script" path="res://resources/gun_resource.gd" id="13_ysug8"]
+[ext_resource type="Script" path="res://scripts/GUI_controller.gd" id="15_jq3j3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4173a"]
 size = Vector2(40.5, 701)
@@ -24,19 +26,19 @@ size = Vector2(1195, 32)
 [sub_resource type="Resource" id="Resource_4d4ci"]
 script = ExtResource("12_wuvgv")
 id = "starting bullet"
-speed = 750.0
+speed = 250.0
 strength = 10.0
 scatter = 0
 repeat_scatter = false
 scale = 1.0
-lifetime = 5.0
+lifetime = 1.0
 
 [sub_resource type="Resource" id="Resource_mhkgy"]
 script = ExtResource("13_ysug8")
 id = "starting gun"
 shot_time = 0.5
-shot_number = 5
-shot_spread = 5
+shot_number = 1
+shot_spread = 0
 current_bullet = SubResource("Resource_4d4ci")
 
 [node name="World" type="Node2D"]
@@ -88,6 +90,10 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_b545p")
 stretch_mode = 1
 
+[node name="UpgradeManager" type="Node" parent="." node_paths=PackedStringArray("score_text")]
+script = ExtResource("4_88rj6")
+score_text = NodePath("../ScoreText")
+
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("1_hjijg")
 
@@ -123,3 +129,24 @@ text = "Points: 0
 script = ExtResource("6_86sgh")
 
 [node name="GUI" type="Node" parent="."]
+script = ExtResource("15_jq3j3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -78.0
+offset_bottom = 66.0
+grow_horizontal = 0
+
+[node name="ShotButton" type="Button" parent="GUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Add Shot"
+text = "Add Shot"
+
+[node name="SpreadButton" type="Button" parent="GUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Add Shot"
+text = "Add Spread"

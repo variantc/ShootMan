@@ -14,8 +14,18 @@ class_name Player
 var counter := 0.0
 
 func _ready():
-	pass
+	SignalBus.change_shot_number.connect(_on_change_shot_number)
+	SignalBus.change_shot_spread.connect(_on_change_shot_spread)
 
+
+func _on_change_shot_number(amt : int):
+	current_gun.shot_number += amt
+	current_gun.shot_spread += 5
+	
+
+func _on_change_shot_spread(amt : float):
+	current_gun.shot_spread += amt
+	
 
 func _process(delta):
 	_move_and_rotate(delta)
@@ -46,7 +56,6 @@ func _shoot(delta, gun_resource : GunResource):
 			
 			bullet.setup(bullet_stats)
 			
-	
 	
 func _move_and_rotate(delta):
 	# Reverse on RMB

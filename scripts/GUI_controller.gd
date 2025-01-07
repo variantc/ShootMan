@@ -6,13 +6,15 @@ var upgrades = {}  # Start with empty dictionary
 func _ready():
 	# Initialize dictionary in _ready when nodes are available
 	upgrades = {
-		"shot_number": %ShotButton,
-		"shot_time": %TimeButton,
-		"shot_spread": %SpreadButton,
-		"shot_lifetime": %LifetimeButton
+		UpgradeManager.Type.SHOT_NUMBER: %ShotButton,
+		UpgradeManager.Type.SHOT_TIME: %TimeButton,
+		UpgradeManager.Type.SHOT_SPREAD: %SpreadButton,
+		UpgradeManager.Type.SHOT_LIFETIME: %LifetimeButton
 	}
-	
+
+
 	for upgrade_type in upgrades:
+		print(upgrade_type)
 		upgrades[upgrade_type].button_up.connect(
 			func(): SignalBus.upgrade_button_pressed.emit(upgrade_type)
 		)

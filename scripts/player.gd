@@ -16,16 +16,17 @@ var counter := 0.0
 func _ready():
 	SignalBus.apply_upgrade.connect(_on_apply_upgrade)
 
-func _on_apply_upgrade(upgrade_type: String, amount: float):
+
+func _on_apply_upgrade(upgrade_type: int, amount: float, operation: int):
 	match upgrade_type:
-		"shot_number":
+		UpgradeManager.Type.SHOT_NUMBER:
 			current_gun.shot_number += amount
 			current_gun.shot_spread += 5
-		"shot_time":
+		UpgradeManager.Type.SHOT_TIME:
 			current_gun.shot_time += amount
-		"shot_spread":
+		UpgradeManager.Type.SHOT_SPREAD:
 			current_gun.shot_spread += amount
-		"shot_lifetime":
+		UpgradeManager.Type.SHOT_LIFETIME:
 			current_gun.current_bullet.lifetime += amount
 	
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=22 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://d264gao7bbsgt" path="res://scenes/attack_group.tscn" id="11_x2le3"]
 [ext_resource type="Script" path="res://resources/bullet_resource.gd" id="12_wuvgv"]
 [ext_resource type="Script" path="res://resources/gun_resource.gd" id="13_ysug8"]
+[ext_resource type="Script" path="res://scenes/camera_2d.gd" id="15_3cbjm"]
 [ext_resource type="Script" path="res://scripts/GUI_controller.gd" id="15_jq3j3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4173a"]
@@ -92,10 +93,14 @@ stretch_mode = 1
 
 [node name="UpgradeManager" type="Node" parent="." node_paths=PackedStringArray("score_text")]
 script = ExtResource("4_88rj6")
-score_text = NodePath("../ScoreText")
+score_text = NodePath("../Camera2D/GUI/ScoreText")
 
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("1_hjijg")
+
+[node name="DropSpawner" type="Node" parent="."]
+script = ExtResource("5_2b576")
+drop_scene = ExtResource("6_llsii")
 
 [node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("world")]
 script = ExtResource("1_irc5a")
@@ -108,10 +113,6 @@ spawn_enemy_spiral_time = 15.0
 spawn_group_time = 60.0
 spawn_inc_time = 60.0
 
-[node name="DropSpawner" type="Node" parent="."]
-script = ExtResource("5_2b576")
-drop_scene = ExtResource("6_llsii")
-
 [node name="Player" parent="." instance=ExtResource("2_gkc74")]
 position = Vector2(575, 350)
 slide_on_ceiling = false
@@ -121,20 +122,30 @@ floor_max_angle = 0.0
 floor_snap_length = 0.0
 current_gun = SubResource("Resource_mhkgy")
 
-[node name="ScoreText" type="RichTextLabel" parent="."]
-offset_right = 199.0
-offset_bottom = 40.0
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(575, 350)
+script = ExtResource("15_3cbjm")
+player = NodePath("../Player")
+
+[node name="GUI" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("15_jq3j3")
+
+[node name="ScoreText" type="RichTextLabel" parent="Camera2D/GUI"]
+unique_name_in_owner = true
+offset_left = -575.0
+offset_top = -319.0
+offset_right = -376.0
+offset_bottom = -279.0
 text = "Points: 0
 "
 script = ExtResource("6_86sgh")
 
-[node name="GUI" type="Node" parent="."]
-script = ExtResource("15_jq3j3")
-
-[node name="PauseScreen" type="Control" parent="GUI"]
+[node name="PauseScreen" type="Control" parent="Camera2D/GUI"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -142,7 +153,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="GUI/PauseScreen"]
+[node name="ColorRect" type="ColorRect" parent="Camera2D/GUI/PauseScreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -153,7 +164,7 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 color = Color(0, 0, 0, 0.501961)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PauseScreen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/GUI/PauseScreen"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -162,25 +173,25 @@ offset_left = -147.0
 offset_bottom = 136.0
 grow_horizontal = 0
 
-[node name="ShotButton" type="Button" parent="GUI/PauseScreen/VBoxContainer"]
+[node name="ShotButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Add Shot"
 text = "Add Shot"
 
-[node name="TimeButton" type="Button" parent="GUI/PauseScreen/VBoxContainer"]
+[node name="TimeButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Add Shot"
 text = "Reduce Shot Time"
 
-[node name="SpreadButton" type="Button" parent="GUI/PauseScreen/VBoxContainer"]
+[node name="SpreadButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Add Shot"
 text = "Add Spread"
 
-[node name="LifetimeButton" type="Button" parent="GUI/PauseScreen/VBoxContainer"]
+[node name="LifetimeButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Add Shot"

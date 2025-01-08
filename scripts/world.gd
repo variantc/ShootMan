@@ -6,7 +6,9 @@ class_name World
 @onready var player := $Player as Player
 @onready var drop_spawner := $DropSpawner as DropSpawner
 @onready var enemy_spawner := $EnemySpawner as EnemySpawner
-@onready var score_text := $ScoreText as RichTextLabel
+@onready var score_text := %ScoreText as RichTextLabel
+
+var offset_to_player : Vector2
 
 
 func _ready():
@@ -14,7 +16,7 @@ func _ready():
 	SignalBus.drop_picked_up.connect(_on_drop_pickedup)
 	SignalBus.enemy_killed.connect(_on_enemy_killed)
 	print(get_tree().root.get_child_count())
-	
+
 
 func _on_enemy_killed(enemy, audio):
 	sound_manager.play_sound(audio.stream)
@@ -29,7 +31,7 @@ func _on_drop_pickedup(audio : AudioStreamPlayer2D):
 func _on_drop_to_player(drop : DropStandard):
 	drop_spawner.set_player_for_drop(drop, player)
 
-
+	
 #var counter = 0
 #func _process(delta):
 	#counter += delta

@@ -5,6 +5,7 @@ var upgrades = {}  # Start with empty dictionary
 
 var is_paused := false
 
+
 func _ready():
 	# Make GUI non-pausing
 	process_mode = Node.PROCESS_MODE_ALWAYS

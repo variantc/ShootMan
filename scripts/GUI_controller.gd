@@ -10,7 +10,7 @@ func _ready():
 	# Make GUI non-pausing
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
-	%PauseScreen.visible = false
+	%PauseScreen.set_visible(false)
 	
 	# Initialize dictionary in _ready when nodes are available
 	upgrades = {
@@ -22,7 +22,7 @@ func _ready():
 
 
 	for upgrade_type in upgrades:
-		print(upgrade_type)
+		print_debug(upgrade_type)
 		upgrades[upgrade_type].button_up.connect(
 			func(): SignalBus.upgrade_button_pressed.emit(upgrade_type)
 		)

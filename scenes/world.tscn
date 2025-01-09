@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=19 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
@@ -11,18 +11,11 @@
 [ext_resource type="Script" path="res://scripts/score_text.gd" id="6_86sgh"]
 [ext_resource type="PackedScene" uid="uid://dhy2erh2732mq" path="res://scenes/drop_standard.tscn" id="6_llsii"]
 [ext_resource type="PackedScene" uid="uid://ckskkkn4w07o3" path="res://scenes/enemy_spiral.tscn" id="7_gpqxu"]
-[ext_resource type="Script" path="res://scripts/bullet_destroyers.gd" id="8_o2mvc"]
 [ext_resource type="PackedScene" uid="uid://d264gao7bbsgt" path="res://scenes/attack_group.tscn" id="11_x2le3"]
 [ext_resource type="Script" path="res://resources/bullet_resource.gd" id="12_wuvgv"]
 [ext_resource type="Script" path="res://resources/gun_resource.gd" id="13_ysug8"]
 [ext_resource type="Script" path="res://scenes/camera_2d.gd" id="15_3cbjm"]
 [ext_resource type="Script" path="res://scripts/GUI_controller.gd" id="15_jq3j3"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4173a"]
-size = Vector2(40.5, 701)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5iijj"]
-size = Vector2(1195, 32)
 
 [sub_resource type="Resource" id="Resource_4d4ci"]
 script = ExtResource("12_wuvgv")
@@ -45,52 +38,6 @@ current_bullet = SubResource("Resource_4d4ci")
 [node name="World" type="Node2D"]
 script = ExtResource("1_rlksj")
 
-[node name="BulletDestroyers" type="Node" parent="." node_paths=PackedStringArray("destroyers")]
-script = ExtResource("8_o2mvc")
-destroyers = [NodePath("Area2D"), NodePath("Area2D2"), NodePath("Area2D3"), NodePath("Area2D4")]
-
-[node name="Area2D" type="Area2D" parent="BulletDestroyers"]
-collision_layer = 8
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDestroyers/Area2D"]
-position = Vector2(-24, 325)
-shape = SubResource("RectangleShape2D_4173a")
-
-[node name="Area2D2" type="Area2D" parent="BulletDestroyers"]
-position = Vector2(1187, 2)
-collision_layer = 8
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDestroyers/Area2D2"]
-position = Vector2(-3, 331.5)
-shape = SubResource("RectangleShape2D_4173a")
-
-[node name="Area2D3" type="Area2D" parent="BulletDestroyers"]
-position = Vector2(590, -331)
-collision_layer = 8
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDestroyers/Area2D3"]
-position = Vector2(-12, 303)
-shape = SubResource("RectangleShape2D_5iijj")
-
-[node name="Area2D4" type="Area2D" parent="BulletDestroyers"]
-position = Vector2(590, 348)
-collision_layer = 8
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDestroyers/Area2D4"]
-position = Vector2(-16, 333)
-shape = SubResource("RectangleShape2D_5iijj")
-
-[node name="Ground" type="TextureRect" parent="."]
-offset_right = 11550.0
-offset_bottom = 6700.0
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_b545p")
-stretch_mode = 1
-
 [node name="UpgradeManager" type="Node" parent="." node_paths=PackedStringArray("score_text")]
 script = ExtResource("4_88rj6")
 score_text = NodePath("../Camera2D/GUI/ScoreText")
@@ -110,10 +57,20 @@ enemy_spiral_scene = ExtResource("7_gpqxu")
 attack_group_scene = ExtResource("11_x2le3")
 spawn_enemy_standard_time = 2.0
 spawn_enemy_spiral_time = 15.0
-spawn_group_time = 60.0
+spawn_group_time = 5.0
 spawn_inc_time = 60.0
 
+[node name="Ground" type="TextureRect" parent="."]
+offset_left = -3867.0
+offset_top = -2921.0
+offset_right = 38618.0
+offset_bottom = 31574.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_b545p")
+stretch_mode = 1
+
 [node name="Player" parent="." instance=ExtResource("2_gkc74")]
+unique_name_in_owner = true
 position = Vector2(575, 350)
 slide_on_ceiling = false
 floor_stop_on_slope = false
@@ -134,6 +91,7 @@ script = ExtResource("15_jq3j3")
 
 [node name="ScoreText" type="RichTextLabel" parent="Camera2D/GUI"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = -575.0
 offset_top = -319.0
 offset_right = -376.0
@@ -144,16 +102,12 @@ script = ExtResource("6_86sgh")
 
 [node name="PauseScreen" type="Control" parent="Camera2D/GUI"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D/GUI/PauseScreen"]
+custom_minimum_size = Vector2(2000, 2000)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -162,16 +116,14 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-color = Color(0, 0, 0, 0.501961)
+color = Color(0, 0, 0, 0.478431)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/GUI/PauseScreen"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -147.0
-offset_bottom = 136.0
-grow_horizontal = 0
+layout_mode = 0
+offset_left = 400.0
+offset_top = -300.0
+offset_right = 547.0
+offset_bottom = -164.0
 
 [node name="ShotButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true

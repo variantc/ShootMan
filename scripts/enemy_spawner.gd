@@ -58,8 +58,10 @@ func _run_spawn_increment_timer(delta):
 func _spawn_attack_group():
 	var attack_group = attack_group_scene.instantiate()
 	self.add_child(attack_group)
+	attack_group.global_position = %Player.global_position
 	for enemy : EnemyStandard in attack_group.get_children():
-		_setup_enemy(enemy, enemy.global_position)
+		enemy.world = world
+		#_setup_enemy(enemy, enemy.global_position)
 	
 		
 func _spawn_enemy(enemy_scene : PackedScene):
@@ -79,18 +81,22 @@ func _get_random_edge_position():
 	var screen_width = viewport_rect.size.x
 	var screen_height = viewport_rect.size.y
 	
-	var offset := 25.0
+	var offset := 100.0
+	
+	var temp_pos
 	
 	match randi() % 4:
 		0: # Top edge
-			return Vector2(randf() * screen_width + offset, -offset)
+			temp_pos = Vector2(randf() * screen_width + offset, -offset)
 		1: # Bottom edge
-			return Vector2(randf() * screen_width, screen_height + offset)
+			temp_pos = Vector2(randf() * screen_width, screen_height + offset)
 		2: # Left edge
-			return Vector2(-offset, randf() * screen_height)
+			temp_pos = Vector2(-offset, randf() * screen_height)
 		3: # Right edge
-			return Vector2(screen_width + offset, randf() * screen_height)
+			temp_pos = Vector2(screen_width + offset, randf() * screen_height)
 				
+	return temp_pos + %Player.global_position - %Player.start_pos
+
 
 func _on_enemy_killed(enemy : EnemyStandard):
 	enemy_list.remove_at(enemy_list.find(enemy))

@@ -35,7 +35,7 @@ position = Vector2(557, 328)
 
 [node name="EnemyStandard" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
-position = Vector2(615, 335)
+position = Vector2(722, 396)
 speed = 70.0
 health = 20.0
 
@@ -47,13 +47,14 @@ material = SubResource("ShaderMaterial_q65ld")
 
 [node name="ColorRect" parent="EnemyStandard" index="2"]
 color = Color(1, 1, 1, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer2D" parent="EnemyStandard" index="3"]
 stream = SubResource("AudioStreamRandomizer_yj0ii")
 
 [node name="EnemyStandard2" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
-position = Vector2(615, -340)
+position = Vector2(724, -438)
 speed = 70.0
 health = 20.0
 
@@ -65,13 +66,14 @@ material = SubResource("ShaderMaterial_q65ld")
 
 [node name="ColorRect" parent="EnemyStandard2" index="2"]
 color = Color(1, 1, 1, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer2D" parent="EnemyStandard2" index="3"]
 stream = SubResource("AudioStreamRandomizer_yj0ii")
 
 [node name="EnemyStandard3" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
-position = Vector2(-572, -341)
+position = Vector2(-687, -434)
 speed = 70.0
 health = 20.0
 
@@ -83,13 +85,14 @@ material = SubResource("ShaderMaterial_q65ld")
 
 [node name="ColorRect" parent="EnemyStandard3" index="2"]
 color = Color(1, 1, 1, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer2D" parent="EnemyStandard3" index="3"]
 stream = SubResource("AudioStreamRandomizer_yj0ii")
 
 [node name="EnemyStandard4" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
-position = Vector2(-576, 341)
+position = Vector2(-693, 407)
 speed = 70.0
 health = 20.0
 
@@ -101,13 +104,14 @@ material = SubResource("ShaderMaterial_q65ld")
 
 [node name="ColorRect" parent="EnemyStandard4" index="2"]
 color = Color(1, 1, 1, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer2D" parent="EnemyStandard4" index="3"]
 stream = SubResource("AudioStreamRandomizer_yj0ii")
 
 [node name="EnemyStandard5" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
-position = Vector2(-577, -2)
+position = Vector2(-687, -4)
 speed = 70.0
 health = 20.0
 
@@ -119,13 +123,14 @@ material = SubResource("ShaderMaterial_q65ld")
 
 [node name="ColorRect" parent="EnemyStandard5" index="2"]
 color = Color(1, 1, 1, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer2D" parent="EnemyStandard5" index="3"]
 stream = SubResource("AudioStreamRandomizer_yj0ii")
 
 [node name="EnemyStandard6" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
-position = Vector2(-6, -348)
+position = Vector2(-11, -439)
 speed = 70.0
 health = 20.0
 
@@ -137,13 +142,14 @@ material = SubResource("ShaderMaterial_q65ld")
 
 [node name="ColorRect" parent="EnemyStandard6" index="2"]
 color = Color(1, 1, 1, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer2D" parent="EnemyStandard6" index="3"]
 stream = SubResource("AudioStreamRandomizer_yj0ii")
 
 [node name="EnemyStandard7" parent="." instance=ExtResource("1_xiih4")]
 material = SubResource("ShaderMaterial_w5k1w")
-position = Vector2(13, 342)
+position = Vector2(6, 410)
 speed = 70.0
 health = 20.0
 
@@ -155,8 +161,28 @@ material = SubResource("ShaderMaterial_q65ld")
 
 [node name="ColorRect" parent="EnemyStandard7" index="2"]
 color = Color(1, 1, 1, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer2D" parent="EnemyStandard7" index="3"]
+stream = SubResource("AudioStreamRandomizer_yj0ii")
+
+[node name="EnemyStandard8" parent="." instance=ExtResource("1_xiih4")]
+material = SubResource("ShaderMaterial_w5k1w")
+position = Vector2(735, -28)
+speed = 70.0
+health = 20.0
+
+[node name="CollisionShape2D" parent="EnemyStandard8" index="0"]
+shape = SubResource("CircleShape2D_gelfa")
+
+[node name="Sprite2D" parent="EnemyStandard8" index="1"]
+material = SubResource("ShaderMaterial_q65ld")
+
+[node name="ColorRect" parent="EnemyStandard8" index="2"]
+color = Color(1, 1, 1, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer2D" parent="EnemyStandard8" index="3"]
 stream = SubResource("AudioStreamRandomizer_yj0ii")
 
 [editable path="EnemyStandard"]
@@ -166,3 +192,4 @@ stream = SubResource("AudioStreamRandomizer_yj0ii")
 [editable path="EnemyStandard5"]
 [editable path="EnemyStandard6"]
 [editable path="EnemyStandard7"]
+[editable path="EnemyStandard8"]

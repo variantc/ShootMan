@@ -13,8 +13,12 @@ class_name Player
 
 var counter := 0.0
 
+var start_pos : Vector2
+
 func _ready():
 	SignalBus.apply_upgrade.connect(_on_apply_upgrade)
+	
+	start_pos = global_position
 
 
 func _on_apply_upgrade(upgrade_type: int, amount: float, operation: int):

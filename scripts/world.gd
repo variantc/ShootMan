@@ -15,7 +15,6 @@ func _ready():
 	SignalBus.drop_to_player.connect(_on_drop_to_player)
 	SignalBus.drop_picked_up.connect(_on_drop_pickedup)
 	SignalBus.enemy_killed.connect(_on_enemy_killed)
-	print(get_tree().root.get_child_count())
 
 
 func _on_enemy_killed(enemy, audio):

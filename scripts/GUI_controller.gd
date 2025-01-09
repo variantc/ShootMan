@@ -10,6 +10,8 @@ func _ready():
 	# Make GUI non-pausing
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
+	%PauseScreen.visible = false
+	
 	# Initialize dictionary in _ready when nodes are available
 	upgrades = {
 		UpgradeManager.Type.SHOT_NUMBER: %ShotButton,

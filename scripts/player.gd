@@ -81,4 +81,4 @@ func _move_and_rotate(delta):
 func _check_collision():
 	var collision = get_last_slide_collision() as KinematicCollision2D
 	if collision:
-		print("KILL PLAYER, GAME OVER")
+		SignalBus.player_killed.emit()

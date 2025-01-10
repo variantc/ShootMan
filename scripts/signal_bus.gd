@@ -9,3 +9,5 @@ signal enemy_killed(enemy : EnemyStandard, audio : AudioStreamPlayer2D)
 
 signal upgrade_button_pressed(upgrade_type: String)
 signal apply_upgrade(upgrade_type: String, amount)
+
+signal player_killed

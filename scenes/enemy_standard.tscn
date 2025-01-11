@@ -16,7 +16,7 @@
 radius = 15.0
 
 [sub_resource type="Gradient" id="Gradient_3ffsw"]
-offsets = PackedFloat32Array(0, 0.0107991, 0.12527, 0.401728)
+offsets = PackedFloat32Array(0, 0.0107991, 0.265659, 0.63067)
 colors = PackedColorArray(0.6461, 0.364, 0.91, 0, 1, 0.328, 0.04, 1, 0, 0, 0, 1, 0.98, 0.392, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bmvgt"]

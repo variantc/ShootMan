@@ -43,26 +43,49 @@ func enemy_setup(game_world: World, pos : Vector2):
 func hit(bullet : Bullet, bullet_direction : Vector2, bullet_speed : float):
 	_knock_back(bullet_direction, bullet_speed)
 	
+	var prev_health = health
 	var bullet_damage = health
 	health -= bullet.strength
+	_show_damage(prev_health, health)
 	bullet.strength -= bullet_damage
-	var health_left  = health / _start_health
-	%Sprite2D.material.set_shader_parameter("hp_left", health_left)
-	if health <= 0:
-		die()
+
+	
+
+func _show_damage(prev, current):
+	var dam_time = 0.3
+	# Create and configure a single tween
+	var tween = create_tween() as Tween
+	
+	# Ensure die() is only called after tween completes
+	tween.finished.connect(func(): if health <= 0 : die())
+	
+	var start_health_left = prev / _start_health
+	# Update shader to reflect new health
+	var health_left = max(current / _start_health, 0)
+	
+	# Tween the shader health parameter and position simultaneously
+	tween.tween_method(_set_shader_hp_left, start_health_left, health_left, dam_time)\
+		.set_ease(Tween.EASE_OUT)\
+		.set_trans(Tween.TRANS_QUAD)
+
+
+func _set_shader_hp_left(hp_left: float):
+	%Sprite2D.material.set_shader_parameter("hp_left", hp_left)
 	
 	
 func _knock_back(direction: Vector2, speed: float):
 	var kb_red_factor = 0.075
 	var kb_time = 0.3
-	var tween = create_tween()
 	var kb_target_pos = global_position + direction * speed * kb_red_factor
-	
-	# Moves from current position to target position over 0.3 seconds
+
+
+	# Create and configure a single tween
+	var tween = create_tween() as Tween
+		
 	tween.tween_property(self, "global_position", kb_target_pos, kb_time)\
 		.set_ease(Tween.EASE_OUT)\
 		.set_trans(Tween.TRANS_QUAD)
-		
+
 
 func die():
 		SignalBus.enemy_killed.emit(self, %AudioStreamPlayer2D)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ckskkkn4w07o3"]
+[gd_scene load_steps=19 format=3 uid="uid://ckskkkn4w07o3"]
 
 [ext_resource type="Script" path="res://scripts/enemy_spiral.gd" id="1_s7lcw"]
 [ext_resource type="Texture2D" uid="uid://byxxpwsjctwmn" path="res://sprites/pawn_0.png" id="3_5q1jh"]
@@ -14,38 +14,89 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
 radius = 15.0
 
-[sub_resource type="Shader" id="Shader_g4c0q"]
+[sub_resource type="Shader" id="Shader_m3vhj"]
 code = "shader_type canvas_item;
 
 // Uniform variables to control the shader
 uniform vec4 shade_color : source_color = vec4(0.0, 0.0, 0.0, 0.5); // Default to semi-transparent black
 uniform float shade_intensity : hint_range(0.0, 1.0) = 0.5; // Control shade intensity
 
-void fragment() {
-    // Sample the original sprite color
-    vec4 original_color = texture(TEXTURE, UV);
-	vec4 shaded_color = vec4(0.0);
-	
-    if(original_color.a < 0.0001) 
-	{
-		shaded_color = vec4(0.0);
-	}
-	else 
-	{
-    // Mix the original color with the shade color based on intensity
-    shaded_color = mix(original_color, shade_color, shade_intensity);
-	}
-	
-    
-    // Output the final color
-    COLOR = shaded_color;
+group_uniforms taking_damage;
+uniform sampler2D burn_gradient;
+uniform sampler2D burn_noise;
+uniform float hp_left: hint_range(0.0, 1.0, 0.05);
+group_uniforms;
+
+vec4 apply_shade(vec4 original_color) {
+    if(original_color.a < 0.0001) {
+        return vec4(0.0);
+    }
+    return mix(original_color, shade_color, shade_intensity);
 }
+
+void apply_damage_fragment(inout vec4 c, vec2 uv) {
+	float noise_r = texture(burn_noise, uv).r;
+	float ty = uv.x + mix(-2.0, 1.0, hp_left) + noise_r;
+	vec4 grad_tex = texture(
+		burn_gradient, 
+		vec2(uv.y, ty));
+	
+	float mix_ratio = clamp(ty, 0.0, 1.0);;
+	c = vec4(mix(grad_tex, c, mix_ratio).rgb, min(grad_tex.a, c.a));
+}
+
+void apply_damage_vertex(inout vec2 v) {
+	
+	float scale = 1.0 + smoothstep(0.7, 1.0, 1.0 - hp_left);
+	v *= scale;
+}
+
+void vertex() {
+	apply_damage_vertex(VERTEX);
+}
+
+
+void fragment() {
+
+	//flash_on_hit(COLOR.rgb); 		// characters.inc
+	COLOR = apply_shade(COLOR);
+	apply_damage_fragment(COLOR, UV);
+	
+	#ifdef DEBUG_MODE_ON
+	debug_draw_dots_at_vertices(UV, COLOR, TEXTURE);		// debug_utils.inc
+	#endif
+	
+    // Sample the original sprite color
+    //vec4 original_color = texture(TEXTURE, UV);
+	//vec4 shaded_color = apply_shade(original_color);
+	//
+    //COLOR = apply_damage(shaded_color, UV);
+}
+
 "
 
+[sub_resource type="Gradient" id="Gradient_0rkyu"]
+offsets = PackedFloat32Array(0, 0.0605187, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0.542667, 0.44, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ssyl7"]
+gradient = SubResource("Gradient_0rkyu")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7rj3m"]
+noise_type = 3
+frequency = 0.0195
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7k3mt"]
+noise = SubResource("FastNoiseLite_7rj3m")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sfkgk"]
-shader = SubResource("Shader_g4c0q")
+shader = SubResource("Shader_m3vhj")
 shader_parameter/shade_color = Color(0.81, 0.783, 0, 1)
 shader_parameter/shade_intensity = 0.5
+shader_parameter/hp_left = 1.0
+shader_parameter/burn_gradient = SubResource("GradientTexture2D_ssyl7")
+shader_parameter/burn_noise = SubResource("NoiseTexture2D_7k3mt")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yj0ii"]
 streams_count = 7

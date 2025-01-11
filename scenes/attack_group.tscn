@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://d264gao7bbsgt"]
+[gd_scene load_steps=19 format=3 uid="uid://d264gao7bbsgt"]
 
 [ext_resource type="PackedScene" uid="uid://b51lbdgysvfq1" path="res://scenes/enemy_standard.tscn" id="1_xiih4"]
 [ext_resource type="Shader" path="res://shaders/enemy_standard.gdshader" id="2_216x1"]
+[ext_resource type="Shader" uid="uid://c37qvy0dnck82" path="res://shaders/enemy_group.tres" id="3_c3dnt"]
 [ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_dwtdw"]
 [ext_resource type="AudioStream" uid="uid://rw6vkwrnn4jm" path="res://sounds/explosions/explosion (2).wav" id="5_jcu4q"]
 [ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="6_xwq0e"]
@@ -11,15 +12,36 @@
 [ext_resource type="AudioStream" uid="uid://cwxjmr02t3n7u" path="res://sounds/explosions/explosion (7).wav" id="10_ychg5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w5k1w"]
+shader = ExtResource("2_216x1")
+shader_parameter/shade_color = Color(0, 0.6, 0, 1)
+shader_parameter/shade_intensity = 0.5
+shader_parameter/hp_left = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
 radius = 15.0
 
+[sub_resource type="Gradient" id="Gradient_8qja8"]
+offsets = PackedFloat32Array(0, 0.054755, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.19, 0.0342, 0.0342, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dgnbq"]
+gradient = SubResource("Gradient_8qja8")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nqmed"]
+noise_type = 3
+frequency = 0.0079
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1xdru"]
+noise = SubResource("FastNoiseLite_nqmed")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q65ld"]
-shader = ExtResource("2_216x1")
+shader = ExtResource("3_c3dnt")
 shader_parameter/shade_color = Color(0.0674999, 0.81, 0, 1)
 shader_parameter/shade_intensity = 0.5
-shader_parameter/hp_left = null
+shader_parameter/hp_left = 1.0
+shader_parameter/burn_gradient = SubResource("GradientTexture2D_dgnbq")
+shader_parameter/burn_noise = SubResource("NoiseTexture2D_1xdru")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yj0ii"]
 streams_count = 7

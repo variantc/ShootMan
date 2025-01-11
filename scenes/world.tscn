@@ -185,5 +185,7 @@ alignment = 1
 
 [node name="RestartButton" type="Button" parent="Camera2D/GUI/GameOverScreen/VBoxContainer"]
 unique_name_in_owner = true
+z_index = 99
+z_as_relative = false
 layout_mode = 2
 text = "Restart"

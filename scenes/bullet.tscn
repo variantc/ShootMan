@@ -11,9 +11,6 @@
 [ext_resource type="AudioStream" uid="uid://c62kjyo2y8y20" path="res://sounds/shots/shot_ (8).wav" id="9_5gd8v"]
 [ext_resource type="AudioStream" uid="uid://xdyva7qo10dk" path="res://sounds/shots/shot_ (9).wav" id="10_miipn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx2ns"]
-size = Vector2(4, 4)
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_k4n72"]
 streams_count = 9
 stream_0/stream = ExtResource("2_toceb")
@@ -26,13 +23,13 @@ stream_6/stream = ExtResource("8_poocb")
 stream_7/stream = ExtResource("9_5gd8v")
 stream_8/stream = ExtResource("10_miipn")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx2ns"]
+size = Vector2(4, 4)
+
 [node name="Bullet" type="Area2D"]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_lb5fr")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_jx2ns")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -2.0
@@ -45,5 +42,8 @@ stream = SubResource("AudioStreamRandomizer_k4n72")
 volume_db = -20.0
 pitch_scale = 0.6
 autoplay = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jx2ns")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -21,8 +21,8 @@
 [sub_resource type="Resource" id="Resource_4d4ci"]
 script = ExtResource("12_wuvgv")
 id = "starting bullet"
-speed = 250.0
-strength = 10.0
+speed = 750.0
+strength = 1.0
 scatter = 0
 repeat_scatter = false
 scale = 1.0
@@ -133,25 +133,21 @@ offset_bottom = -164.0
 [node name="ShotButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Add Shot"
 text = "Add Shot"
 
 [node name="TimeButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Add Shot"
 text = "Reduce Shot Time"
 
 [node name="SpreadButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Add Shot"
 text = "Add Spread"
 
 [node name="LifetimeButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Add Shot"
 text = "Add Range"
 
 [node name="GameOverScreen" type="Control" parent="Camera2D/GUI"]
@@ -190,5 +186,4 @@ alignment = 1
 [node name="RestartButton" type="Button" parent="Camera2D/GUI/GameOverScreen/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Add Shot"
 text = "Restart"

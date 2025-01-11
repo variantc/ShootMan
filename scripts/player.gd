@@ -21,7 +21,7 @@ func _ready():
 	start_pos = global_position
 
 
-func _on_apply_upgrade(upgrade_type: int, amount: float, operation: int):
+func _on_apply_upgrade(upgrade_type: int, amount, operation: int):
 	match upgrade_type:
 		UpgradeManager.Type.SHOT_NUMBER:
 			current_gun.shot_number += amount

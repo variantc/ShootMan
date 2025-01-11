@@ -14,6 +14,7 @@ var repeat_scatter : bool = false
 
 var bullet_resource : BulletResource
 
+
 func _ready():
 	var root = get_tree().root
 	world = root.get_child(root.get_child_count() - 1)
@@ -44,7 +45,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("Enemy"):
-		body.hit(self)		# Enemy.hit will reduce this bullet's strength
+		body.hit(self, direction, speed)		# Enemy.hit will reduce this bullet's strength
 	if strength <= 0:
 		# Use call_deferred to delay the split_bullets() call
 		call_deferred("split_bullets")
@@ -67,7 +68,7 @@ func split_bullets():
 			bullet_stats.rotation = new_rot
 			bullet_stats.speed = speed
 			bullet_stats.strength = orig_strength
-			bullet_stats.scatter = scatter
+			bullet_stats.scatter = sub_scatter
 			new_bullet.setup(bullet_stats)
 			# Recalculate direction for the new bullet
 			new_bullet.direction = Vector2(cos(new_bullet.rotation), sin(new_bullet.rotation)).normalized()

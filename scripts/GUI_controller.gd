@@ -1,7 +1,6 @@
 extends Node
 class_name GUI_Controller
 
-signal restart_b
 
 var upgrades = {}  # Start with empty dictionary
 

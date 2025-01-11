@@ -19,6 +19,7 @@ radius = 15.0
 shader = ExtResource("2_216x1")
 shader_parameter/shade_color = Color(0.0674999, 0.81, 0, 1)
 shader_parameter/shade_intensity = 0.5
+shader_parameter/hp_left = null
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yj0ii"]
 streams_count = 7

@@ -69,6 +69,7 @@ health = 20.0
 shape = SubResource("CircleShape2D_gelfa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_sfkgk")
 position = Vector2(1, -1)
 scale = Vector2(0.5, 0.5)

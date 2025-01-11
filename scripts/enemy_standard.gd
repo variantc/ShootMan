@@ -5,10 +5,18 @@ class_name EnemyStandard
 @export var speed : float
 @export var ang_acc : float
 @export var health : float
+var _start_health : float
 
 @onready var movement_component = $MovementComponent as MovementComponent
 
 var world : World
+
+
+func _ready():
+	_start_health = health
+	
+	# Make each material unique for multiple instances of enemy
+	%Sprite2D.material = %Sprite2D.material.duplicate()
 
 
 func _process(delta):
@@ -38,6 +46,8 @@ func hit(bullet : Bullet, bullet_direction : Vector2, bullet_speed : float):
 	var bullet_damage = health
 	health -= bullet.strength
 	bullet.strength -= bullet_damage
+	var health_left  = health / _start_health
+	%Sprite2D.material.set_shader_parameter("hp_left", health_left)
 	if health <= 0:
 		die()
 	

@@ -22,7 +22,7 @@
 script = ExtResource("12_wuvgv")
 id = "starting bullet"
 speed = 750.0
-strength = 1.0
+strength = 2.5
 scatter = 0
 repeat_scatter = false
 scale = 1.0

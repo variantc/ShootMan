@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b51lbdgysvfq1"]
+[gd_scene load_steps=19 format=3 uid="uid://b51lbdgysvfq1"]
 
 [ext_resource type="Script" path="res://scripts/enemy_standard.gd" id="1_5if6k"]
 [ext_resource type="Shader" path="res://shaders/enemy_standard.gdshader" id="3_bwe03"]
@@ -15,10 +15,29 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
 radius = 15.0
 
+[sub_resource type="Gradient" id="Gradient_3ffsw"]
+offsets = PackedFloat32Array(0, 0.0107991, 0.12527, 0.401728)
+colors = PackedColorArray(0.6461, 0.364, 0.91, 0, 1, 0.328, 0.04, 1, 0, 0, 0, 1, 0.98, 0.392, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bmvgt"]
+gradient = SubResource("Gradient_3ffsw")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fl1rm"]
+noise_type = 3
+frequency = 0.0067
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rs4ng"]
+noise = SubResource("FastNoiseLite_fl1rm")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sfkgk"]
 shader = ExtResource("3_bwe03")
 shader_parameter/shade_color = Color(0.81, 0, 0, 1)
 shader_parameter/shade_intensity = 0.5
+shader_parameter/hp_left = 1.0
+shader_parameter/burn_gradient = SubResource("GradientTexture2D_bmvgt")
+shader_parameter/burn_noise = SubResource("NoiseTexture2D_rs4ng")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yj0ii"]
 streams_count = 7
@@ -42,6 +61,7 @@ health = 10.0
 shape = SubResource("CircleShape2D_gelfa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_sfkgk")
 position = Vector2(1, -1)
 scale = Vector2(0.5, 0.5)

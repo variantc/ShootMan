@@ -11,3 +11,6 @@ signal upgrade_button_pressed(upgrade_type: String)
 signal apply_upgrade(upgrade_type: String, amount)
 
 signal player_killed
+signal slow_motion_started(duration : float)
+signal game_over
+signal pause_state_changed(paused : bool)

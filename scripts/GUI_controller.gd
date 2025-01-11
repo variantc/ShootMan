@@ -1,10 +1,10 @@
-# GUI_Controller.gd
 extends Node
+class_name GUI_Controller
+
+signal restart_b
 
 var upgrades = {}  # Start with empty dictionary
 
-var is_paused := false
-signal restart_b
 
 func _ready():
 	# Make GUI non-pausing
@@ -12,9 +12,17 @@ func _ready():
 	
 	%PauseScreen.set_visible(false)
 	%GameOverScreen.set_visible(false)
+	%GameOverScreen.modulate.a = 0  # Start fully transparent
 	
-	SignalBus.player_killed.connect(_on_player_killed)
+	SignalBus.game_over.connect(_on_game_over)
+	SignalBus.pause_state_changed.connect(_on_pause_state_changed)
+	SignalBus.slow_motion_started.connect(_on_slow_motion_started)
+		
+	%RestartButton.button_up.connect(_on_restart_button_up)
+	_setup_upgrade_buttons()
 	
+
+func _setup_upgrade_buttons():
 	# Initialize dictionary in _ready when nodes are available
 	upgrades = {
 		UpgradeManager.Type.SHOT_NUMBER: %ShotButton,
@@ -22,36 +30,32 @@ func _ready():
 		UpgradeManager.Type.SHOT_SPREAD: %SpreadButton,
 		UpgradeManager.Type.SHOT_LIFETIME: %LifetimeButton
 	}
-
-
+	
+	# Connect the button up signals of each button
 	for upgrade_type in upgrades:
-		print_debug(upgrade_type)
 		upgrades[upgrade_type].button_up.connect(
 			func(): SignalBus.upgrade_button_pressed.emit(upgrade_type)
 		)
-		
-	%RestartButton.button_up.connect(_on_restart_button_up)
 
 
 func _input(event):
 	if event.is_action_pressed("Pause"): # and not is_game_over:
-		toggle_pause()
-
-		
-func toggle_pause():
-	is_paused = !is_paused
-	get_tree().paused = is_paused
-	if is_paused:
-		%PauseScreen.set_visible(true)
-	else:
-		%PauseScreen.set_visible(false)
+		%GameStateManager.toggle_pause()
 
 
-func _on_player_killed():
+func _on_pause_state_changed(paused : bool):
+	%PauseScreen.set_visible(paused)
+
+
+func _on_slow_motion_started(duration : float):
 	%GameOverScreen.set_visible(true)
-	get_tree().paused = true
+	var tween = create_tween()
+	tween.tween_property(%GameOverScreen, "modulate:a", 1.0, duration)
+	
+
+func _on_game_over():
+	pass
 
 
 func _on_restart_button_up():
-	get_tree().paused = false
-	get_tree().reload_current_scene.call_deferred()
+	%GameStateManager.restart_game()

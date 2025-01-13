@@ -25,6 +25,7 @@ stream_6/stream = ExtResource("8_igqrm")
 stream_7/stream = ExtResource("9_t36ew")
 
 [node name="drop_standard" type="Area2D" groups=["Drop"]]
+visibility_layer = 2
 collision_layer = 16
 script = ExtResource("1_rs0tx")
 pickup_radius = 150

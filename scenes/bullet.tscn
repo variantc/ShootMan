@@ -27,6 +27,7 @@ stream_8/stream = ExtResource("10_miipn")
 size = Vector2(4, 4)
 
 [node name="Bullet" type="Area2D"]
+visibility_layer = 2
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_lb5fr")

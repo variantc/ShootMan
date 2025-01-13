@@ -48,6 +48,7 @@ script = ExtResource("4_88rj6")
 score_text = NodePath("../Camera2D/GUI/ScoreText")
 
 [node name="SoundManager" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("1_hjijg")
 
 [node name="DropSpawner" type="Node" parent="."]
@@ -66,6 +67,7 @@ spawn_group_time = 60.0
 spawn_inc_time = 60.0
 
 [node name="Ground" type="TextureRect" parent="."]
+visibility_layer = 4
 offset_left = -3867.0
 offset_top = -2921.0
 offset_right = 38618.0
@@ -90,6 +92,7 @@ script = ExtResource("15_3cbjm")
 player = NodePath("../Player")
 
 [node name="GUI" type="Control" parent="Camera2D"]
+visibility_layer = 2
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("15_jq3j3")
@@ -132,21 +135,25 @@ offset_bottom = -164.0
 
 [node name="ShotButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true
+z_index = 99
 layout_mode = 2
 text = "Add Shot"
 
 [node name="TimeButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true
+z_index = 99
 layout_mode = 2
 text = "Reduce Shot Time"
 
 [node name="SpreadButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true
+z_index = 99
 layout_mode = 2
 text = "Add Spread"
 
 [node name="LifetimeButton" type="Button" parent="Camera2D/GUI/PauseScreen/VBoxContainer"]
 unique_name_in_owner = true
+z_index = 99
 layout_mode = 2
 text = "Add Range"
 

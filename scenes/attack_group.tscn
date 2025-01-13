@@ -54,6 +54,7 @@ stream_5/stream = ExtResource("9_axiaq")
 stream_6/stream = ExtResource("10_ychg5")
 
 [node name="attack_group" type="Node2D"]
+visibility_layer = 2
 position = Vector2(557, 328)
 
 [node name="EnemyStandard" parent="." instance=ExtResource("1_xiih4")]

@@ -32,7 +32,7 @@ lifetime = 1.0
 [sub_resource type="Resource" id="Resource_mhkgy"]
 script = ExtResource("13_ysug8")
 id = "starting gun"
-shot_time = 1.0
+shot_time = 10000.0
 shot_number = 1
 shot_spread = 0
 current_bullet = SubResource("Resource_4d4ci")

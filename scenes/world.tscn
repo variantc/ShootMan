@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=21 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://resources/gun_resource.gd" id="13_ysug8"]
 [ext_resource type="Script" path="res://scenes/camera_2d.gd" id="15_3cbjm"]
 [ext_resource type="Script" path="res://scripts/gui_controller.gd" id="15_jq3j3"]
+[ext_resource type="PackedScene" uid="uid://c43atuift7o0d" path="res://scenes/upgrade_node.tscn" id="18_lhl2h"]
 
 [sub_resource type="Resource" id="Resource_4d4ci"]
 script = ExtResource("12_wuvgv")
@@ -31,7 +32,7 @@ lifetime = 1.0
 [sub_resource type="Resource" id="Resource_mhkgy"]
 script = ExtResource("13_ysug8")
 id = "starting gun"
-shot_time = 1.0
+shot_time = 10000.0
 shot_number = 1
 shot_spread = 0
 current_bullet = SubResource("Resource_4d4ci")
@@ -56,6 +57,7 @@ script = ExtResource("5_2b576")
 drop_scene = ExtResource("6_llsii")
 
 [node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("world")]
+process_mode = 4
 script = ExtResource("1_irc5a")
 world = NodePath("..")
 enemy_standard_scene = ExtResource("3_6vcwx")
@@ -79,6 +81,7 @@ stretch_mode = 1
 [node name="Player" parent="." instance=ExtResource("2_gkc74")]
 unique_name_in_owner = true
 position = Vector2(575, 350)
+collision_mask = 50
 slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_block_on_wall = false
@@ -196,3 +199,5 @@ z_index = 99
 z_as_relative = false
 layout_mode = 2
 text = "Restart"
+
+[node name="UpgradeNode" parent="." instance=ExtResource("18_lhl2h")]

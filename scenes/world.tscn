@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=23 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bg3jhepeqaqn1" path="res://scenes/player.tscn" id="2_gkc74"]
 [ext_resource type="PackedScene" uid="uid://b51lbdgysvfq1" path="res://scenes/enemy_standard.tscn" id="3_6vcwx"]
 [ext_resource type="Script" path="res://scripts/upgrade_manager.gd" id="4_88rj6"]
+[ext_resource type="AudioStream" uid="uid://dugywuriayege" path="res://sounds/upgrade.wav" id="4_xbfcx"]
 [ext_resource type="Script" path="res://scripts/drop_spawner.gd" id="5_2b576"]
+[ext_resource type="AudioStream" uid="uid://bxnppd7ae0j1j" path="res://sounds/failed_upgrade.wav" id="5_6jdvl"]
 [ext_resource type="Script" path="res://scripts/score_text.gd" id="6_86sgh"]
 [ext_resource type="PackedScene" uid="uid://dhy2erh2732mq" path="res://scenes/drop_standard.tscn" id="6_llsii"]
 [ext_resource type="PackedScene" uid="uid://ckskkkn4w07o3" path="res://scenes/enemy_spiral.tscn" id="7_gpqxu"]
@@ -47,6 +49,9 @@ script = ExtResource("2_chy2p")
 [node name="UpgradeManager" type="Node" parent="." node_paths=PackedStringArray("score_text")]
 script = ExtResource("4_88rj6")
 score_text = NodePath("../Camera2D/GUI/ScoreText")
+upgrade_cost = 1
+upgrade_audio_stream = ExtResource("4_xbfcx")
+failed_audio_stream = ExtResource("5_6jdvl")
 
 [node name="SoundManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -57,7 +62,6 @@ script = ExtResource("5_2b576")
 drop_scene = ExtResource("6_llsii")
 
 [node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("world")]
-process_mode = 4
 script = ExtResource("1_irc5a")
 world = NodePath("..")
 enemy_standard_scene = ExtResource("3_6vcwx")
@@ -69,7 +73,6 @@ spawn_group_time = 60.0
 spawn_inc_time = 60.0
 
 [node name="Ground" type="TextureRect" parent="."]
-visible = false
 visibility_layer = 4
 offset_left = -3867.0
 offset_top = -2921.0

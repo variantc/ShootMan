@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c43atuift7o0d"]
+[gd_scene load_steps=5 format=3 uid="uid://c43atuift7o0d"]
 
 [ext_resource type="Texture2D" uid="uid://d26n1sy223811" path="res://sprites/upgrade_node.png" id="1_0o85p"]
+[ext_resource type="Texture2D" uid="uid://cdddee3d6al15" path="res://sprites/upgrade_node_raw.png" id="2_7t7kl"]
 [ext_resource type="Script" path="res://scripts/upgrade_node.gd" id="2_t3o28"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aa4n7"]
@@ -8,9 +9,12 @@ radius = 43.7379
 
 [node name="UpgradeNode" type="Area2D"]
 script = ExtResource("2_t3o28")
+built_sprite = ExtResource("1_0o85p")
+raw_sprite = ExtResource("2_7t7kl")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_0o85p")
+[node name="ResourceSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_7t7kl")
 
 [node name="UpgradeButton" type="Button" parent="."]
 unique_name_in_owner = true

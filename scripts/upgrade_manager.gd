@@ -24,13 +24,15 @@ static var UPGRADE_VALUES = {
 
 @export var score_text: ScoreText
 @export var upgrade_cost := 0
+@export var upgrade_audio_stream : AudioStream
+@export var failed_audio_stream : AudioStream
 
 
 func _ready():
 	SignalBus.upgrade_button_pressed.connect(_on_upgrade_button_pressed)
 
 
-func _on_upgrade_button_pressed(upgrade_type: int):
+func _on_upgrade_button_pressed(upgrade_node: UpgradeNode, upgrade_type: int):
 	if score_text.score >= upgrade_cost:
 		score_text.score -= upgrade_cost
 		var upgrade_info = UPGRADE_VALUES[upgrade_type]
@@ -39,3 +41,7 @@ func _on_upgrade_button_pressed(upgrade_type: int):
 			upgrade_info.amount,
 			upgrade_info.operation
 		)
+		%SoundManager.play_sound(upgrade_audio_stream)
+		upgrade_node.claim_upgrade()
+	else:
+		%SoundManager.play_sound(failed_audio_stream)

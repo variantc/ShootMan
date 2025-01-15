@@ -7,7 +7,7 @@ extends Node
 @warning_ignore("unused_signal") signal enemy_spawned(enemy : EnemyStandard)
 @warning_ignore("unused_signal") signal enemy_killed(enemy : EnemyStandard, audio : AudioStreamPlayer2D)
 
-@warning_ignore("unused_signal") signal upgrade_button_pressed(upgrade_type: String)
+@warning_ignore("unused_signal") signal upgrade_button_pressed(upgrade_node : UpgradeNode, upgrade_type : int)
 @warning_ignore("unused_signal") signal apply_upgrade(upgrade_type: String, amount)
 
 @warning_ignore("unused_signal") signal player_killed

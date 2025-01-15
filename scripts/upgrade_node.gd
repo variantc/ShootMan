@@ -5,8 +5,8 @@ class_name UpgradeNode
 @export var built_sprite : Texture2D
 @export var raw_sprite : Texture2D
 
-var claimed : bool
-
+var claimed : bool = false
+var level : int = 0
 
 func _ready():
 	%UpgradeButton.set_visible(false)
@@ -24,7 +24,11 @@ func _ready():
 func claim_upgrade():
 	%ResourceSprite.texture = built_sprite
 	claimed = true
-	%UpgradeButton.set_visible(false)	
+	#%UpgradeButton.set_visible(false)	
+	
+	level += 1
+	%UpgradeLevelLabel.set_visible(true)
+	%UpgradeLevelLabel.text = "Level " + str(level)
 
 
 # To detect bullets?
@@ -34,10 +38,10 @@ func _on_area_entered(area):
 
 # To detect player and enemies?
 func _on_body_entered(body):
-	if body is Player and not claimed:
+	if body is Player: #and not claimed:
 		%UpgradeButton.set_visible(true)	
 	
 	
 func _on_body_exited(body):
-	if body is Player and not claimed:
+	if body is Player: #and not claimed:
 		%UpgradeButton.set_visible(false)

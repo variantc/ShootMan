@@ -29,12 +29,3 @@ func _on_drop_pickedup(audio : AudioStreamPlayer2D):
 
 func _on_drop_to_player(drop : DropStandard):
 	drop_spawner.set_player_for_drop(drop, player)
-
-	
-#var counter = 0
-#func _process(delta):
-	#counter += delta
-	#if counter > 2:
-		#counter = 0
-		#player.current_gun.shot_number += 1
-		#player.current_gun.shot_spread += 10

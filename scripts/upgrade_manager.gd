@@ -23,7 +23,7 @@ static var UPGRADE_VALUES = {
 
 
 @export var score_text: ScoreText
-@export var upgrade_cost := 0
+@export var base_upgrade_cost := 0
 @export var upgrade_audio_stream : AudioStream
 @export var failed_audio_stream : AudioStream
 
@@ -33,6 +33,8 @@ func _ready():
 
 
 func _on_upgrade_button_pressed(upgrade_node: UpgradeNode, upgrade_type: int):
+	# Testing against upgrade base cost time the node's upgrade level for scaling
+	var upgrade_cost = base_upgrade_cost * (upgrade_node.level + 1)
 	if score_text.score >= upgrade_cost:
 		score_text.score -= upgrade_cost
 		var upgrade_info = UPGRADE_VALUES[upgrade_type]

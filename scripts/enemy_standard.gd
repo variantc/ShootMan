@@ -59,7 +59,7 @@ func _show_damage(prev, current):
 	# Ensure queue_free() is only called after tween completes
 	tween.finished.connect(func(): if health <= 0 : queue_free())
 	if health <= 0:
-		die_sound()
+		_die()
 	
 	var start_health_left = prev / _start_health
 	# Update shader to reflect new health
@@ -89,7 +89,7 @@ func _knock_back(direction: Vector2, speed: float):
 		.set_trans(Tween.TRANS_QUAD)
 
 
-func die_sound():
+func _die():
+		#world.enemy_spawner.remove_enemy_from_list(self)
 		SignalBus.enemy_killed.emit(self, %AudioStreamPlayer2D)
 		# queue_free called in tween.finished signal
-		#queue_free()

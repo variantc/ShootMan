@@ -34,6 +34,7 @@ func _ready():
 
 func _on_upgrade_button_pressed(upgrade_node: UpgradeNode, upgrade_type: int):
 	# Testing against upgrade base cost time the node's upgrade level for scaling
+	# + 1 because starts at level zero
 	var upgrade_cost = base_upgrade_cost * (upgrade_node.level + 1)
 	if score_text.score >= upgrade_cost:
 		score_text.score -= upgrade_cost

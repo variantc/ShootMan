@@ -61,6 +61,7 @@ func _spawn_attack_group():
 	attack_group.global_position = %Player.global_position
 	for enemy : EnemyStandard in attack_group.get_children():
 		enemy.world = world
+		enemy_list.append(enemy)
 		#_setup_enemy(enemy, enemy.global_position)
 	
 		
@@ -74,6 +75,7 @@ func _setup_enemy(enemy, spawn_pos : Vector2):
 	SignalBus.enemy_spawned.emit(enemy)
 	enemy_list.append(enemy)
 	enemy.enemy_setup(world, spawn_pos)
+	print_debug(len(enemy_list))
 	
 
 func _get_random_edge_position():
@@ -98,5 +100,5 @@ func _get_random_edge_position():
 	return temp_pos + %Player.global_position - %Player.start_pos
 
 
-func _on_enemy_killed(enemy : EnemyStandard):
+func remove_enemy_from_list(enemy : EnemyStandard):
 	enemy_list.remove_at(enemy_list.find(enemy))

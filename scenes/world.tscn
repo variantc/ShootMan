@@ -49,7 +49,6 @@ script = ExtResource("2_chy2p")
 [node name="UpgradeManager" type="Node" parent="." node_paths=PackedStringArray("score_text")]
 script = ExtResource("4_88rj6")
 score_text = NodePath("../Camera2D/GUI/ScoreText")
-base_upgrade_cost = 1
 upgrade_audio_stream = ExtResource("4_xbfcx")
 failed_audio_stream = ExtResource("5_6jdvl")
 

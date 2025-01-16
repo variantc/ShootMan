@@ -19,8 +19,10 @@ func move_and_rotate(
 	var rotate_amount = clamp(target_angle, -ang_acc * delta, ang_acc * delta)
 	body.rotation += rotate_amount
 
-	var factor = 1
-	if reverse:
-		factor = -1
-	body.velocity = factor * (target - body.global_position).normalized() * speed
+	var direction = Vector2.RIGHT.rotated(body.rotation)
+	var factor = -1 if reverse else 1
+
+	#body.velocity = factor * (target - body.global_position).normalized() * speed
+	body.velocity = factor * direction * speed
+	
 	body.move_and_slide()

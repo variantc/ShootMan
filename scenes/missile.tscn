@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://rjpyjelqnsml"]
+[gd_scene load_steps=16 format=3 uid="uid://rjpyjelqnsml"]
 
-[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_tvvql"]
+[ext_resource type="Script" path="res://scripts/missile.gd" id="1_bx2il"]
 [ext_resource type="AudioStream" uid="uid://cilm5agmcp85i" path="res://sounds/shots/shot_ (1).wav" id="2_5wim3"]
 [ext_resource type="AudioStream" uid="uid://c700jyo7bsmuc" path="res://sounds/shots/shot_ (2).wav" id="3_q10h2"]
 [ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="4_deoym"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://c62kjyo2y8y20" path="res://sounds/shots/shot_ (8).wav" id="9_pun1m"]
 [ext_resource type="AudioStream" uid="uid://xdyva7qo10dk" path="res://sounds/shots/shot_ (9).wav" id="10_e11vt"]
 [ext_resource type="Script" path="res://scripts/components/movement_component.gd" id="11_7bkf3"]
+[ext_resource type="Texture2D" uid="uid://d04gmrqs45y36" path="res://sprites/explosion.png" id="12_unrpa"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_k4n72"]
 streams_count = 9
@@ -27,14 +28,18 @@ stream_8/stream = ExtResource("10_e11vt")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx2ns"]
 size = Vector2(4, 4)
 
-[node name="Missile" type="Area2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6xhng"]
+
+[node name="Missile" type="CharacterBody2D"]
 visibility_layer = 2
 collision_layer = 4
 collision_mask = 34
-script = ExtResource("1_tvvql")
+script = ExtResource("1_bx2il")
+speed = 100.0
+ang_acc = 0.25
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -5.0
+offset_left = -7.0
 offset_top = -2.0
 offset_right = 2.0
 offset_bottom = 2.0
@@ -53,4 +58,18 @@ shape = SubResource("RectangleShape2D_jx2ns")
 unique_name_in_owner = true
 script = ExtResource("11_7bkf3")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="CollisionArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+shape = SubResource("RectangleShape2D_jx2ns")
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+shape = SubResource("CircleShape2D_6xhng")
+
+[node name="Sprite2D" type="Sprite2D" parent="ExplosionArea"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_unrpa")

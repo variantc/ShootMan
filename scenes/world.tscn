@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=25 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://scripts/gui_controller.gd" id="15_jq3j3"]
 [ext_resource type="PackedScene" uid="uid://c43atuift7o0d" path="res://scenes/upgrade_node.tscn" id="18_lhl2h"]
 [ext_resource type="PackedScene" uid="uid://cfuxvhjeo2lal" path="res://scenes/enemy_missile.tscn" id="21_ivebk"]
+[ext_resource type="PackedScene" uid="uid://rjpyjelqnsml" path="res://scenes/missile.tscn" id="22_o2ced"]
 
 [sub_resource type="Resource" id="Resource_4d4ci"]
 script = ExtResource("12_wuvgv")
@@ -223,3 +224,6 @@ position = Vector2(750, 433)
 orbit_speed = 10.0
 speed = 60.0
 health = 20.0
+
+[node name="Missile" parent="." instance=ExtResource("22_o2ced")]
+position = Vector2(104, 548)

@@ -1,0 +1,99 @@
+[gd_scene load_steps=19 format=3 uid="uid://cfuxvhjeo2lal"]
+
+[ext_resource type="Script" path="res://scripts/enemy_missile.gd" id="1_sinyk"]
+[ext_resource type="Shader" path="res://shaders/enemy_missile.gdshader" id="2_v0w66"]
+[ext_resource type="Texture2D" uid="uid://byxxpwsjctwmn" path="res://sprites/pawn_0.png" id="3_acyuq"]
+[ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_l26rg"]
+[ext_resource type="AudioStream" uid="uid://rw6vkwrnn4jm" path="res://sounds/explosions/explosion (2).wav" id="5_wddie"]
+[ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="6_gr7jn"]
+[ext_resource type="AudioStream" uid="uid://dv2ay24mst4c7" path="res://sounds/explosions/explosion (4).wav" id="7_y5kkt"]
+[ext_resource type="AudioStream" uid="uid://dbbxvnqc0l2b4" path="res://sounds/explosions/explosion (5).wav" id="8_5c6do"]
+[ext_resource type="AudioStream" uid="uid://45ndai6jryhf" path="res://sounds/explosions/explosion (6).wav" id="9_eo1eg"]
+[ext_resource type="AudioStream" uid="uid://cwxjmr02t3n7u" path="res://sounds/explosions/explosion (7).wav" id="10_hmekv"]
+[ext_resource type="PackedScene" uid="uid://cx2lutrqoqoro" path="res://scenes/components/movement_component.tscn" id="11_v2qla"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
+radius = 15.0
+
+[sub_resource type="Gradient" id="Gradient_3ffsw"]
+offsets = PackedFloat32Array(0, 0.0107991, 0.265659, 0.63067)
+colors = PackedColorArray(0.6461, 0.364, 0.91, 0, 1, 0.328, 0.04, 1, 0, 0, 0, 1, 0.98, 0.392, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bmvgt"]
+gradient = SubResource("Gradient_3ffsw")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fl1rm"]
+noise_type = 3
+frequency = 0.0067
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rs4ng"]
+noise = SubResource("FastNoiseLite_fl1rm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfkgk"]
+shader = ExtResource("2_v0w66")
+shader_parameter/mix_amount = 0.0
+shader_parameter/flash_colour = Color(1, 1, 1, 1)
+shader_parameter/shade_color = Color(0.430695, 0.394542, 0.601883, 1)
+shader_parameter/shade_intensity = 0.5
+shader_parameter/hp_left = 1.0
+shader_parameter/burn_gradient = SubResource("GradientTexture2D_bmvgt")
+shader_parameter/burn_noise = SubResource("NoiseTexture2D_rs4ng")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yj0ii"]
+streams_count = 7
+stream_0/stream = ExtResource("4_l26rg")
+stream_1/stream = ExtResource("5_wddie")
+stream_2/stream = ExtResource("6_gr7jn")
+stream_3/stream = ExtResource("7_y5kkt")
+stream_4/stream = ExtResource("8_5c6do")
+stream_5/stream = ExtResource("9_eo1eg")
+stream_6/stream = ExtResource("10_hmekv")
+
+[node name="EnemyMissile" type="CharacterBody2D" groups=["Enemy"]]
+visibility_layer = 2
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_sinyk")
+orbit_speed = 1.0
+speed = 10.0
+ang_acc = 1.0
+health = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gelfa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_sfkgk")
+position = Vector2(1, -1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_acyuq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_top = -2.0
+offset_right = 15.0
+offset_bottom = 2.0
+color = Color(1, 0, 0, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_yj0ii")
+
+[node name="MovementComponent" parent="." instance=ExtResource("11_v2qla")]
+
+[node name="DebugRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07, 0.2715, 1, 1)

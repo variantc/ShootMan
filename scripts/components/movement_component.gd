@@ -2,7 +2,8 @@ extends Node
 class_name MovementComponent
 
 
-func move_and_rotate(delta, 
+func move_and_rotate(
+		delta, 
 		body: CharacterBody2D, 
 		target: Vector2, 
 		speed: float, 
@@ -10,7 +11,7 @@ func move_and_rotate(delta,
 		reverse: bool = false):
 
 	if speed < 0.001:
-		print(body.name + ": has zero speed, is this intentional?")
+		print_debug(body.name + ": has zero speed, is this intentional?")
 			
 	var target_angle = body.get_angle_to(target)
 

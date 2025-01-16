@@ -177,10 +177,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -876.0
-offset_top = -892.0
-offset_right = 1124.0
-offset_bottom = 1108.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -213,13 +209,13 @@ text = "Restart"
 position = Vector2(691, 345)
 
 [node name="EnemyMissile" parent="." instance=ExtResource("21_ivebk")]
-position = Vector2(385, 425)
-orbit_speed = 10.0
-speed = 60.0
+position = Vector2(185, 501)
+speed = 40.0
+ang_acc = 2.0
 health = 20.0
 
 [node name="EnemyMissile2" parent="." instance=ExtResource("21_ivebk")]
-position = Vector2(750, 433)
-orbit_speed = 10.0
-speed = 60.0
+position = Vector2(926, 541)
+speed = 40.0
+ang_acc = 2.0
 health = 20.0

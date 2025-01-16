@@ -215,11 +215,13 @@ position = Vector2(691, 345)
 [node name="EnemyMissile" parent="." instance=ExtResource("21_ivebk")]
 position = Vector2(385, 425)
 orbit_speed = 10.0
-speed = 60.0
+speed = 40.0
+ang_acc = 2.0
 health = 20.0
 
 [node name="EnemyMissile2" parent="." instance=ExtResource("21_ivebk")]
 position = Vector2(750, 433)
 orbit_speed = 10.0
-speed = 60.0
+speed = 40.0
+ang_acc = 2.0
 health = 20.0

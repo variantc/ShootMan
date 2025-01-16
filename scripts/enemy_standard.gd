@@ -10,6 +10,7 @@ var _start_health : float
 @onready var movement_component = $MovementComponent as MovementComponent
 
 var world : World
+var player : Player
 
 
 func _ready():

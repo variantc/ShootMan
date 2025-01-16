@@ -3,6 +3,8 @@ extends EnemyStandard
 @export var radius: float = 350.0
 @export var orbit_speed: float = 0.05
 
+@export var current_gun : GunResource
+
 var _orbit_angle: float = 0.0
 
 func _ready():
@@ -11,6 +13,7 @@ func _ready():
 
 func _process(delta: float) -> void:
 	_move_and_rotate(delta)
+	%ShootComponent.shoot(delta, current_gun, 1)
 	
 	
 func _move_and_rotate(delta):

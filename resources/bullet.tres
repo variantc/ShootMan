@@ -1,14 +1,12 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bwmhdwfic47a"]
+[gd_resource type="Resource" script_class="BulletResource" load_steps=2 format=3 uid="uid://bwmhdwfic47a"]
 
 [ext_resource type="Script" path="res://resources/bullet_resource.gd" id="1_caint"]
 
 [resource]
 script = ExtResource("1_caint")
 id = ""
-posisiton = Vector2(0, 0)
-rotation = Vector2(0, 0)
-speed = 0.0
-strength = 0.0
+speed = 100.0
+strength = 10.0
 scatter = 0
 repeat_scatter = false
 scale = 1.0

@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://cfuxvhjeo2lal"]
+[gd_scene load_steps=22 format=3 uid="uid://cfuxvhjeo2lal"]
 
 [ext_resource type="Script" path="res://scripts/enemy_missile.gd" id="1_sinyk"]
+[ext_resource type="Resource" uid="uid://essjjlaf2xfv" path="res://resources/gun_resource.tres" id="2_bouac"]
 [ext_resource type="Shader" path="res://shaders/enemy_missile.gdshader" id="2_v0w66"]
 [ext_resource type="Texture2D" uid="uid://byxxpwsjctwmn" path="res://sprites/pawn_0.png" id="3_acyuq"]
 [ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_l26rg"]
@@ -11,6 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://45ndai6jryhf" path="res://sounds/explosions/explosion (6).wav" id="9_eo1eg"]
 [ext_resource type="AudioStream" uid="uid://cwxjmr02t3n7u" path="res://sounds/explosions/explosion (7).wav" id="10_hmekv"]
 [ext_resource type="PackedScene" uid="uid://cx2lutrqoqoro" path="res://scenes/components/movement_component.tscn" id="11_v2qla"]
+[ext_resource type="Script" path="res://scripts/components/shoot_component.gd" id="13_i5tjw"]
+[ext_resource type="PackedScene" uid="uid://b8rvbitfa8jom" path="res://scenes/bullet.tscn" id="14_utnfj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
 radius = 15.0
@@ -57,6 +60,7 @@ collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_sinyk")
 orbit_speed = 1.0
+current_gun = ExtResource("2_bouac")
 speed = 10.0
 ang_acc = 1.0
 health = 40.0
@@ -97,3 +101,8 @@ offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.07, 0.2715, 1, 1)
+
+[node name="ShootComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("13_i5tjw")
+bullet_scene = ExtResource("14_utnfj")

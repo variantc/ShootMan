@@ -1,4 +1,5 @@
 extends Node
+class_name ShootComponent
 
 
 @export var bullet_scene : PackedScene
@@ -11,7 +12,7 @@ func _ready():
 	parent = get_parent()
 	
 
-func shoot(delta, gun_resource : GunResource):
+func shoot(delta, gun_resource : GunResource, mask : int):
 	if gun_resource.shot_number == 0:
 		print("ERROR: Shot number is zero!")
 		return
@@ -26,6 +27,7 @@ func shoot(delta, gun_resource : GunResource):
 				rot = parent.global_rotation - (rad_spread)/2 + i * rad_spread/(gun_resource.shot_number-1)
 			var bullet = bullet_scene.instantiate() as Bullet
 			
+			bullet.collision_mask = mask
 			parent.get_parent().add_child(bullet)
 			
 			#var bullet_stats = load("res://resources/bullet.tres") as BulletResource

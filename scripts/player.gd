@@ -15,6 +15,7 @@ var counter := 0.0
 
 var start_pos : Vector2
 
+
 func _ready():
 	SignalBus.apply_upgrade.connect(_on_apply_upgrade)
 	
@@ -37,7 +38,7 @@ func _on_apply_upgrade(upgrade_type: int, amount, operation: int):
 func _process(delta):
 	_move_and_rotate(delta)
 	_check_collision()
-	%ShootComponent.shoot(delta, current_gun)
+	%ShootComponent.shoot(delta, current_gun, 34)
 	
 	
 func _move_and_rotate(delta):

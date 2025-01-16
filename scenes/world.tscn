@@ -42,6 +42,7 @@ current_bullet = SubResource("Resource_4d4ci")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_rlksj")
+DEBUG = true
 
 [node name="GameStateManager" type="Node" parent="."]
 unique_name_in_owner = true

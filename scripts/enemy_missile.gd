@@ -5,10 +5,16 @@ extends EnemyStandard
 
 @export var current_gun : GunResource
 
-var _orbit_angle: float = 0.0
+var orbit_direction : int = 1
+var radius_factor : float = 1.0
 
 func _ready():
 	world = get_tree().root.get_child(1)
+	
+	if randi_range(0,1):
+		orbit_direction = -1
+		
+	radius_factor *= randf_range(0.95,1.1)
 
 
 func _process(delta: float) -> void:
@@ -18,16 +24,16 @@ func _process(delta: float) -> void:
 	
 func _move_and_rotate(delta):
 	var to_player = (global_position - world.player.global_position).normalized()
+	var rotate_ang = PI/6 * orbit_direction
 	var strafe_target = \
-		world.player.global_position + (to_player * radius).rotated(PI/6)
+		world.player.global_position + (to_player * radius_factor * radius).rotated(rotate_ang)
 	
-	%DebugRect.global_position = strafe_target
-	
-	#var reverse = false
-	#if global_position.distance_squared_to(player.global_position) < radius * radius:
-		#reverse = true
-	#else:
-		#reverse = false
+	if world.DEBUG:
+		%DebugLine.clear_points()
+		%DebugLine.global_position = Vector2.ZERO
+		%DebugLine.global_rotation = 0
+		%DebugLine.add_point(global_position)
+		%DebugLine.add_point(strafe_target)
 	
 	movement_component.move_and_rotate(
 		delta, 

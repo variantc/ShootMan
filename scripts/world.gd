@@ -1,6 +1,8 @@
 extends Node2D
 class_name World
 
+@export_category("DEBUG")
+@export var DEBUG : bool = false
 
 @onready var sound_manager := $SoundManager as SoundManager
 @onready var player := $Player as Player

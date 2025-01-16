@@ -76,11 +76,10 @@ func _set_shader_hp_left(hp_left: float):
 	%Sprite2D.material.set_shader_parameter("hp_left", hp_left)
 	
 	
-func _knock_back(direction: Vector2, speed: float):
+func _knock_back(direction: Vector2, kb_speed: float):
 	var kb_red_factor = 0.075
 	var kb_time = 0.3
-	var kb_target_pos = global_position + direction * speed * kb_red_factor
-
+	var kb_target_pos = global_position + direction * kb_speed * kb_red_factor
 
 	# Create and configure a single tween
 	var tween = create_tween() as Tween

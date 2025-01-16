@@ -22,8 +22,7 @@ SignalBus="*res://scripts/signal_bus.gd"
 [display]
 
 window/size/always_on_top=true
-window/stretch/mode="canvas_items"
-window/stretch/scale_mode="integer"
+window/stretch/mode="viewport"
 
 [input]
 

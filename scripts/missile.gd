@@ -5,25 +5,30 @@ class_name Missile
 @export var speed : float = 200
 @export var ang_acc : float = 1
 
-var lifetime : float = 5
+var lifetime : float = 2
 var life_counter : float = 0
 
 var world : World
-
+var exploding : bool = false
 
 func _ready():
 	var root = get_tree().root
 	world = root.get_child(root.get_child_count() - 1)
 	
 	%CollisionArea.body_entered.connect(_on_body_entered)
-	
-	%ExplosionArea.process_mode = Node.PROCESS_MODE_DISABLED
-	
 	%ExplosionArea.body_entered.connect(_on_explosion_entered)
+	
+	for n in %ExplosionArea.get_children():
+		var node : Node2D = n
+		n.scale = Vector2.ZERO
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if exploding:
+		return
+	
 	%MovementComponent.move_and_rotate(
 		delta, 
 		self, 
@@ -33,6 +38,7 @@ func _physics_process(delta):
 		
 	life_counter += delta
 	if life_counter > lifetime:
+		exploding = true
 		_explode()
 		
 		
@@ -47,6 +53,29 @@ func _on_explosion_entered(body):
 
 
 func _explode():
-	%ExplosionArea.process_mode = Node.PROCESS_MODE_INHERIT
-	print_debug("BOOOM")
-	queue_free()
+	var tween = create_tween() as Tween
+	
+	tween.finished.connect(func(): _end_explosion())
+	
+	# Tween the shader health parameter and position simultaneously
+	tween.tween_method(_scale_explosion, 0.0, 1.0, 0.5) \
+		.set_ease(Tween.EASE_OUT)\
+		.set_trans(Tween.TRANS_EXPO)
+		
+
+func _scale_explosion(scale: float):
+	for n in %ExplosionArea.get_children():
+		var node : Node2D = n
+		n.scale = Vector2(scale, scale)
+
+
+func _end_explosion():
+	var tween = create_tween() as Tween
+
+	# Ensure queue_free() is only called after tween completes
+	tween.finished.connect(func(): queue_free())
+	
+	# Tween the shader health parameter and position simultaneously
+	tween.tween_method(_scale_explosion, 1.0, 0.0, 0.75) \
+		.set_ease(Tween.EASE_IN)\
+		.set_trans(Tween.TRANS_QUAD)

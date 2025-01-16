@@ -227,3 +227,12 @@ health = 20.0
 
 [node name="Missile" parent="." instance=ExtResource("22_o2ced")]
 position = Vector2(104, 548)
+
+[node name="Missile2" parent="." instance=ExtResource("22_o2ced")]
+position = Vector2(112, 334)
+
+[node name="Missile3" parent="." instance=ExtResource("22_o2ced")]
+position = Vector2(246, 156)
+
+[node name="Missile4" parent="." instance=ExtResource("22_o2ced")]
+position = Vector2(430, 88)

@@ -29,6 +29,7 @@ stream_8/stream = ExtResource("10_e11vt")
 size = Vector2(4, 4)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6xhng"]
+radius = 30.0
 
 [node name="Missile" type="CharacterBody2D"]
 visibility_layer = 2
@@ -71,5 +72,4 @@ unique_name_in_owner = true
 shape = SubResource("CircleShape2D_6xhng")
 
 [node name="Sprite2D" type="Sprite2D" parent="ExplosionArea"]
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("12_unrpa")

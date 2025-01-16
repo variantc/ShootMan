@@ -9,7 +9,7 @@ class_name Player
 
 @export var current_gun : GunResource
 
-@onready var movement_component = $MovementComponent as MovementComponent
+@onready var movement_component = %MovementComponent as MovementComponent
 
 var counter := 0.0
 
@@ -37,32 +37,8 @@ func _on_apply_upgrade(upgrade_type: int, amount, operation: int):
 func _process(delta):
 	_move_and_rotate(delta)
 	_check_collision()
-	_shoot(delta, current_gun)
+	%ShootComponent.shoot(delta, current_gun)
 	
-	
-func _shoot(delta, gun_resource : GunResource):
-	if gun_resource.shot_number == 0:
-		print("ERROR: Shot number is zero!")
-		return
-		
-	counter += delta
-	var rad_spread = gun_resource.shot_spread * PI/180
-	if counter > gun_resource.shot_time:
-		counter = 0.0
-		for i in range(gun_resource.shot_number):
-			var rot = global_rotation
-			if gun_resource.shot_number > 1:
-				rot = global_rotation - (rad_spread)/2 + i * rad_spread/(gun_resource.shot_number-1)
-			var bullet = bullet_scene.instantiate() as Bullet
-			world.add_child(bullet)
-			
-			#var bullet_stats = load("res://resources/bullet.tres") as BulletResource
-			var bullet_stats = gun_resource.current_bullet
-			bullet_stats.bullet_position = global_position
-			bullet_stats.rotation = rot
-			
-			bullet.setup(bullet_stats)
-			
 	
 func _move_and_rotate(delta):
 	# Reverse on RMB

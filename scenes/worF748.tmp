@@ -62,6 +62,7 @@ script = ExtResource("5_2b576")
 drop_scene = ExtResource("6_llsii")
 
 [node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("world")]
+process_mode = 4
 script = ExtResource("1_irc5a")
 world = NodePath("..")
 enemy_standard_scene = ExtResource("3_6vcwx")

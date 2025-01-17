@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="BulletResource" load_steps=2 format=3 uid="uid://bwmhdwfic47a"]
+[gd_resource type="Resource" script_class="ProjectileResource" load_steps=2 format=3 uid="uid://bwmhdwfic47a"]
 
 [ext_resource type="Script" path="res://resources/projectile_resource.gd" id="1_caint"]
 
 [resource]
 script = ExtResource("1_caint")
-id = ""
+id = "player_bullet"
 speed = 100.0
 strength = 10.0
 scatter = 0
 repeat_scatter = false
 scale = 1.0
 lifetime = 5.0
+mask = 2

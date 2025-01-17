@@ -25,15 +25,15 @@ void apply_damage_fragment(inout vec4 c, vec2 uv) {
 	float noise_r = texture(burn_noise, uv).r;
 	float ty = uv.x + mix(-2.0, 1.0, hp_left) + noise_r;
 	vec4 grad_tex = texture(
-		burn_gradient, 
+		burn_gradient,
 		vec2(uv.y, ty));
-	
+
 	float mix_ratio = clamp(ty, 0.0, 1.0);;
 	c = vec4(mix(grad_tex, c, mix_ratio).rgb, min(grad_tex.a, c.a));
 }
 
 void apply_damage_vertex(inout vec2 v) {
-	
+
 	float scale = 1.0 + smoothstep(0.7, 1.0, 1.0 - hp_left);
 	v *= scale;
 }
@@ -51,11 +51,10 @@ void fragment() {
 	COLOR = apply_shade(COLOR);
 	flash_on_hit(COLOR.rgb); 		// characters.inc
 
-	
+
 	apply_damage_fragment(COLOR, UV);
-	
+
 	#ifdef DEBUG_MODE_ON
 	debug_draw_dots_at_vertices(UV, COLOR, TEXTURE);		// debug_utils.inc
 	#endif
 }
-

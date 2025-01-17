@@ -49,10 +49,14 @@ func setup (missile_stats : ProjectileResource) :
 	scale = Vector2(missile_stats.scale, missile_stats.scale)
 	lifetime = missile_stats.lifetime
 	collision_mask = missile_stats.mask
+	%CollisionArea.collision_mask = collision_mask
+	%ExplosionArea.collision_mask = collision_mask
 		
 		
 func _on_body_entered(body):
+	print_debug(body)
 	if body.is_in_group("Player"):
+		print_debug(body)
 		_explode()
 
 

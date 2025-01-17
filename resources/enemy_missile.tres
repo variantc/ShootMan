@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ProjectileResource" load_steps=2 format=3 uid="uid://3x5t63ybrdrj"]
+
+[ext_resource type="Script" path="res://resources/projectile_resource.gd" id="1_62tbj"]
+
+[resource]
+script = ExtResource("1_62tbj")
+id = "standard_missile"
+speed = 100.0
+strength = 10.0
+scatter = 0
+repeat_scatter = false
+scale = 1.0
+lifetime = 5.0
+mask = 1

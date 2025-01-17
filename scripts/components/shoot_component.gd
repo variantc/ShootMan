@@ -43,13 +43,14 @@ func shoot(delta, weapon_resource : WeaponResource, mask : int):
 			
 			#var bullet_stats = load("res://resources/bullet.tres") as BulletResource
 			var projectile_stats = weapon_resource.current_projectile
-			projectile_stats.projectile_position = parent.global_position
+			var spawn_offset = Vector2.RIGHT.rotated(rot) * 20  # Adjust 20 to whatever offset you want
+			projectile_stats.projectile_position = parent.global_position + spawn_offset
 			projectile_stats.rotation = rot
 			
-			#TODO: Check updated
-			if parent is Player:
-				projectile_stats.mask = ENEMY_LAYER_MASK
-			if parent is EnemyMissile:
-				projectile_stats.mask = PLAYER_LAYER_MASK
+			##TODO: Check updated
+			#if parent is Player:
+				#projectile_stats.mask = ENEMY_LAYER_MASK
+			#if parent is EnemyMissile:
+				#projectile_stats.mask = PLAYER_LAYER_MASK
 				
 			projectile.setup(projectile_stats)

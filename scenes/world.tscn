@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=26 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://scripts/gui_controller.gd" id="15_jq3j3"]
 [ext_resource type="PackedScene" uid="uid://c43atuift7o0d" path="res://scenes/upgrade_node.tscn" id="18_lhl2h"]
 [ext_resource type="PackedScene" uid="uid://cfuxvhjeo2lal" path="res://scenes/enemy_missile.tscn" id="21_ivebk"]
+[ext_resource type="Resource" uid="uid://3x5t63ybrdrj" path="res://resources/enemy_missile.tres" id="22_u6r73"]
 
 [sub_resource type="Resource" id="Resource_3jeuv"]
 script = ExtResource("12_wuvgv")
@@ -41,6 +42,15 @@ shot_number = 1
 shot_spread = 5
 projectile_type = 0
 current_projectile = SubResource("Resource_3jeuv")
+
+[sub_resource type="Resource" id="Resource_didse"]
+script = ExtResource("13_ysug8")
+id = ""
+shot_time = 0.5
+shot_number = 1
+shot_spread = 5
+projectile_type = 1
+current_projectile = ExtResource("22_u6r73")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_rlksj")
@@ -217,6 +227,7 @@ position = Vector2(691, 345)
 [node name="EnemyMissile" parent="." instance=ExtResource("21_ivebk")]
 position = Vector2(385, 425)
 orbit_speed = 10.0
+current_weapon = SubResource("Resource_didse")
 speed = 60.0
 health = 20.0
 

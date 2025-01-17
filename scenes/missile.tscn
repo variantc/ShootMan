@@ -61,14 +61,12 @@ script = ExtResource("11_7bkf3")
 
 [node name="CollisionArea" type="Area2D" parent="."]
 unique_name_in_owner = true
-collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
 shape = SubResource("RectangleShape2D_jx2ns")
 
 [node name="ExplosionArea" type="Area2D" parent="."]
 unique_name_in_owner = true
-collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
 shape = SubResource("CircleShape2D_6xhng")

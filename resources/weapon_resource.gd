@@ -1,5 +1,5 @@
 extends Resource
-class_name GunResource
+class_name WeaponResource
 
 
 @export var id : String
@@ -10,4 +10,5 @@ class_name GunResource
 	set(value):
 		shot_number = value
 @export var shot_spread : int = 5
-@export var current_bullet : BulletResource
+@export var projectile_type : ProjectileResource.Type
+@export var current_projectile : ProjectileResource

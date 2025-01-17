@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://cfuxvhjeo2lal"]
+[gd_scene load_steps=32 format=3 uid="uid://cfuxvhjeo2lal"]
 
 [ext_resource type="Script" path="res://scripts/enemy_missile.gd" id="1_sinyk"]
-[ext_resource type="Resource" uid="uid://essjjlaf2xfv" path="res://resources/gun_resource.tres" id="2_bouac"]
+[ext_resource type="Script" path="res://resources/projectile_resource.gd" id="2_m5rmq"]
 [ext_resource type="Shader" path="res://shaders/enemy_missile.gdshader" id="2_v0w66"]
 [ext_resource type="Texture2D" uid="uid://byxxpwsjctwmn" path="res://sprites/pawn_0.png" id="3_acyuq"]
+[ext_resource type="Script" path="res://resources/weapon_resource.gd" id="3_yuy0d"]
 [ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_l26rg"]
 [ext_resource type="AudioStream" uid="uid://rw6vkwrnn4jm" path="res://sounds/explosions/explosion (2).wav" id="5_wddie"]
 [ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="6_gr7jn"]
@@ -14,6 +15,52 @@
 [ext_resource type="PackedScene" uid="uid://cx2lutrqoqoro" path="res://scenes/components/movement_component.tscn" id="11_v2qla"]
 [ext_resource type="Script" path="res://scripts/components/shoot_component.gd" id="13_i5tjw"]
 [ext_resource type="PackedScene" uid="uid://b8rvbitfa8jom" path="res://scenes/bullet.tscn" id="14_utnfj"]
+[ext_resource type="PackedScene" uid="uid://rjpyjelqnsml" path="res://scenes/missile.tscn" id="15_ywmck"]
+
+[sub_resource type="Gradient" id="Gradient_y2upc"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r2yot"]
+gradient = SubResource("Gradient_y2upc")
+
+[sub_resource type="Gradient" id="Gradient_emc2s"]
+offsets = PackedFloat32Array(0, 0.534137)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1mg64"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4sgwt"]
+color_ramp = SubResource("Gradient_emc2s")
+noise = SubResource("FastNoiseLite_1mg64")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fw8bm"]
+shader = ExtResource("2_v0w66")
+shader_parameter/mix_amount = 0.0
+shader_parameter/flash_colour = null
+shader_parameter/shade_color = Color(0.64, 0.2496, 0.3472, 0.643137)
+shader_parameter/shade_intensity = 0.461
+shader_parameter/hp_left = 1.0
+shader_parameter/burn_gradient = SubResource("GradientTexture2D_r2yot")
+shader_parameter/burn_noise = SubResource("NoiseTexture2D_4sgwt")
+
+[sub_resource type="Resource" id="Resource_gmj5e"]
+script = ExtResource("2_m5rmq")
+id = ""
+speed = 100.0
+strength = 10.0
+scatter = 0
+repeat_scatter = false
+scale = 1.0
+lifetime = 5.0
+mask = 0
+
+[sub_resource type="Resource" id="Resource_oy5ci"]
+script = ExtResource("3_yuy0d")
+id = ""
+shot_time = 1.0
+shot_number = 1
+shot_spread = 5
+projectile_type = 1
+current_projectile = SubResource("Resource_gmj5e")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
 radius = 15.0
@@ -56,11 +103,12 @@ stream_6/stream = ExtResource("10_hmekv")
 
 [node name="EnemyMissile" type="CharacterBody2D" groups=["Enemy"]]
 visibility_layer = 2
+material = SubResource("ShaderMaterial_fw8bm")
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_sinyk")
 orbit_speed = 1.0
-current_gun = ExtResource("2_bouac")
+current_weapon = SubResource("Resource_oy5ci")
 speed = 10.0
 ang_acc = 1.0
 health = 40.0
@@ -96,3 +144,4 @@ default_color = Color(1, 0, 0, 1)
 unique_name_in_owner = true
 script = ExtResource("13_i5tjw")
 bullet_scene = ExtResource("14_utnfj")
+missile_scene = ExtResource("15_ywmck")

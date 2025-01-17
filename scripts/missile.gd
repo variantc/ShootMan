@@ -40,6 +40,15 @@ func _physics_process(delta):
 	if life_counter > lifetime:
 		exploding = true
 		_explode()
+
+
+func setup (missile_stats : ProjectileResource) :
+	global_position = missile_stats.projectile_position
+	rotation = missile_stats.rotation
+	speed = missile_stats.speed
+	scale = Vector2(missile_stats.scale, missile_stats.scale)
+	lifetime = missile_stats.lifetime
+	collision_mask = missile_stats.mask
 		
 		
 func _on_body_entered(body):

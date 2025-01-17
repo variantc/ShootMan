@@ -7,7 +7,7 @@ class_name Player
 @export var speed : float
 @export var ang_acc : float
 
-@export var current_gun : GunResource
+@export var current_weapon : WeaponResource
 
 @onready var movement_component = %MovementComponent as MovementComponent
 
@@ -25,20 +25,20 @@ func _ready():
 func _on_apply_upgrade(upgrade_type: int, amount, operation: int):
 	match upgrade_type:
 		UpgradeManager.Type.SHOT_NUMBER:
-			current_gun.shot_number += amount
-			current_gun.shot_spread += 5
+			current_weapon.shot_number += amount
+			current_weapon.shot_spread += 5
 		UpgradeManager.Type.SHOT_TIME:
-			current_gun.shot_time += amount
+			current_weapon.shot_time += amount
 		UpgradeManager.Type.SHOT_SPREAD:
-			current_gun.shot_spread += amount
+			current_weapon.shot_spread += amount
 		UpgradeManager.Type.SHOT_LIFETIME:
-			current_gun.current_bullet.lifetime += amount
+			current_weapon.current_bullet.lifetime += amount
 	
 
 func _process(delta):
 	_move_and_rotate(delta)
 	_check_collision()
-	%ShootComponent.shoot(delta, current_gun, 34)
+	%ShootComponent.shoot(delta, current_weapon, 34)
 	
 	
 func _move_and_rotate(delta):

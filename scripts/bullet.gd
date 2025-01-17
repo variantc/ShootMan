@@ -12,7 +12,7 @@ var lifetime : float = 5
 var life_counter : float = 0
 var repeat_scatter : bool = false
 
-var bullet_resource : BulletResource
+var bullet_stats : ProjectileResource
 
 
 func _ready():
@@ -20,9 +20,9 @@ func _ready():
 	world = root.get_child(root.get_child_count() - 1)
 
 
-func setup( bullet_stats : BulletResource ):
+func setup( bullet_stats : ProjectileResource ):
 
-	global_position = bullet_stats.bullet_position
+	global_position = bullet_stats.projectile_position
 	rotation = bullet_stats.rotation
 	speed = bullet_stats.speed
 	strength = bullet_stats.strength
@@ -32,6 +32,7 @@ func setup( bullet_stats : BulletResource ):
 	scale = Vector2(bullet_stats.scale, bullet_stats.scale)
 	lifetime = bullet_stats.lifetime
 	direction = Vector2(cos(rotation), sin(rotation)).normalized()
+	collision_mask = bullet_stats.mask
 	
 
 func _process(delta):
@@ -63,7 +64,7 @@ func split_bullets():
 			# Check if we want repeat scattering:
 			var sub_scatter = scatter-1 if repeat_scatter else 0
 			
-			var bullet_stats = load("res://resources/bullet.tres") as BulletResource
+			var bullet_stats = load("res://resources/bullet.tres") as ProjectileResource
 			bullet_stats.bullet_position = global_position
 			bullet_stats.rotation = new_rot
 			bullet_stats.speed = speed

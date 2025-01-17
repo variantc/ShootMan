@@ -1,9 +1,11 @@
 extends EnemyStandard
+class_name EnemyMissile
+
 
 @export var radius: float = 350.0
 @export var orbit_speed: float = 0.05
 
-@export var current_gun : GunResource
+@export var current_weapon : WeaponResource
 
 var orbit_direction : int = 1
 var radius_factor : float = 1.0
@@ -19,14 +21,15 @@ func _ready():
 
 func _process(delta: float) -> void:
 	_move_and_rotate(delta)
-	%ShootComponent.shoot(delta, current_gun, 1)
+	%ShootComponent.shoot(delta, current_weapon, 1)
 	
 	
 func _move_and_rotate(delta):
 	var to_player = (global_position - world.player.global_position).normalized()
 	var rotate_ang = PI/6 * orbit_direction
 	var strafe_target = \
-		world.player.global_position + (to_player * radius_factor * radius).rotated(rotate_ang)
+		world.player.global_position \
+			+ (to_player * radius_factor * radius).rotated(rotate_ang)
 	
 	if world.DEBUG:
 		%DebugLine.clear_points()

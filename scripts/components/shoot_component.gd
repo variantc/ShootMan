@@ -3,36 +3,53 @@ class_name ShootComponent
 
 
 @export var bullet_scene : PackedScene
+@export var missile_scene : PackedScene
 
 var counter : float = 0
 var parent : Node
+
+const PLAYER_LAYER_MASK := 1
+const ENEMY_LAYER_MASK := 2
 
 
 func _ready():
 	parent = get_parent()
 	
 
-func shoot(delta, gun_resource : GunResource, mask : int):
-	if gun_resource.shot_number == 0:
+func shoot(delta, weapon_resource : WeaponResource, mask : int):
+	if weapon_resource.shot_number == 0:
 		print("ERROR: Shot number is zero!")
 		return
 		
 	counter += delta
-	var rad_spread = gun_resource.shot_spread * PI/180
-	if counter > gun_resource.shot_time:
+	var rad_spread = weapon_resource.shot_spread * PI/180
+	if counter > weapon_resource.shot_time:
 		counter = 0.0
-		for i in range(gun_resource.shot_number):
+		for i in range(weapon_resource.shot_number):
 			var rot = parent.global_rotation
-			if gun_resource.shot_number > 1:
-				rot = parent.global_rotation - (rad_spread)/2 + i * rad_spread/(gun_resource.shot_number-1)
-			var bullet = bullet_scene.instantiate() as Bullet
+			if weapon_resource.shot_number > 1:
+				rot = parent.global_rotation - (rad_spread)/2 + i * rad_spread/(weapon_resource.shot_number-1)
 			
-			bullet.collision_mask = mask
-			parent.get_parent().add_child(bullet)
+			var projectile
+
+			match weapon_resource.projectile_type:
+				ProjectileResource.Type.BULLET:
+					projectile = bullet_scene.instantiate() as Bullet
+				ProjectileResource.Type.MISSILE:
+					projectile = missile_scene.instantiate() as Missile
+			
+			projectile.collision_mask = mask
+			parent.get_parent().add_child(projectile)
 			
 			#var bullet_stats = load("res://resources/bullet.tres") as BulletResource
-			var bullet_stats = gun_resource.current_bullet
-			bullet_stats.bullet_position = parent.global_position
-			bullet_stats.rotation = rot
+			var projectile_stats = weapon_resource.current_projectile
+			projectile_stats.projectile_position = parent.global_position
+			projectile_stats.rotation = rot
 			
-			bullet.setup(bullet_stats)
+			#TODO: Check updated
+			if parent is Player:
+				projectile_stats.mask = ENEMY_LAYER_MASK
+			if parent is EnemyMissile:
+				projectile_stats.mask = PLAYER_LAYER_MASK
+				
+			projectile.setup(projectile_stats)

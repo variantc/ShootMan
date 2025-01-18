@@ -30,24 +30,25 @@ func shoot(delta, weapon_resource : WeaponResource):
 			if weapon_resource.shot_number > 1:
 				rot = parent.global_rotation - (rad_spread)/2 + i * rad_spread/(weapon_resource.shot_number-1)
 			
+			
 			var projectile
 
 			match weapon_resource.projectile_type:
-				ProjectileResource.Type.BULLET:
+				WeaponResource.Type.BULLET:
 					projectile = bullet_scene.instantiate() as Bullet
-				ProjectileResource.Type.MISSILE:
+				WeaponResource.Type.MISSILE:
 					projectile = missile_scene.instantiate() as Missile
 			
 			#projectile.collision_mask = weapon_resource.mask
 			parent.get_parent().add_child(projectile)
 			
 			#var bullet_stats = load("res://resources/bullet.tres") as BulletResource
-			var projectile_stats = weapon_resource.current_projectile.duplicate() as ProjectileResource
+			var weapon_stats = weapon_resource.duplicate() as WeaponResource
 			
 			# Offset spawn position to avoid collider issues:
 			var spawn_offset = Vector2.RIGHT.rotated(rot) * 20  # Adjust 20 to whatever offset you want
-			projectile_stats.projectile_position = parent.global_position + spawn_offset
-			projectile_stats.rotation = rot
+			weapon_stats.projectile_position = parent.global_position + spawn_offset
+			weapon_stats.rotation = rot
 			
 			##TODO: Check updated
 			#if parent is Player:
@@ -55,4 +56,4 @@ func shoot(delta, weapon_resource : WeaponResource):
 			#if parent is EnemyMissile:
 				#projectile_stats.mask = PLAYER_LAYER_MASK
 				
-			projectile.setup(projectile_stats)
+			projectile.setup(weapon_stats)

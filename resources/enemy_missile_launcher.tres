@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="WeaponResource" load_steps=3 format=3 uid="uid://leqihn8b5uic"]
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://leqihn8b5uic"]
 
-[ext_resource type="Resource" uid="uid://3x5t63ybrdrj" path="res://resources/enemy_missile.tres" id="1_fxyr1"]
 [ext_resource type="Script" path="res://resources/weapon_resource.gd" id="2_f5c1k"]
 
 [resource]
@@ -8,6 +7,13 @@ script = ExtResource("2_f5c1k")
 id = "enemy_launcher"
 shot_time = 3.0
 shot_number = 1
-shot_spread = 5
+shot_spread = 2.5
 projectile_type = 1
-current_projectile = ExtResource("1_fxyr1")
+speed = 50.0
+angular_acc = 0.7
+strength = 10.0
+scatter = 0
+repeat_scatter = false
+scale = 1.0
+lifetime = 10.0
+mask = 5

@@ -42,7 +42,7 @@ func _physics_process(delta):
 		_explode()
 
 
-func setup (missile_stats : ProjectileResource) :
+func setup (missile_stats : WeaponResource) :
 	global_position = missile_stats.projectile_position
 	rotation = missile_stats.rotation
 	speed = missile_stats.speed
@@ -69,8 +69,7 @@ func _on_explosion_entered(body):
 func _on_collision_area_entered(area):
 	if area.is_in_group("Projectile"):
 		_explode()
-	
-	
+
 	
 func _explode():
 	# Stop the missile:

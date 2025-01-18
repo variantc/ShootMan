@@ -12,7 +12,7 @@ var lifetime : float = 5
 var life_counter : float = 0
 var repeat_scatter : bool = false
 
-var bullet_stats : ProjectileResource
+var bullet_stats : WeaponResource
 
 
 func _ready():
@@ -22,7 +22,7 @@ func _ready():
 	area_entered.connect(_on_area_entered)
 
 
-func setup( bullet_stats : ProjectileResource ):
+func setup( bullet_stats : WeaponResource ):
 
 	global_position = bullet_stats.projectile_position
 	rotation = bullet_stats.rotation
@@ -72,7 +72,7 @@ func split_bullets():
 			# Check if we want repeat scattering:
 			var sub_scatter = scatter-1 if repeat_scatter else 0
 			
-			var bullet_stats = load("res://resources/bullet.tres") as ProjectileResource
+			var bullet_stats = load("res://resources/bullet.tres") as WeaponResource
 			bullet_stats.bullet_position = global_position
 			bullet_stats.rotation = new_rot
 			bullet_stats.speed = speed

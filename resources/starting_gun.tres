@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://essjjlaf2xfv"]
+
+[ext_resource type="Script" path="res://resources/weapon_resource.gd" id="1_lli1i"]
+
+[resource]
+script = ExtResource("1_lli1i")
+id = "starting_gun"
+shot_time = 1.0
+shot_number = 1
+shot_spread = 2.5
+projectile_type = 0
+speed = 500.0
+angular_acc = 0.0
+strength = 10.0
+scatter = 0
+repeat_scatter = false
+scale = 1.0
+lifetime = 5.0
+mask = 10

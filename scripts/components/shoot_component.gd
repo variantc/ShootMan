@@ -16,7 +16,7 @@ func _ready():
 	parent = get_parent()
 	
 
-func shoot(delta, weapon_resource : WeaponResource, mask : int):
+func shoot(delta, weapon_resource : WeaponResource):
 	if weapon_resource.shot_number == 0:
 		print("ERROR: Shot number is zero!")
 		return
@@ -38,11 +38,13 @@ func shoot(delta, weapon_resource : WeaponResource, mask : int):
 				ProjectileResource.Type.MISSILE:
 					projectile = missile_scene.instantiate() as Missile
 			
-			projectile.collision_mask = mask
+			#projectile.collision_mask = weapon_resource.mask
 			parent.get_parent().add_child(projectile)
 			
 			#var bullet_stats = load("res://resources/bullet.tres") as BulletResource
-			var projectile_stats = weapon_resource.current_projectile
+			var projectile_stats = weapon_resource.current_projectile.duplicate() as ProjectileResource
+			
+			# Offset spawn position to avoid collider issues:
 			var spawn_offset = Vector2.RIGHT.rotated(rot) * 20  # Adjust 20 to whatever offset you want
 			projectile_stats.projectile_position = parent.global_position + spawn_offset
 			projectile_stats.rotation = rot

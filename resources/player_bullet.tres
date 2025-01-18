@@ -5,10 +5,11 @@
 [resource]
 script = ExtResource("1_caint")
 id = "player_bullet"
-speed = 100.0
+speed = 2000.0
+angular_acc = 0.0
 strength = 10.0
 scatter = 0
 repeat_scatter = false
 scale = 1.0
 lifetime = 5.0
-mask = 2
+mask = 10

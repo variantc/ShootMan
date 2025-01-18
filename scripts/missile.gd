@@ -46,6 +46,7 @@ func setup (missile_stats : ProjectileResource) :
 	global_position = missile_stats.projectile_position
 	rotation = missile_stats.rotation
 	speed = missile_stats.speed
+	ang_acc = missile_stats.angular_acc
 	scale = Vector2(missile_stats.scale, missile_stats.scale)
 	lifetime = missile_stats.lifetime
 	collision_mask = missile_stats.mask
@@ -54,9 +55,9 @@ func setup (missile_stats : ProjectileResource) :
 		
 		
 func _on_body_entered(body):
-	print_debug(body)
+	if body == self:
+		return
 	if body.is_in_group("Player"):
-		print_debug(body)
 		_explode()
 
 
@@ -65,7 +66,16 @@ func _on_explosion_entered(body):
 		SignalBus.player_killed.emit()
 
 
+func _on_collision_area_entered(area):
+	if area.is_in_group("Projectile"):
+		_explode()
+	
+	
+	
 func _explode():
+	# Stop the missile:
+	%MovementComponent.stop = true
+	
 	var tween = create_tween() as Tween
 	
 	tween.finished.connect(func(): _end_explosion())
@@ -76,10 +86,9 @@ func _explode():
 		.set_trans(Tween.TRANS_EXPO)
 		
 
-func _scale_explosion(scale: float):
+func _scale_explosion(new_scale: float):
 	for n in %ExplosionArea.get_children():
-		var node : Node2D = n
-		n.scale = Vector2(scale, scale)
+		n.scale = Vector2(new_scale, new_scale)
 
 
 func _end_explosion():

@@ -38,7 +38,7 @@ func _on_apply_upgrade(upgrade_type: int, amount, operation: int):
 func _process(delta):
 	_move_and_rotate(delta)
 	_check_collision()
-	%ShootComponent.shoot(delta, current_weapon, 34)
+	%ShootComponent.shoot(delta, current_weapon)
 	
 	
 func _move_and_rotate(delta):

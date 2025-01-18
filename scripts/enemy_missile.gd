@@ -21,7 +21,7 @@ func _ready():
 
 func _process(delta: float) -> void:
 	_move_and_rotate(delta)
-	%ShootComponent.shoot(delta, current_weapon, 1)
+	%ShootComponent.shoot(delta, current_weapon)
 	
 	
 func _move_and_rotate(delta):

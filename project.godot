@@ -24,6 +24,10 @@ SignalBus="*res://scripts/signal_bus.gd"
 window/size/always_on_top=true
 window/stretch/mode="viewport"
 
+[global_group]
+
+Projectile=""
+
 [input]
 
 RMB={
@@ -44,7 +48,7 @@ Pause={
 2d_render/layer_3="Background"
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemy"
-2d_physics/layer_3="Bullet"
-2d_physics/layer_4="BulletDestroyer"
+2d_physics/layer_3="PlayerProjectiles"
+2d_physics/layer_4="EnemyProjectilers"
 2d_physics/layer_5="Drop"
 2d_physics/layer_6="UpgradeNode"

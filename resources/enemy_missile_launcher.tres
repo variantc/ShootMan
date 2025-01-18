@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_f5c1k")
 id = "enemy_launcher"
-shot_time = 1.0
+shot_time = 3.0
 shot_number = 1
 shot_spread = 5
 projectile_type = 1

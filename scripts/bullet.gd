@@ -18,6 +18,8 @@ var bullet_stats : ProjectileResource
 func _ready():
 	var root = get_tree().root
 	world = root.get_child(root.get_child_count() - 1)
+	body_entered.connect(_on_body_entered)
+	area_entered.connect(_on_area_entered)
 
 
 func setup( bullet_stats : ProjectileResource ):
@@ -33,7 +35,8 @@ func setup( bullet_stats : ProjectileResource ):
 	lifetime = bullet_stats.lifetime
 	direction = Vector2(cos(rotation), sin(rotation)).normalized()
 	collision_mask = bullet_stats.mask
-	
+	print("Bullet collision mask: ", bullet_stats.mask, " to ", collision_mask)
+	print("Bullet monitoring: ", monitoring)
 
 func _process(delta):
 	# Move the bullet in its direction
@@ -44,7 +47,12 @@ func _process(delta):
 		split_bullets()
 
 
+func _on_area_entered(area):
+	print_debug("area: " + area.name)
+
+
 func _on_body_entered(body):
+	print_debug("body: " + body.name)
 	if body.is_in_group("Enemy"):
 		body.hit(self, direction, speed)		# Enemy.hit will reduce this bullet's strength
 	if strength <= 0:

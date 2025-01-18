@@ -27,6 +27,7 @@
 script = ExtResource("12_wuvgv")
 id = ""
 speed = 250.0
+angular_acc = 0.0
 strength = 5.0
 scatter = 0
 repeat_scatter = false

@@ -7,6 +7,7 @@ enum Type { BULLET, MISSILE }
 var projectile_position : Vector2 
 var rotation : float 
 @export var speed : float
+@export var angular_acc : float = 0
 @export var strength : float
 @export var scatter : int = 0
 @export var repeat_scatter : bool = false

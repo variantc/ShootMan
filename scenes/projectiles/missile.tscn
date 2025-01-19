@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://rjpyjelqnsml"]
 
-[ext_resource type="Script" path="res://scripts/missile.gd" id="1_bx2il"]
+[ext_resource type="Script" path="res://scripts/weapons/missile.gd" id="1_bx2il"]
 [ext_resource type="AudioStream" uid="uid://cilm5agmcp85i" path="res://sounds/shots/shot_ (1).wav" id="2_5wim3"]
 [ext_resource type="AudioStream" uid="uid://c700jyo7bsmuc" path="res://sounds/shots/shot_ (2).wav" id="3_q10h2"]
 [ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="4_deoym"]

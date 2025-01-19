@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmkwxw6xesyb6"]
 
-[ext_resource type="Script" path="res://scripts/bullet_destroyers.gd" id="1_syarf"]
+[ext_resource type="Script" path="res://scripts/not_used/bullet_destroyers_NOT_USED.gd" id="1_syarf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4173a"]
 size = Vector2(40.5, 701)

@@ -5,9 +5,11 @@ class_name EnemySpawner
 @export var world : World
 @export var enemy_standard_scene : PackedScene
 @export var enemy_spiral_scene : PackedScene
+@export var enemy_missile_scene : PackedScene
 @export var attack_group_scene : PackedScene
 @export var spawn_enemy_standard_time : float
 @export var spawn_enemy_spiral_time : float
+@export var spawn_enemy_missile_time : float
 @export var spawn_group_time : float
 @export var spawn_inc_time : float
 
@@ -15,6 +17,7 @@ var enemy_list : Array[EnemyStandard]
 
 var spawn_enemy_standard_counter = 0
 var spawn_enemy_spiral_counter = 0
+var spawn_enemy_missile_counter = 0
 var spawn_group_counter = 0
 var inc_counter = 0
 
@@ -22,6 +25,7 @@ var inc_counter = 0
 func _process(delta):
 	_run_spawn_enemy_standard_timer(delta)
 	_run_spawn_enemy_spiral_timer(delta)
+	_run_spawn_enemy_missile_timer(delta)
 	_run_spawn_group_timer(delta)
 	_run_spawn_increment_timer(delta)
 
@@ -40,6 +44,13 @@ func _run_spawn_enemy_spiral_timer(delta) -> void:
 		_spawn_enemy(enemy_spiral_scene)
 		
 	
+func _run_spawn_enemy_missile_timer(delta) -> void:
+	spawn_enemy_missile_counter += delta
+	if spawn_enemy_missile_counter > spawn_enemy_missile_time:
+		spawn_enemy_missile_counter = 0
+		_spawn_enemy(enemy_missile_scene)
+		
+		
 func _run_spawn_group_timer(delta) -> void:
 	spawn_group_counter += delta
 	if spawn_group_counter > spawn_group_time:

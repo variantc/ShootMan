@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://d264gao7bbsgt"]
 
-[ext_resource type="PackedScene" uid="uid://b51lbdgysvfq1" path="res://scenes/enemy_standard.tscn" id="1_xiih4"]
+[ext_resource type="PackedScene" uid="uid://b51lbdgysvfq1" path="res://scenes/enemies/enemy_standard.tscn" id="1_xiih4"]
 [ext_resource type="Shader" path="res://shaders/enemy_standard.gdshader" id="2_216x1"]
 [ext_resource type="Shader" uid="uid://c37qvy0dnck82" path="res://shaders/enemy_group.tres" id="3_c3dnt"]
 [ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_dwtdw"]

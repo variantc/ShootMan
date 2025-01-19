@@ -35,8 +35,6 @@ func setup( bullet_stats : WeaponResource ):
 	lifetime = bullet_stats.lifetime
 	direction = Vector2(cos(rotation), sin(rotation)).normalized()
 	collision_mask = bullet_stats.mask
-	print("Bullet collision mask: ", bullet_stats.mask, " to ", collision_mask)
-	print("Bullet monitoring: ", monitoring)
 
 func _process(delta):
 	# Move the bullet in its direction

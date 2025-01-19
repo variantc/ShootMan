@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://b51lbdgysvfq1"]
 
-[ext_resource type="Script" path="res://scripts/enemy_standard.gd" id="1_5if6k"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_standard.gd" id="1_5if6k"]
 [ext_resource type="Shader" path="res://shaders/enemy_standard.gdshader" id="3_bwe03"]
 [ext_resource type="Texture2D" uid="uid://byxxpwsjctwmn" path="res://sprites/pawn_0.png" id="3_y4vii"]
 [ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_tp4ts"]

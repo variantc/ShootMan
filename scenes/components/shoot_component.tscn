@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bfqikvscrc03s"]
 
 [ext_resource type="Script" path="res://scripts/components/shoot_component.gd" id="1_v44ky"]
-[ext_resource type="PackedScene" uid="uid://b8rvbitfa8jom" path="res://scenes/bullet.tscn" id="2_a6fdl"]
-[ext_resource type="PackedScene" uid="uid://rjpyjelqnsml" path="res://scenes/missile.tscn" id="3_ceavb"]
+[ext_resource type="PackedScene" uid="uid://b8rvbitfa8jom" path="res://scenes/projectiles/bullet.tscn" id="2_a6fdl"]
+[ext_resource type="PackedScene" uid="uid://rjpyjelqnsml" path="res://scenes/projectiles/missile.tscn" id="3_ceavb"]
 
 [node name="ShootComponent" type="Node"]
 script = ExtResource("1_v44ky")

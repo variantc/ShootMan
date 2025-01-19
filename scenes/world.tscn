@@ -1,45 +1,27 @@
-[gd_scene load_steps=22 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=20 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Texture2D" uid="uid://kc6q6ikbkegv" path="res://sprites/floor_1.jpg" id="1_b545p"]
-[ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_hjijg"]
-[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="1_irc5a"]
+[ext_resource type="Script" path="res://scripts/managers/sound_manager.gd" id="1_hjijg"]
+[ext_resource type="Script" path="res://scripts/managers/enemy_spawner.gd" id="1_irc5a"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_rlksj"]
-[ext_resource type="Script" path="res://scripts/game_state_manager.gd" id="2_chy2p"]
+[ext_resource type="Script" path="res://scripts/managers/game_state_manager.gd" id="2_chy2p"]
 [ext_resource type="PackedScene" uid="uid://bg3jhepeqaqn1" path="res://scenes/player.tscn" id="2_gkc74"]
-[ext_resource type="PackedScene" uid="uid://b51lbdgysvfq1" path="res://scenes/enemy_standard.tscn" id="3_6vcwx"]
-[ext_resource type="Script" path="res://scripts/upgrade_manager.gd" id="4_88rj6"]
-[ext_resource type="AudioStream" uid="uid://dugywuriayege" path="res://sounds/upgrade.wav" id="4_xbfcx"]
-[ext_resource type="Script" path="res://scripts/drop_spawner.gd" id="5_2b576"]
-[ext_resource type="AudioStream" uid="uid://bxnppd7ae0j1j" path="res://sounds/failed_upgrade.wav" id="5_6jdvl"]
+[ext_resource type="PackedScene" uid="uid://b51lbdgysvfq1" path="res://scenes/enemies/enemy_standard.tscn" id="3_6vcwx"]
+[ext_resource type="Script" path="res://scripts/managers/upgrade_manager.gd" id="4_88rj6"]
+[ext_resource type="AudioStream" uid="uid://dugywuriayege" path="res://sounds/upgrades/upgrade.wav" id="4_xbfcx"]
+[ext_resource type="Script" path="res://scripts/managers/drop_spawner.gd" id="5_2b576"]
+[ext_resource type="AudioStream" uid="uid://bxnppd7ae0j1j" path="res://sounds/upgrades/failed_upgrade.wav" id="5_6jdvl"]
 [ext_resource type="Script" path="res://scripts/score_text.gd" id="6_86sgh"]
 [ext_resource type="PackedScene" uid="uid://dhy2erh2732mq" path="res://scenes/drop_standard.tscn" id="6_llsii"]
-[ext_resource type="PackedScene" uid="uid://ckskkkn4w07o3" path="res://scenes/enemy_spiral.tscn" id="7_gpqxu"]
-[ext_resource type="PackedScene" uid="uid://d264gao7bbsgt" path="res://scenes/attack_group.tscn" id="11_x2le3"]
-[ext_resource type="Script" path="res://resources/weapon_resource.gd" id="13_ysug8"]
+[ext_resource type="PackedScene" uid="uid://ckskkkn4w07o3" path="res://scenes/enemies/enemy_spiral.tscn" id="7_gpqxu"]
+[ext_resource type="PackedScene" uid="uid://d264gao7bbsgt" path="res://scenes/enemies/attack_group.tscn" id="11_x2le3"]
 [ext_resource type="Script" path="res://scenes/camera_2d.gd" id="15_3cbjm"]
-[ext_resource type="Script" path="res://scripts/gui_controller.gd" id="15_jq3j3"]
+[ext_resource type="Script" path="res://scripts/managers/gui_controller.gd" id="15_jq3j3"]
 [ext_resource type="PackedScene" uid="uid://c43atuift7o0d" path="res://scenes/upgrade_node.tscn" id="18_lhl2h"]
-[ext_resource type="PackedScene" uid="uid://cfuxvhjeo2lal" path="res://scenes/enemy_missile.tscn" id="21_ivebk"]
-
-[sub_resource type="Resource" id="Resource_didse"]
-script = ExtResource("13_ysug8")
-id = ""
-shot_time = 0.5
-shot_number = 1
-shot_spread = 2.5
-projectile_type = 1
-speed = 0.0
-angular_acc = 0.0
-strength = 0.0
-scatter = 0
-repeat_scatter = false
-scale = 1.0
-lifetime = 0.0
-mask = 0
+[ext_resource type="PackedScene" uid="uid://cfuxvhjeo2lal" path="res://scenes/enemies/enemy_missile.tscn" id="21_ivebk"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_rlksj")
-DEBUG = true
 
 [node name="GameStateManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -64,9 +46,11 @@ script = ExtResource("1_irc5a")
 world = NodePath("..")
 enemy_standard_scene = ExtResource("3_6vcwx")
 enemy_spiral_scene = ExtResource("7_gpqxu")
+enemy_missile_scene = ExtResource("21_ivebk")
 attack_group_scene = ExtResource("11_x2le3")
 spawn_enemy_standard_time = 2.0
 spawn_enemy_spiral_time = 15.0
+spawn_enemy_missile_time = 10.0
 spawn_group_time = 60.0
 spawn_inc_time = 60.0
 
@@ -206,17 +190,4 @@ layout_mode = 2
 text = "Restart"
 
 [node name="UpgradeNode" parent="." instance=ExtResource("18_lhl2h")]
-position = Vector2(691, 345)
-
-[node name="EnemyMissile" parent="." instance=ExtResource("21_ivebk")]
-position = Vector2(385, 425)
-orbit_speed = 10.0
-current_weapon = SubResource("Resource_didse")
-speed = 60.0
-health = 20.0
-
-[node name="EnemyMissile2" parent="." instance=ExtResource("21_ivebk")]
-position = Vector2(750, 433)
-orbit_speed = 10.0
-speed = 60.0
-health = 20.0
+position = Vector2(273, 167)

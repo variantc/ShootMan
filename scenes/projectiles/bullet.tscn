@@ -1,0 +1,48 @@
+[gd_scene load_steps=13 format=3 uid="uid://b8rvbitfa8jom"]
+
+[ext_resource type="Script" path="res://scripts/weapons/bullet.gd" id="1_k31s4"]
+[ext_resource type="AudioStream" uid="uid://cilm5agmcp85i" path="res://sounds/shots/shot_ (1).wav" id="2_6vbwq"]
+[ext_resource type="AudioStream" uid="uid://c700jyo7bsmuc" path="res://sounds/shots/shot_ (2).wav" id="3_tqvvx"]
+[ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="4_53bw1"]
+[ext_resource type="AudioStream" uid="uid://8pc8lxpamcu4" path="res://sounds/shots/shot_ (4).wav" id="5_0f6vr"]
+[ext_resource type="AudioStream" uid="uid://3vdvbiv2x40d" path="res://sounds/shots/shot_ (5).wav" id="6_b82hb"]
+[ext_resource type="AudioStream" uid="uid://dxpuyu84lrj6s" path="res://sounds/shots/shot_ (6).wav" id="7_il7lf"]
+[ext_resource type="AudioStream" uid="uid://gtkcy7y25ug" path="res://sounds/shots/shot_ (7).wav" id="8_n143n"]
+[ext_resource type="AudioStream" uid="uid://c62kjyo2y8y20" path="res://sounds/shots/shot_ (8).wav" id="9_syplx"]
+[ext_resource type="AudioStream" uid="uid://xdyva7qo10dk" path="res://sounds/shots/shot_ (9).wav" id="10_o7kmq"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_k4n72"]
+streams_count = 9
+stream_0/stream = ExtResource("2_6vbwq")
+stream_1/stream = ExtResource("3_tqvvx")
+stream_2/stream = ExtResource("4_53bw1")
+stream_3/stream = ExtResource("5_0f6vr")
+stream_4/stream = ExtResource("6_b82hb")
+stream_5/stream = ExtResource("7_il7lf")
+stream_6/stream = ExtResource("8_n143n")
+stream_7/stream = ExtResource("9_syplx")
+stream_8/stream = ExtResource("10_o7kmq")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx2ns"]
+size = Vector2(4, 4)
+
+[node name="Bullet" type="Area2D" groups=["Projectile"]]
+visibility_layer = 2
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("1_k31s4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_k4n72")
+volume_db = -20.0
+pitch_scale = 0.6
+autoplay = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jx2ns")

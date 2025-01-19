@@ -1,9 +1,9 @@
 [gd_scene load_steps=29 format=3 uid="uid://cfuxvhjeo2lal"]
 
-[ext_resource type="Script" path="res://scripts/enemy_missile.gd" id="1_sinyk"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_missile.gd" id="1_sinyk"]
 [ext_resource type="Shader" path="res://shaders/enemy_missile.gdshader" id="2_v0w66"]
 [ext_resource type="Texture2D" uid="uid://byxxpwsjctwmn" path="res://sprites/pawn_0.png" id="3_acyuq"]
-[ext_resource type="Resource" uid="uid://leqihn8b5uic" path="res://resources/enemy_missile_launcher.tres" id="3_ftd20"]
+[ext_resource type="Resource" uid="uid://leqihn8b5uic" path="res://resources/instances/enemy_missile_launcher.tres" id="3_ftd20"]
 [ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_l26rg"]
 [ext_resource type="AudioStream" uid="uid://rw6vkwrnn4jm" path="res://sounds/explosions/explosion (2).wav" id="5_wddie"]
 [ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="6_gr7jn"]
@@ -13,8 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://cwxjmr02t3n7u" path="res://sounds/explosions/explosion (7).wav" id="10_hmekv"]
 [ext_resource type="PackedScene" uid="uid://cx2lutrqoqoro" path="res://scenes/components/movement_component.tscn" id="11_v2qla"]
 [ext_resource type="Script" path="res://scripts/components/shoot_component.gd" id="13_i5tjw"]
-[ext_resource type="PackedScene" uid="uid://b8rvbitfa8jom" path="res://scenes/bullet.tscn" id="14_utnfj"]
-[ext_resource type="PackedScene" uid="uid://rjpyjelqnsml" path="res://scenes/missile.tscn" id="15_ywmck"]
+[ext_resource type="PackedScene" uid="uid://b8rvbitfa8jom" path="res://scenes/projectiles/bullet.tscn" id="14_utnfj"]
+[ext_resource type="PackedScene" uid="uid://rjpyjelqnsml" path="res://scenes/projectiles/missile.tscn" id="15_ywmck"]
 
 [sub_resource type="Gradient" id="Gradient_y2upc"]
 
@@ -88,9 +88,9 @@ collision_mask = 5
 script = ExtResource("1_sinyk")
 orbit_speed = 1.0
 current_weapon = ExtResource("3_ftd20")
-speed = 10.0
+speed = 40.0
 ang_acc = 1.0
-health = 40.0
+health = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gelfa")

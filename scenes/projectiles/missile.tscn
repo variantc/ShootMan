@@ -43,7 +43,7 @@ offset_left = -7.0
 offset_top = -2.0
 offset_right = 2.0
 offset_bottom = 2.0
-color = Color(1, 0, 0, 1)
+color = Color(1, 0.9, 0, 1)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_k4n72")

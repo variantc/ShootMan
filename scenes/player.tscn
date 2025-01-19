@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://bg3jhepeqaqn1"]
 
-[ext_resource type="Texture2D" uid="uid://byxxpwsjctwmn" path="res://sprites/pawn_0.png" id="1_53m1k"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rrtky"]
 [ext_resource type="PackedScene" uid="uid://b8rvbitfa8jom" path="res://scenes/projectiles/bullet.tscn" id="2_qp317"]
 [ext_resource type="Resource" uid="uid://essjjlaf2xfv" path="res://resources/instances/starting_gun.tres" id="3_j6dq6"]
 [ext_resource type="PackedScene" uid="uid://cx2lutrqoqoro" path="res://scenes/components/movement_component.tscn" id="4_4x1rb"]
+[ext_resource type="Texture2D" uid="uid://c2fgxpxjw2tun" path="res://sprites/player_01.png" id="4_7o64f"]
 [ext_resource type="PackedScene" uid="uid://bfqikvscrc03s" path="res://scenes/components/shoot_component.tscn" id="5_rpwvy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
@@ -23,11 +23,13 @@ current_weapon = ExtResource("3_j6dq6")
 shape = SubResource("CircleShape2D_gelfa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -1)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_53m1k")
+texture_filter = 1
+position = Vector2(2, 0)
+rotation = 1.5708
+texture = ExtResource("4_7o64f")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_top = -2.0
 offset_right = 15.0
 offset_bottom = 2.0

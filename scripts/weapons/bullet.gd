@@ -50,7 +50,6 @@ func _on_area_entered(area):
 
 
 func _on_body_entered(body):
-	print_debug("body: " + body.name)
 	if body.is_in_group("Enemy"):
 		body.hit(self, direction, speed)		# Enemy.hit will reduce this bullet's strength
 	if strength <= 0:

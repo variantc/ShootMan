@@ -11,7 +11,8 @@ var orbit_direction : int = 1
 var radius_factor : float = 1.0
 
 func _ready():
-	world = get_tree().root.get_child(1)
+	#world = get_tree().root.get_child(1)
+	super._ready()
 	
 	if randi_range(0,1):
 		orbit_direction = -1

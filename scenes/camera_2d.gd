@@ -10,8 +10,7 @@ func _ready():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):		
+func _physics_process(delta):		
 	# Smoothing of camera movement
 	var offset_sq = global_position.distance_squared_to(player.global_position)
 	global_position = lerp(global_position, player.global_position, delta * offset_sq / lag)
-		

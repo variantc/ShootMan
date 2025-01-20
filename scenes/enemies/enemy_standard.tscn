@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=3 uid="uid://b51lbdgysvfq1"]
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy_standard.gd" id="1_5if6k"]
+[ext_resource type="Texture2D" uid="uid://b1u45yvhcw8co" path="res://sprites/EnemyStandard.png" id="3_4fyp8"]
 [ext_resource type="Shader" path="res://shaders/enemy_standard.gdshader" id="3_bwe03"]
-[ext_resource type="Texture2D" uid="uid://byxxpwsjctwmn" path="res://sprites/pawn_0.png" id="3_y4vii"]
 [ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_tp4ts"]
 [ext_resource type="AudioStream" uid="uid://rw6vkwrnn4jm" path="res://sounds/explosions/explosion (2).wav" id="5_smh3g"]
 [ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="6_0ay5f"]
@@ -36,7 +36,7 @@ shader = ExtResource("3_bwe03")
 shader_parameter/mix_amount = 0.0
 shader_parameter/flash_colour = Color(1, 1, 1, 1)
 shader_parameter/shade_color = Color(0.81, 0, 0, 1)
-shader_parameter/shade_intensity = 0.5
+shader_parameter/shade_intensity = 0.0
 shader_parameter/hp_left = 1.0
 shader_parameter/burn_gradient = SubResource("GradientTexture2D_bmvgt")
 shader_parameter/burn_noise = SubResource("NoiseTexture2D_rs4ng")
@@ -65,12 +65,14 @@ shape = SubResource("CircleShape2D_gelfa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+texture_filter = 1
 material = SubResource("ShaderMaterial_sfkgk")
-position = Vector2(1, -1)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_y4vii")
+position = Vector2(3, 0)
+rotation = 1.5708
+texture = ExtResource("3_4fyp8")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_top = -2.0
 offset_right = 15.0
 offset_bottom = 2.0

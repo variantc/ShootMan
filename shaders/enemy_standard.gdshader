@@ -39,7 +39,7 @@ void apply_damage_vertex(inout vec2 v) {
 }
 
 void vertex() {
-	breath(VERTEX, BREATHING_PACE); 		// characters.inc
+	//breath(VERTEX, BREATHING_PACE); 		// characters.inc
 
 	apply_damage_vertex(VERTEX);
 }

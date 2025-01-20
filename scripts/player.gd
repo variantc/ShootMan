@@ -20,7 +20,7 @@ func _ready():
 	SignalBus.apply_upgrade.connect(_on_apply_upgrade)
 	
 	start_pos = global_position
-
+	
 
 func _on_apply_upgrade(upgrade_type: int, amount, operation: int):
 	match upgrade_type:
@@ -35,19 +35,21 @@ func _on_apply_upgrade(upgrade_type: int, amount, operation: int):
 			current_weapon.current_bullet.lifetime += amount
 	
 
-func _process(delta):
-	_move_and_rotate(delta)
-	_check_collision()
+func _physics_process(delta):
+	# Movement component now returns KinematicCollision2D since we're using
+	# move_and_collide.  This will move and check
+	_check_collision(_move_and_rotate(delta))
+	
 	%ShootComponent.shoot(delta, current_weapon)
 	
 	
-func _move_and_rotate(delta):
+func _move_and_rotate(delta) -> KinematicCollision2D:
 	# Reverse on RMB
 	var rev = false
 	if Input.is_action_pressed("RMB"):
 		rev = true
 		
-	movement_component.move_and_rotate(
+	return movement_component.move_and_rotate(
 		delta, 
 		self, 
 		get_global_mouse_position(),
@@ -55,7 +57,7 @@ func _move_and_rotate(delta):
 		ang_acc,
 		rev)
 	
-func _check_collision():
-	var collision = get_last_slide_collision() as KinematicCollision2D
+	
+func _check_collision(collision : KinematicCollision2D):
 	if collision:
 		SignalBus.player_killed.emit()

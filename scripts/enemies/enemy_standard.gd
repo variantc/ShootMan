@@ -66,8 +66,6 @@ func _show_damage(prev, current):
 	# Update shader to reflect new health
 	var health_left = max(current / _start_health, 0)
 	
-	print_debug(start_health_left, " ", health_left)
-	
 	# Tween the shader health parameter and position simultaneously
 	tween.tween_method(_set_shader_hp_left, start_health_left, health_left, dam_time)\
 		.set_ease(Tween.EASE_OUT)\

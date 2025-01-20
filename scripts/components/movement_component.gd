@@ -10,7 +10,7 @@ func move_and_rotate(
 		target: Vector2, 
 		speed: float, 
 		ang_acc: float,
-		reverse: bool = false): #-> KinematicCollision2D:
+		reverse: bool = false) -> KinematicCollision2D:
 
 	if stop:
 		body.velocity = Vector2.ZERO
@@ -30,4 +30,4 @@ func move_and_rotate(
 	var factor = -1 if reverse else 1
 	body.velocity = factor * direction * speed
 	
-	body.move_and_collide(body.velocity * delta)
+	return body.move_and_collide(body.velocity * delta)

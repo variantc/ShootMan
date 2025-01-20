@@ -48,9 +48,9 @@ enemy_standard_scene = ExtResource("3_6vcwx")
 enemy_spiral_scene = ExtResource("7_gpqxu")
 enemy_missile_scene = ExtResource("21_ivebk")
 attack_group_scene = ExtResource("11_x2le3")
-spawn_enemy_standard_time = 22.0
+spawn_enemy_standard_time = 1.0
 spawn_enemy_spiral_time = 15.0
-spawn_enemy_missile_time = 2.0
+spawn_enemy_missile_time = 22.0
 spawn_group_time = 60.0
 spawn_inc_time = 60.0
 

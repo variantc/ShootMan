@@ -10,6 +10,7 @@ class_name Player
 @export var current_weapon : WeaponResource
 
 @onready var movement_component = %MovementComponent as MovementComponent
+@onready var movement_resource : MovementResource
 
 var counter := 0.0
 
@@ -18,8 +19,9 @@ var start_pos : Vector2
 
 func _ready():
 	SignalBus.apply_upgrade.connect(_on_apply_upgrade)
-	
 	start_pos = global_position
+	
+	movement_resource = MovementResource.new(self, speed, ang_acc)
 	
 
 func _on_apply_upgrade(upgrade_type: int, amount, operation: int):
@@ -45,17 +47,11 @@ func _physics_process(delta):
 	
 func _move_and_rotate(delta) -> KinematicCollision2D:
 	# Reverse on RMB
-	var rev = false
+	movement_resource.reverse = false
 	if Input.is_action_pressed("RMB"):
-		rev = true
+		movement_resource.reverse = true
 		
-	return movement_component.move_and_rotate(
-		delta, 
-		self, 
-		get_global_mouse_position(),
-		speed,
-		ang_acc,
-		rev)
+	return movement_component.move_and_rotate(movement_resource, get_global_mouse_position(), delta)
 	
 	
 func _check_collision(collision : KinematicCollision2D):

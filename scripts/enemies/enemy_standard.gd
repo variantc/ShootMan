@@ -8,6 +8,7 @@ class_name EnemyStandard
 var _start_health : float
 
 @onready var movement_component = $MovementComponent as MovementComponent
+@onready var movement_resource : MovementResource
 
 var world : World
 var player : Player
@@ -15,6 +16,8 @@ var player : Player
 
 func _ready():
 	_start_health = health
+	
+	movement_resource = MovementResource.new(self, speed, ang_acc)
 	
 	# Make each material unique for multiple instances of enemy
 	%Sprite2D.material = %Sprite2D.material.duplicate()
@@ -28,12 +31,7 @@ func _move_and_rotate(delta):
 	if world == null:
 		print("Error: EnemyStandard.world not assigned - has .enemy_setup() run?")
 	
-	movement_component.move_and_rotate(
-		delta, 
-		self, 
-		world.player.global_position,
-		speed,
-		ang_acc)
+	movement_component.move_and_rotate(movement_resource, world.player.global_position, delta)
 	
 
 func enemy_setup(game_world: World, pos : Vector2):
@@ -50,7 +48,6 @@ func hit(bullet : Bullet, bullet_direction : Vector2, bullet_speed : float):
 	_show_damage(prev_health, health)
 	bullet.strength -= bullet_damage
 
-	
 
 func _show_damage(prev, current):
 	var dam_time = 0.3
@@ -74,8 +71,8 @@ func _show_damage(prev, current):
 
 func _set_shader_hp_left(hp_left: float):
 	%Sprite2D.material.set_shader_parameter("hp_left", hp_left)
-	
-	
+
+
 func _knock_back(direction: Vector2, kb_speed: float):
 	var kb_red_factor = 0.075
 	var kb_time = 0.3

@@ -11,7 +11,6 @@ var orbit_direction : int = 1
 var radius_factor : float = 1.0
 
 func _ready():
-	#world = get_tree().root.get_child(1)
 	super._ready()
 	
 	if randi_range(0,1):
@@ -39,9 +38,4 @@ func _move_and_rotate(delta):
 		%DebugLine.add_point(global_position)
 		%DebugLine.add_point(strafe_target)
 	
-	movement_component.move_and_rotate(
-		delta, 
-		self, 
-		strafe_target,
-		speed,
-		ang_acc)
+	movement_component.move_and_rotate(movement_resource, strafe_target, delta)

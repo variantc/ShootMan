@@ -11,6 +11,9 @@ var life_counter : float = 0
 var world : World
 var exploding : bool = false
 
+var movement_resource : MovementResource
+
+
 func _ready():
 	var root = get_tree().root
 	world = root.get_child(root.get_child_count() - 1)
@@ -22,19 +25,15 @@ func _ready():
 		var node : Node2D = n
 		n.scale = Vector2.ZERO
 	
-
+	movement_resource = MovementResource.new(self, speed, ang_acc)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if exploding:
 		return
 	
-	%MovementComponent.move_and_rotate(
-		delta, 
-		self, 
-		world.player.global_position,
-		speed,
-		ang_acc)
+	%MovementComponent.move_and_rotate(movement_resource, world.player.global_position, delta)
 		
 	life_counter += delta
 	if life_counter > lifetime:

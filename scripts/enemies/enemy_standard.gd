@@ -18,9 +18,28 @@ func _ready():
 	_start_health = health
 	
 	movement_resource = MovementResource.new(self, speed, ang_acc)
-	
+	_randomise_shader_noise()
+
+
+func _randomise_shader_noise():	
 	# Make each material unique for multiple instances of enemy
 	%Sprite2D.material = %Sprite2D.material.duplicate()
+	
+	# Get and duplicate the noise texture
+	var noise_texture: NoiseTexture2D = %Sprite2D.material.get_shader_parameter("burn_noise").duplicate()
+	
+	# Duplicate the noise generator
+	noise_texture.noise = noise_texture.noise.duplicate()
+	
+	# Set the new noise texture on the material
+	%Sprite2D.material.set_shader_parameter("burn_noise", noise_texture)
+	
+	if not noise_texture:
+		printerr("No noise_texture found")
+		
+	# Get the noise generator and set its seed
+	var noise = noise_texture.noise
+	noise.seed = randi() % 10000
 
 
 func _process(delta):

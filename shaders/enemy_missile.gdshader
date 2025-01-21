@@ -23,7 +23,7 @@ vec4 apply_shade(vec4 original_color) {
 
 void apply_damage_fragment(inout vec4 c, vec2 uv) {
 	float noise_r = texture(burn_noise, uv).r;
-	float ty = uv.x + mix(-2.0, 1.0, hp_left) + noise_r;
+	float ty = uv.y + mix(-2.0, 1.0, hp_left) + noise_r;
 	vec4 grad_tex = texture(
 		burn_gradient,
 		vec2(uv.y, ty));

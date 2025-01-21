@@ -1,9 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://cfuxvhjeo2lal"]
+[gd_scene load_steps=30 format=3 uid="uid://cfuxvhjeo2lal"]
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy_missile.gd" id="1_sinyk"]
 [ext_resource type="Shader" path="res://shaders/enemy_missile.gdshader" id="2_v0w66"]
 [ext_resource type="Resource" uid="uid://leqihn8b5uic" path="res://resources/instances/enemy_missile_launcher.tres" id="3_ftd20"]
 [ext_resource type="Texture2D" uid="uid://4d13nxctsx71" path="res://sprites/EnemyMissile.png" id="4_111u4"]
+[ext_resource type="Shader" path="res://shaders/enemy_standard.gdshader" id="4_b4hun"]
 [ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_l26rg"]
 [ext_resource type="AudioStream" uid="uid://rw6vkwrnn4jm" path="res://sounds/explosions/explosion (2).wav" id="5_wddie"]
 [ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="6_gr7jn"]
@@ -45,7 +46,7 @@ shader_parameter/burn_noise = SubResource("NoiseTexture2D_4sgwt")
 radius = 15.0
 
 [sub_resource type="Gradient" id="Gradient_3ffsw"]
-offsets = PackedFloat32Array(0, 0.060241, 0.265659, 0.63067)
+offsets = PackedFloat32Array(0, 0.0107991, 0.265659, 0.63067)
 colors = PackedColorArray(0.6461, 0.364, 0.91, 0, 1, 0.328, 0.04, 1, 0, 0, 0, 1, 0.98, 0.392, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bmvgt"]
@@ -60,11 +61,11 @@ fractal_octaves = 2
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rs4ng"]
 noise = SubResource("FastNoiseLite_fl1rm")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfkgk"]
-shader = ExtResource("2_v0w66")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5bwgc"]
+shader = ExtResource("4_b4hun")
 shader_parameter/mix_amount = 0.0
 shader_parameter/flash_colour = Color(1, 1, 1, 1)
-shader_parameter/shade_color = Color(0, 0, 0, 0.5)
+shader_parameter/shade_color = Color(0.81, 0, 0, 1)
 shader_parameter/shade_intensity = 0.0
 shader_parameter/hp_left = 1.0
 shader_parameter/burn_gradient = SubResource("GradientTexture2D_bmvgt")
@@ -98,7 +99,7 @@ shape = SubResource("CircleShape2D_gelfa")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
-material = SubResource("ShaderMaterial_sfkgk")
+material = SubResource("ShaderMaterial_5bwgc")
 position = Vector2(2, 0)
 rotation = 1.5708
 texture = ExtResource("4_111u4")

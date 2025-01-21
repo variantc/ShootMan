@@ -5,11 +5,11 @@
 [resource]
 script = ExtResource("1_est8i")
 id = "enemy_launcher"
-shot_time = 3.0
+shot_time = 5.0
 shot_number = 1
 shot_spread = 2.5
 projectile_type = 1
-speed = 50.0
+speed = 40.0
 angular_acc = 0.7
 strength = 10.0
 scatter = 0

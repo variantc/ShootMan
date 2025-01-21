@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://ckskkkn4w07o3"]
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy_spiral.gd" id="1_s7lcw"]
-[ext_resource type="Texture2D" uid="uid://byxxpwsjctwmn" path="res://sprites/pawn_0.png" id="3_5q1jh"]
+[ext_resource type="Texture2D" uid="uid://bxfywgysf7fbl" path="res://sprites/EnemySpiral.png" id="2_o27r7"]
 [ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_rgfhx"]
 [ext_resource type="AudioStream" uid="uid://rw6vkwrnn4jm" path="res://sounds/explosions/explosion (2).wav" id="5_j7i4f"]
 [ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="6_kpxvj"]
@@ -93,7 +93,7 @@ noise = SubResource("FastNoiseLite_7rj3m")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sfkgk"]
 shader = SubResource("Shader_m3vhj")
 shader_parameter/shade_color = Color(0.81, 0.783, 0, 1)
-shader_parameter/shade_intensity = 0.5
+shader_parameter/shade_intensity = 0.0
 shader_parameter/hp_left = 1.0
 shader_parameter/burn_gradient = SubResource("GradientTexture2D_ssyl7")
 shader_parameter/burn_noise = SubResource("NoiseTexture2D_7k3mt")
@@ -122,12 +122,14 @@ shape = SubResource("CircleShape2D_gelfa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+texture_filter = 1
 material = SubResource("ShaderMaterial_sfkgk")
-position = Vector2(1, -1)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_5q1jh")
+position = Vector2(3, 0)
+rotation = 1.5708
+texture = ExtResource("2_o27r7")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_top = -2.0
 offset_right = 15.0
 offset_bottom = 2.0

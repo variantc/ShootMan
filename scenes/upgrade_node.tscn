@@ -1,11 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://c43atuift7o0d"]
+[gd_scene load_steps=7 format=3 uid="uid://c43atuift7o0d"]
 
 [ext_resource type="Texture2D" uid="uid://d26n1sy223811" path="res://sprites/upgrade_node.png" id="1_0o85p"]
+[ext_resource type="Shader" path="res://shaders/upgrade_node.gdshader" id="1_ug2pp"]
 [ext_resource type="Texture2D" uid="uid://cdddee3d6al15" path="res://sprites/upgrade_node_raw.png" id="2_7t7kl"]
 [ext_resource type="Script" path="res://scripts/upgrade_node.gd" id="2_t3o28"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iw1s5"]
+shader = ExtResource("1_ug2pp")
+shader_parameter/mix_amount = null
+shader_parameter/flash_colour = null
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_aa4n7"]
-radius = 43.7379
+radius = 61.0
 
 [node name="UpgradeNode" type="Area2D"]
 script = ExtResource("2_t3o28")
@@ -14,6 +20,7 @@ raw_sprite = ExtResource("2_7t7kl")
 
 [node name="ResourceSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_iw1s5")
 texture = ExtResource("2_7t7kl")
 
 [node name="UpgradeButton" type="Button" parent="."]

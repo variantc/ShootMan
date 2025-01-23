@@ -51,6 +51,8 @@ func _move_and_rotate(delta):
 		print("Error: EnemyStandard.world not assigned - has .enemy_setup() run?")
 	
 	movement_component.move_and_rotate(movement_resource, world.player.global_position, delta)
+	# Set the rotation in the shader to adjust normals for lighting
+	%Sprite2D.material.set_shader_parameter("object_rotation", rotation - PI)
 	
 
 func enemy_setup(game_world: World, pos : Vector2):

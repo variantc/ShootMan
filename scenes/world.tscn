@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=21 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Script" path="res://scripts/managers/sound_manager.gd" id="1_hjijg"]
 [ext_resource type="Script" path="res://scripts/managers/enemy_spawner.gd" id="1_irc5a"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://scenes/camera_2d.gd" id="15_3cbjm"]
 [ext_resource type="Script" path="res://scripts/managers/gui_controller.gd" id="15_jq3j3"]
 [ext_resource type="PackedScene" uid="uid://c43atuift7o0d" path="res://scenes/upgrade_node.tscn" id="18_lhl2h"]
+[ext_resource type="PackedScene" uid="uid://cv1a5es8xmwxc" path="res://scenes/light.tscn" id="20_dsptr"]
 [ext_resource type="PackedScene" uid="uid://cfuxvhjeo2lal" path="res://scenes/enemies/enemy_missile.tscn" id="21_ivebk"]
 
 [node name="World" type="Node2D"]
@@ -49,8 +50,8 @@ enemy_spiral_scene = ExtResource("7_gpqxu")
 enemy_missile_scene = ExtResource("21_ivebk")
 attack_group_scene = ExtResource("11_x2le3")
 spawn_enemy_standard_time = 1.0
-spawn_enemy_spiral_time = 5.0
-spawn_enemy_missile_time = 9.0
+spawn_enemy_spiral_time = 50.0
+spawn_enemy_missile_time = 90.0
 spawn_group_time = 60.0
 spawn_inc_time = 60.0
 
@@ -192,3 +193,9 @@ text = "Restart"
 
 [node name="UpgradeNode" parent="." instance=ExtResource("18_lhl2h")]
 position = Vector2(273, 167)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+energy = 0.6
+
+[node name="Light" parent="." instance=ExtResource("20_dsptr")]

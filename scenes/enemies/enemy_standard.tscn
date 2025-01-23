@@ -1,10 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://b51lbdgysvfq1"]
+[gd_scene load_steps=14 format=3 uid="uid://b51lbdgysvfq1"]
 
 [ext_resource type="Script" path="res://scripts/enemies/enemy_standard.gd" id="1_5if6k"]
-[ext_resource type="Shader" path="res://shaders/enemy_standard.gdshader" id="3_bwe03"]
+[ext_resource type="Material" uid="uid://cgjk2imsefy53" path="res://shaders/enemy_standard.tres" id="2_vch8d"]
 [ext_resource type="Texture2D" uid="uid://bhfub4uxufsw2" path="res://sprites/EnemyStandard_simple.png" id="3_hksyl"]
 [ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_tp4ts"]
-[ext_resource type="Texture2D" uid="uid://bfw38rnw3gxpi" path="res://sprites/EnemyStandard_normal.png" id="4_u7kwa"]
 [ext_resource type="AudioStream" uid="uid://rw6vkwrnn4jm" path="res://sounds/explosions/explosion (2).wav" id="5_smh3g"]
 [ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="6_0ay5f"]
 [ext_resource type="AudioStream" uid="uid://dv2ay24mst4c7" path="res://sounds/explosions/explosion (4).wav" id="7_poka7"]
@@ -15,37 +14,6 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
 radius = 15.0
-
-[sub_resource type="Gradient" id="Gradient_3ffsw"]
-offsets = PackedFloat32Array(0, 0.0107991, 0.265659, 0.63067)
-colors = PackedColorArray(0.6461, 0.364, 0.91, 0, 1, 0.328, 0.04, 1, 0, 0, 0, 1, 0.98, 0.392, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_bmvgt"]
-gradient = SubResource("Gradient_3ffsw")
-fill_to = Vector2(0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_fl1rm"]
-noise_type = 3
-frequency = 0.0067
-fractal_octaves = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rs4ng"]
-noise = SubResource("FastNoiseLite_fl1rm")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfkgk"]
-shader = ExtResource("3_bwe03")
-shader_parameter/mix_amount = 0.0
-shader_parameter/flash_colour = Color(1, 1, 1, 1)
-shader_parameter/hp_left = 1.0
-shader_parameter/normal_intensity = 1.0
-shader_parameter/light_direction = Vector2(0.5, -0.5)
-shader_parameter/light_color = Vector3(1, 1, 1)
-shader_parameter/object_rotation = 45.0
-shader_parameter/shade_color = Color(1, 1, 1, 1)
-shader_parameter/shade_intensity = 0.154
-shader_parameter/burn_gradient = SubResource("GradientTexture2D_bmvgt")
-shader_parameter/burn_noise = SubResource("NoiseTexture2D_rs4ng")
-shader_parameter/normal_map = ExtResource("4_u7kwa")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yj0ii"]
 streams_count = 7
@@ -72,7 +40,7 @@ shape = SubResource("CircleShape2D_gelfa")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
-material = SubResource("ShaderMaterial_sfkgk")
+material = ExtResource("2_vch8d")
 position = Vector2(3, 0)
 rotation = 1.5708
 texture = ExtResource("3_hksyl")

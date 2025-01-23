@@ -41,33 +41,28 @@ void apply_damage_vertex(inout vec2 v) {
 	v *= scale;
 }
 
-// Normal mapping with rotation
 vec3 apply_normal_map(vec2 uv, vec3 base_color, float rot) {
-	// Sample the normal map
-	vec3 normal = texture(normal_map, uv).rgb * 2.0 - 1.0;
-	normal.xy *= normal_intensity;
+	// Sample normal map and transform from [0,1] to [-1,1]
+	vec3 normal = texture(normal_map, uv).xyz * 2.0 - 1.0;
 
-	// Create a rotation matrix
+	// Apply rotation to the normal map
 	float cos_angle = cos(rot);
 	float sin_angle = sin(rot);
 	mat2 rotation_matrix = mat2(
 		vec2(cos_angle, -sin_angle),
 		vec2(sin_angle, cos_angle)
 	);
-
-	// Rotate the normal map
 	normal.xy = rotation_matrix * normal.xy;
 
-	// Normalize light direction
-	vec2 normalized_light_dir = normalize(light_direction);
+	// Normalize light direction (assumed to be in screen space)
+	vec3 light_dir = normalize(vec3(light_direction, 1.0));
 
-	// Compute lighting
-	float light_factor = dot(normal.xy, normalized_light_dir) * 0.5 + 0.5;
-	light_factor = clamp(light_factor, 0.1, 1.0);
+	// Compute lighting using dot product with normal's Z component for better depth effect
+	float light_factor = dot(normal, light_dir);
+	light_factor = clamp(light_factor * 0.5 + 0.5, 0.1, 1.0); // Ensure min brightness
 
-	// Blend normal lighting with base color
-	return mix(base_color, base_color * light_color * light_factor, normal_intensity);
-
+	// Blend lighting with base sprite color
+	return base_color * (light_color * light_factor);
 }
 
 void vertex() {

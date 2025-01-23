@@ -49,8 +49,8 @@ enemy_standard_scene = ExtResource("3_6vcwx")
 enemy_spiral_scene = ExtResource("7_gpqxu")
 enemy_missile_scene = ExtResource("21_ivebk")
 attack_group_scene = ExtResource("11_x2le3")
-spawn_enemy_standard_time = 1.0
-spawn_enemy_spiral_time = 50.0
+spawn_enemy_standard_time = 11.0
+spawn_enemy_spiral_time = 1.0
 spawn_enemy_missile_time = 90.0
 spawn_group_time = 60.0
 spawn_inc_time = 60.0
@@ -195,7 +195,7 @@ text = "Restart"
 position = Vector2(273, 167)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
 energy = 0.6
 
 [node name="Light" parent="." instance=ExtResource("20_dsptr")]
+visible = false

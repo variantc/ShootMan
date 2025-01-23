@@ -20,12 +20,12 @@ func _ready():
 
 
 func _process(delta: float) -> void:
-	_move_and_rotate(delta)
+	_move_and_rotate(delta, target)
 	%ShootComponent.shoot(delta, current_weapon)
 	
 	
-func _move_and_rotate(delta):
-	var to_player = (global_position - world.player.global_position).normalized()
+func _move_and_rotate(delta, target):
+	var to_player = (global_position - target).normalized()
 	var rotate_ang = PI/6 * orbit_direction
 	var strafe_target = \
 		world.player.global_position \

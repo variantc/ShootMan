@@ -12,9 +12,11 @@ var _start_health : float
 
 var world : World
 var player : Player
-
+var target : Vector2
+var target_player = true
 
 func _ready():
+	SignalBus.upgrade_node_claimed.connect(_on_upgrade_node_claimed)
 	_start_health = health
 	
 	movement_resource = MovementResource.new(self, speed, ang_acc)
@@ -43,21 +45,26 @@ func _randomise_shader_noise():
 
 
 func _process(delta):
-	_move_and_rotate(delta)
+	if target_player:
+		target = world.player.global_position
+		
+	_move_and_rotate(delta, target)
 	
 	
-func _move_and_rotate(delta):
+func _move_and_rotate(delta : float, target : Vector2):
 	if world == null:
 		print("Error: EnemyStandard.world not assigned - has .enemy_setup() run?")
 	
-	movement_component.move_and_rotate(movement_resource, world.player.global_position, delta)
+	movement_component.move_and_rotate(movement_resource, target, delta)
 	# Set the rotation in the shader to adjust normals for lighting
+	# TODO: Change rotation offset?
 	%Sprite2D.material.set_shader_parameter("object_rotation", rotation - PI)
 	
 
 func enemy_setup(game_world: World, pos : Vector2):
 	self.world = game_world
 	global_position = pos
+	_check_for_closest_target()
 
 
 func hit(bullet : Bullet, bullet_direction : Vector2, bullet_speed : float):
@@ -111,3 +118,18 @@ func _die():
 		#world.enemy_spawner.remove_enemy_from_list(self)
 		SignalBus.enemy_killed.emit(self, %AudioStreamPlayer2D)
 		# queue_free called in tween.finished signal
+		
+# When the upgrade node signal is emitted, we currently get all claimed upgrade
+# nodes from world and check against player position
+func _on_upgrade_node_claimed(node : UpgradeNode):
+	_check_for_closest_target()
+	
+
+func _check_for_closest_target() -> void:
+	var positions : Array[Vector2] 
+	for n in world.claimed_upgrade_nodes:
+		positions.append(n.global_position)
+	positions.append(world.player.global_position)
+	target = Refs.get_closest_location(global_position, positions)
+	if target != world.player.position:
+		target_player = false

@@ -25,6 +25,7 @@ func claim_upgrade():
 	%ResourceSprite.texture = built_sprite
 	claimed = true
 	#%UpgradeButton.set_visible(false)	
+	SignalBus.upgrade_node_claimed.emit(self)
 	
 	level += 1
 	%UpgradeLevelLabel.set_visible(true)

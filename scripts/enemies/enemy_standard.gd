@@ -16,7 +16,7 @@ var target : Vector2
 var target_player = true
 
 func _ready():
-	SignalBus.upgrade_node_claimed.connect(_on_upgrade_node_claimed)
+	SignalBus.upgrade_node_claim_status_changed.connect(_on_upgrade_node_claim_state_changed)
 	_start_health = health
 	
 	movement_resource = MovementResource.new(self, speed, ang_acc)
@@ -119,9 +119,10 @@ func _die():
 		SignalBus.enemy_killed.emit(self, %AudioStreamPlayer2D)
 		# queue_free called in tween.finished signal
 		
+		
 # When the upgrade node signal is emitted, we currently get all claimed upgrade
 # nodes from world and check against player position
-func _on_upgrade_node_claimed(node : UpgradeNode):
+func _on_upgrade_node_claim_state_changed(node : UpgradeNode, claimed : bool):
 	_check_for_closest_target()
 	
 

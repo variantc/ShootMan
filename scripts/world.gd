@@ -21,7 +21,7 @@ func _ready():
 	SignalBus.drop_to_player.connect(_on_drop_to_player)
 	SignalBus.drop_picked_up.connect(_on_drop_pickedup)
 	SignalBus.enemy_killed.connect(_on_enemy_killed)
-	SignalBus.upgrade_node_claimed.connect(_on_upgrade_node_claimed)
+	SignalBus.upgrade_node_claim_status_changed.connect(_on_upgrade_node_claim_state_changed)
 
 
 func _on_enemy_killed(enemy, audio):
@@ -47,5 +47,8 @@ func _on_drop_to_player(drop : DropStandard):
 	drop_spawner.set_player_for_drop(drop, player)
 
 
-func _on_upgrade_node_claimed(node : UpgradeNode):
-	claimed_upgrade_nodes.append(node)
+func _on_upgrade_node_claim_state_changed(node : UpgradeNode, claimed : bool):
+	if claimed:
+		claimed_upgrade_nodes.append(node)
+	else:
+		claimed_upgrade_nodes.remove_at(claimed_upgrade_nodes.find(node))

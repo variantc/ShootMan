@@ -15,4 +15,4 @@ extends Node
 @warning_ignore("unused_signal") signal game_over
 @warning_ignore("unused_signal") signal pause_state_changed(paused : bool)
 
-@warning_ignore("unused_signal") signal upgrade_node_claimed(upgrade_node : UpgradeNode)
+@warning_ignore("unused_signal") signal upgrade_node_claim_status_changed(upgrade_node : UpgradeNode, claimed : bool)

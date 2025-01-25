@@ -45,6 +45,6 @@ func _on_upgrade_button_pressed(upgrade_node: UpgradeNode, upgrade_type: int):
 			upgrade_info.operation
 		)
 		%SoundManager.play_sound(upgrade_audio_stream)
-		upgrade_node.claim_upgrade()
+		upgrade_node.change_claim_state(true)
 	else:
 		%SoundManager.play_sound(failed_audio_stream)

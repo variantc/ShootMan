@@ -47,7 +47,7 @@ func change_claim_state(set_claimed : bool):
 	health_bar.value = 100 * health/start_health
 
 
-func _take_damage(amount : float):
+func take_damage(amount : float):
 	health -= amount
 	print_debug(health)
 	health_bar.value = 100 * health/start_health
@@ -66,9 +66,8 @@ func _on_body_entered(body):
 	if body is Player: #and not claimed:
 		upgrade_button.set_visible(true)	
 	if body is EnemyStandard and claimed:
-		body as EnemyStandard
 		body.crash()
-		_take_damage(60)
+		take_damage(60)
 	
 	
 func _on_body_exited(body):

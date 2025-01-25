@@ -54,6 +54,8 @@ func setup (missile_stats : WeaponResource) :
 		
 		
 func _on_body_entered(body):
+	if exploding:
+		return
 	if body == self:
 		return
 	if body.is_in_group("Player"):
@@ -66,8 +68,16 @@ func _on_explosion_entered(body):
 
 
 func _on_collision_area_entered(area):
+	if exploding:
+		return
+		
 	if area.is_in_group("Projectile"):
 		_explode()
+	if area is UpgradeNode:
+		var node = area as UpgradeNode
+		if node.claimed:
+			node.take_damage(60)
+			_explode()
 
 	
 func _explode():

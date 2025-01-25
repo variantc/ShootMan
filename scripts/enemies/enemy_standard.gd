@@ -67,6 +67,7 @@ func enemy_setup(game_world: World, pos : Vector2):
 	_check_for_closest_target()
 
 
+# bullet hit
 func hit(bullet : Bullet, bullet_direction : Vector2, bullet_speed : float):
 	_knock_back(bullet_direction, bullet_speed)
 	
@@ -75,6 +76,11 @@ func hit(bullet : Bullet, bullet_direction : Vector2, bullet_speed : float):
 	health -= bullet.strength
 	_show_damage(prev_health, health)
 	bullet.strength -= bullet_damage
+
+
+# directly destroy enemy
+func destroy():
+	_show_damage(health, 0)
 
 
 func _show_damage(prev, current):

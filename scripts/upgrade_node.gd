@@ -10,6 +10,8 @@ class_name UpgradeNode
 
 var claimed : bool = false
 var level : int = 0
+var health : float = 100
+var start_health : float
 
 func _ready():
 	upgrade_button.set_visible(false)
@@ -18,6 +20,8 @@ func _ready():
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	area_entered.connect(_on_area_entered)
+	
+	start_health = health
 	
 	var upgrade_type = UpgradeManager.Type.SHOT_NUMBER
 	
@@ -39,6 +43,16 @@ func change_claim_state(set_claimed : bool):
 	%UpgradeLevelLabel.set_visible(claimed)
 	%UpgradeLevelLabel.text = "Level " + str(level)
 	health_bar.set_visible(claimed)
+	health_bar.value = 100 * health/start_health
+
+
+func _take_damage(amount : float):
+	health -= amount
+	print_debug(health)
+	health_bar.value = 100 * health/start_health
+	if health <= 0:
+		change_claim_state(false)
+		health = start_health
 
 
 # To detect bullets?
@@ -51,8 +65,9 @@ func _on_body_entered(body):
 	if body is Player: #and not claimed:
 		upgrade_button.set_visible(true)	
 	if body is EnemyStandard:
-		print_debug(body.name + " body")
-		change_claim_state(false)
+		body as EnemyStandard
+		body.destroy()
+		_take_damage(60)
 	
 	
 func _on_body_exited(body):

@@ -48,7 +48,11 @@ func _on_drop_to_player(drop : DropStandard):
 
 
 func _on_upgrade_node_claim_state_changed(node : UpgradeNode, claimed : bool):
-	if claimed:
-		claimed_upgrade_nodes.append(node)
-	else:
+	if node in claimed_upgrade_nodes and not claimed:
 		claimed_upgrade_nodes.remove_at(claimed_upgrade_nodes.find(node))
+	
+	if node not in claimed_upgrade_nodes and claimed:
+		claimed_upgrade_nodes.append(node)
+		
+	for n in claimed_upgrade_nodes:
+		print_debug("claimed nodes: " + str(len(claimed_upgrade_nodes)) + " " + n.name)

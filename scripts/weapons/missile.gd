@@ -81,6 +81,8 @@ func _on_collision_area_entered(area):
 
 	
 func _explode():
+	exploding = true
+	
 	# Stop the missile:
 	%MovementComponent.stop = true
 	

@@ -9,10 +9,12 @@ static var Type = {
 	SHOT_LIFETIME = 3
 }
 
+
 static var Operation = { 	# NOT YET USED
 	ADD = 0,
 	MULTIPLY = 1
 }
+
 
 static var UPGRADE_VALUES = {
 	Type.SHOT_NUMBER: {"amount": 1.0, "operation": Operation.ADD},

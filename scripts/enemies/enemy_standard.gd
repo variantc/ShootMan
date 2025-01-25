@@ -79,7 +79,7 @@ func hit(bullet : Bullet, bullet_direction : Vector2, bullet_speed : float):
 
 
 # directly destroy enemy
-func destroy():
+func crash():
 	_show_damage(health, 0)
 
 
@@ -88,9 +88,9 @@ func _show_damage(prev, current):
 	# Create and configure a single tween
 	var tween = create_tween() as Tween
 	
-	# Ensure queue_free() is only called after tween completes
-	tween.finished.connect(func(): if health <= 0 : queue_free())
-	if health <= 0:
+	if current <= 0:
+		# Ensure queue_free() is only called after tween completes
+		tween.finished.connect(_remove_from_game)
 		_die()
 	
 	var start_health_left = prev / _start_health
@@ -125,6 +125,10 @@ func _die():
 		SignalBus.enemy_killed.emit(self, %AudioStreamPlayer2D)
 		# queue_free called in tween.finished signal
 		
+		
+func _remove_from_game():
+	print_debug("removing " + self.name)
+	queue_free()
 		
 # When the upgrade node signal is emitted, we currently get all claimed upgrade
 # nodes from world and check against player position

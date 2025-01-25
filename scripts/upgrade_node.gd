@@ -42,6 +42,7 @@ func change_claim_state(set_claimed : bool):
 	
 	%UpgradeLevelLabel.set_visible(claimed)
 	%UpgradeLevelLabel.text = "Level " + str(level)
+	
 	health_bar.set_visible(claimed)
 	health_bar.value = 100 * health/start_health
 
@@ -64,9 +65,9 @@ func _on_area_entered(area):
 func _on_body_entered(body):
 	if body is Player: #and not claimed:
 		upgrade_button.set_visible(true)	
-	if body is EnemyStandard:
+	if body is EnemyStandard and claimed:
 		body as EnemyStandard
-		body.destroy()
+		body.crash()
 		_take_damage(60)
 	
 	

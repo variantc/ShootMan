@@ -34,13 +34,15 @@ func claim_upgrade():
 
 # To detect bullets?
 func _on_area_entered(area):
-	print_debug(area)
+	print_debug(area.name + " area")
 
 
 # To detect player and enemies?
 func _on_body_entered(body):
 	if body is Player: #and not claimed:
 		%UpgradeButton.set_visible(true)	
+	if body is EnemyStandard:
+		print_debug(body.name + " body")
 	
 	
 func _on_body_exited(body):

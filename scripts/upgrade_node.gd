@@ -24,7 +24,8 @@ func _ready():
 	body_exited.connect(_on_body_exited)
 	area_entered.connect(_on_area_entered)
 	
-	upgrade_type = UpgradeManager.Type.values().pick_random()
+	# upgrade_type = UpgradeManager.Type.values().pick_random()
+	upgrade_type = UpgradeManager.Type.SHOT_TIME
 	upgrade_button.text = UpgradeManager.UPGRADE_NAMES[upgrade_type]
 	
 	start_health = health

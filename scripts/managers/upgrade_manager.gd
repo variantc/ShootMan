@@ -16,6 +16,14 @@ static var Operation = { 	# NOT YET USED
 }
 
 
+static var UPGRADE_NAMES = { 
+	Type.SHOT_NUMBER: "+ Shot Number",
+	Type.SHOT_TIME: "- Reduce Shot Time",
+	Type.SHOT_SPREAD: "+ Shot Spread",
+	Type.SHOT_LIFETIME: "+ Shot Range" 
+}
+
+
 static var UPGRADE_VALUES = {
 	Type.SHOT_NUMBER: {"amount": 1.0, "operation": Operation.ADD},
 	Type.SHOT_TIME: {"amount": -0.05, "operation": Operation.ADD},

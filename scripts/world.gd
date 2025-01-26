@@ -53,6 +53,7 @@ func _on_upgrade_node_claim_state_changed(node : UpgradeNode, claimed : bool):
 	
 	if node not in claimed_upgrade_nodes and claimed:
 		claimed_upgrade_nodes.append(node)
-		
-	for n in claimed_upgrade_nodes:
-		print_debug("claimed nodes: " + str(len(claimed_upgrade_nodes)) + " " + n.name)
+
+	if DEBUG:	
+		for n in claimed_upgrade_nodes:
+			print_debug("claimed nodes: " + str(len(claimed_upgrade_nodes)) + " " + n.name)

@@ -87,6 +87,8 @@ floor_stop_on_slope = false
 floor_block_on_wall = false
 floor_max_angle = 0.0
 floor_snap_length = 0.0
+speed = 100.0
+ang_acc = 5.0
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(575, 350)

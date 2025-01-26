@@ -18,7 +18,7 @@ var start_pos : Vector2
 
 
 func _ready():
-	#SignalBus.apply_upgrade.connect(_on_apply_upgrade)
+	SignalBus.apply_upgrade.connect(_on_apply_upgrade)
 	SignalBus.upgrade_value_changed.connect(_on_upgrade_value_changed)
 	start_pos = global_position
 	
@@ -26,6 +26,7 @@ func _ready():
 	
 
 func _on_apply_upgrade(upgrade_type: int, amount, operation: int):
+	print_debug(upgrade_type, " : ",  amount)
 	match upgrade_type:
 		UpgradeManager.Type.SHOT_NUMBER:
 			current_weapon.shot_number += amount

@@ -25,6 +25,7 @@ func _ready():
 	area_entered.connect(_on_area_entered)
 	
 	upgrade_type = UpgradeManager.Type.values().pick_random()
+	upgrade_button.text = UpgradeManager.UPGRADE_NAMES[upgrade_type]
 	
 	start_health = health
 	

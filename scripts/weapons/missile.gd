@@ -4,6 +4,7 @@ class_name Missile
 
 @export var speed : float = 200
 @export var ang_acc : float = 1
+@export var missile_sprite : Sprite2D
 
 var lifetime : float = 2
 var life_counter : float = 0
@@ -85,6 +86,8 @@ func _explode():
 	
 	# Stop the missile:
 	%MovementComponent.stop = true
+	# Hide the missile sprite
+	missile_sprite.set_visible(false)
 	
 	var tween = create_tween() as Tween
 	

@@ -18,7 +18,8 @@ var start_pos : Vector2
 
 
 func _ready():
-	SignalBus.apply_upgrade.connect(_on_apply_upgrade)
+	#SignalBus.apply_upgrade.connect(_on_apply_upgrade)
+	SignalBus.upgrade_value_changed.connect(_on_upgrade_value_changed)
 	start_pos = global_position
 	
 	movement_resource = MovementResource.new(self, speed, ang_acc)
@@ -35,6 +36,19 @@ func _on_apply_upgrade(upgrade_type: int, amount, operation: int):
 			current_weapon.shot_spread += amount
 		UpgradeManager.Type.SHOT_LIFETIME:
 			current_weapon.current_bullet.lifetime += amount
+	
+	
+func _on_upgrade_value_changed(upgrade_type: int, amount : float):
+	match upgrade_type:
+		UpgradeManager.Type.SHOT_NUMBER:
+			current_weapon.shot_number = amount + 1
+			current_weapon.shot_spread = (amount + 1)
+		UpgradeManager.Type.SHOT_TIME:
+			current_weapon.shot_time += amount
+		UpgradeManager.Type.SHOT_SPREAD:
+			current_weapon.shot_spread *= amount
+		UpgradeManager.Type.SHOT_LIFETIME:
+			current_weapon.lifetime = amount
 	
 
 func _physics_process(delta):

@@ -16,3 +16,4 @@ extends Node
 @warning_ignore("unused_signal") signal pause_state_changed(paused : bool)
 
 @warning_ignore("unused_signal") signal upgrade_node_claim_status_changed(upgrade_node : UpgradeNode, claimed : bool)
+@warning_ignore("unused_signal") signal upgrade_value_changed(upgrade_type : int, upgrade_value : int)

@@ -52,10 +52,10 @@ enemy_standard_scene = ExtResource("3_6vcwx")
 enemy_spiral_scene = ExtResource("7_gpqxu")
 enemy_missile_scene = ExtResource("21_ivebk")
 attack_group_scene = ExtResource("11_x2le3")
-spawn_enemy_standard_time = 33.0
-spawn_enemy_spiral_time = 55.0
-spawn_enemy_missile_time = 2.0
-spawn_group_time = 60.0
+spawn_enemy_standard_time = 7.0
+spawn_enemy_spiral_time = 11.0
+spawn_enemy_missile_time = 17.0
+spawn_group_time = 120.0
 spawn_inc_time = 60.0
 
 [node name="Background" type="TextureRect" parent="."]
@@ -69,6 +69,14 @@ offset_right = 38174.0
 offset_bottom = 33710.0
 texture = ExtResource("14_5ds7y")
 stretch_mode = 1
+
+[node name="UpgradeNode" parent="." instance=ExtResource("18_lhl2h")]
+unique_name_in_owner = true
+position = Vector2(273, 167)
+
+[node name="UpgradeNode2" parent="." instance=ExtResource("18_lhl2h")]
+unique_name_in_owner = true
+position = Vector2(990, 488)
 
 [node name="Player" parent="." instance=ExtResource("2_gkc74")]
 unique_name_in_owner = true
@@ -194,7 +202,3 @@ z_index = 99
 z_as_relative = false
 layout_mode = 2
 text = "Restart"
-
-[node name="UpgradeNode" parent="." instance=ExtResource("18_lhl2h")]
-unique_name_in_owner = true
-position = Vector2(273, 167)

@@ -97,6 +97,7 @@ func _show_damage(prev, current):
 	# Update shader to reflect new health
 	var health_left = max(current / _start_health, 0)
 	
+	tween.parallel()
 	# Tween the shader health parameter and position simultaneously
 	tween.tween_method(_set_shader_hp_left, start_health_left, health_left, dam_time)\
 		.set_ease(Tween.EASE_OUT)\
@@ -127,8 +128,8 @@ func _die():
 		
 		
 func _remove_from_game():
-	print_debug("removing " + self.name)
 	queue_free()
+		
 		
 # When the upgrade node signal is emitted, we currently get all claimed upgrade
 # nodes from world and check against player position

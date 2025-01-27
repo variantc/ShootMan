@@ -5,8 +5,8 @@ class_name ScoreText
 var score = 0:
 	set(value):
 		score = value
-		update_points_by(0)
+		update_points()
 
 
-func update_points_by(inc : int):
+func update_points():
 	text = "Points: " + str(score)

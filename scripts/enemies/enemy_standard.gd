@@ -51,11 +51,11 @@ func _process(delta):
 	_move_and_rotate(delta, target)
 	
 	
-func _move_and_rotate(delta : float, target : Vector2):
+func _move_and_rotate(delta : float, target_pos : Vector2):
 	if world == null:
 		print("Error: EnemyStandard.world not assigned - has .enemy_setup() run?")
 	
-	movement_component.move_and_rotate(movement_resource, target, delta)
+	movement_component.move_and_rotate(movement_resource, target_pos, delta)
 	# Set the rotation in the shader to adjust normals for lighting
 	# TODO: Change rotation offset?
 	%Sprite2D.material.set_shader_parameter("object_rotation", rotation - PI)
@@ -133,7 +133,7 @@ func _remove_from_game():
 		
 # When the upgrade node signal is emitted, we currently get all claimed upgrade
 # nodes from world and check against player position
-func _on_upgrade_node_claim_state_changed(node : UpgradeNode, claimed : bool):
+func _on_upgrade_node_claim_state_changed(_node : UpgradeNode, _claimed : bool):
 	_check_for_closest_target()
 	
 

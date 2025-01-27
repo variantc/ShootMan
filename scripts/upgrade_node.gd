@@ -30,8 +30,6 @@ func _ready():
 	
 	start_health = health
 	
-	var upgrade_type = UpgradeManager.Type.SHOT_NUMBER
-	
 	upgrade_button.button_up.connect(
 			func(): SignalBus.upgrade_button_pressed.emit(self, upgrade_type)
 		)

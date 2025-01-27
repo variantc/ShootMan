@@ -22,19 +22,20 @@ func _ready():
 	area_entered.connect(_on_area_entered)
 
 
-func setup( bullet_stats : WeaponResource ):
+func setup( new_bullet_stats : WeaponResource ):
 
-	global_position = bullet_stats.projectile_position
-	rotation = bullet_stats.rotation
-	speed = bullet_stats.speed
-	strength = bullet_stats.strength
+	global_position = new_bullet_stats.projectile_position
+	rotation = new_bullet_stats.rotation
+	speed = new_bullet_stats.speed
+	strength = new_bullet_stats.strength
 	orig_strength = strength
-	scatter = bullet_stats.scatter
-	repeat_scatter = bullet_stats.repeat_scatter
-	scale = Vector2(bullet_stats.scale, bullet_stats.scale)
-	lifetime = bullet_stats.lifetime
+	scatter = new_bullet_stats.scatter
+	repeat_scatter = new_bullet_stats.repeat_scatter
+	scale = Vector2(new_bullet_stats.scale, new_bullet_stats.scale)
+	lifetime = new_bullet_stats.lifetime
 	direction = Vector2(cos(rotation), sin(rotation)).normalized()
-	collision_mask = bullet_stats.mask
+	collision_mask = new_bullet_stats.mask
+
 
 func _process(delta):
 	# Move the bullet in its direction
@@ -69,12 +70,12 @@ func split_bullets():
 			# Check if we want repeat scattering:
 			var sub_scatter = scatter-1 if repeat_scatter else 0
 			
-			var bullet_stats = load("res://resources/bullet.tres") as WeaponResource
-			bullet_stats.bullet_position = global_position
-			bullet_stats.rotation = new_rot
-			bullet_stats.speed = speed
-			bullet_stats.strength = orig_strength
-			bullet_stats.scatter = sub_scatter
+			var sub_bullet_stats = load("res://resources/bullet.tres") as WeaponResource
+			sub_bullet_stats.bullet_position = global_position
+			sub_bullet_stats.rotation = new_rot
+			sub_bullet_stats.speed = speed
+			sub_bullet_stats.strength = orig_strength
+			sub_bullet_stats.scatter = sub_scatter
 			new_bullet.setup(bullet_stats)
 			# Recalculate direction for the new bullet
 			new_bullet.direction = Vector2(cos(new_bullet.rotation), sin(new_bullet.rotation)).normalized()

@@ -24,12 +24,12 @@ func _process(delta: float) -> void:
 	%ShootComponent.shoot(delta, current_weapon)
 	
 	
-func _move_and_rotate(delta, target):
-	var to_player = (global_position - target).normalized()
+func _move_and_rotate(delta, traget_pos):
+	var to_target = (global_position - traget_pos).normalized()
 	var rotate_ang = PI/6 * orbit_direction
 	var strafe_target = \
 		world.player.global_position \
-			+ (to_player * radius_factor * radius).rotated(rotate_ang)
+			+ (to_target * radius_factor * radius).rotated(rotate_ang)
 	
 	if world.DEBUG:
 		%DebugLine.clear_points()

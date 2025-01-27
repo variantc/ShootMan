@@ -43,7 +43,7 @@ func _on_debug_upgrade(upgrade_type: int):
 			current_weapon.current_bullet.lifetime += 0.05
 	
 	
-func _on_upgrade_value_changed(upgrade_type: int, level : int, operation : int = 0):
+func _on_upgrade_value_changed(upgrade_type: int, level : int, _operation : int = 0):
 	var max_level = 0
 	for n in world.claimed_upgrade_nodes:
 		print_debug(n.level)

@@ -23,7 +23,6 @@ func _ready():
 	%ExplosionArea.body_entered.connect(_on_explosion_entered)
 	
 	for n in %ExplosionArea.get_children():
-		var node : Node2D = n
 		n.scale = Vector2.ZERO
 	
 	movement_resource = MovementResource.new(self, speed, ang_acc)

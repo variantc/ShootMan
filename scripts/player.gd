@@ -34,9 +34,7 @@ func _on_debug_upgrade(upgrade_type: int):
 			current_weapon.shot_number += 1
 			current_weapon.shot_spread += 1
 		UpgradeManager.Type.SHOT_TIME:
-			print_debug("before " + str(current_weapon.shot_time))
 			current_weapon.shot_time -= 0.05
-			print_debug("after " + str(current_weapon.shot_time))
 		UpgradeManager.Type.SHOT_SPREAD:
 			current_weapon.shot_spread += 2.5
 		UpgradeManager.Type.SHOT_LIFETIME:
@@ -46,17 +44,18 @@ func _on_debug_upgrade(upgrade_type: int):
 func _on_upgrade_value_changed(upgrade_type: int, level : int, _operation : int = 0):
 	var max_level = 0
 	for n in world.claimed_upgrade_nodes:
-		print_debug(n.level)
 		max_level = max(n.level, max_level)
+	print_debug("--------------------------------")
+	print_debug("shots : " + str(current_weapon.shot_number))
+	print_debug("time : " + str(current_weapon.shot_time))
+	print_debug("--------------------------------")
 	
 	match upgrade_type:
 		UpgradeManager.Type.SHOT_NUMBER:
 			current_weapon.shot_number = max_level + 1
 			current_weapon.shot_spread = (max_level + 1)
 		UpgradeManager.Type.SHOT_TIME:
-			print_debug("before " + str(current_weapon.shot_time))
 			current_weapon.shot_time = start_weapon.shot_time - max_level * 0.05
-			print_debug("after " + str(current_weapon.shot_time))
 		UpgradeManager.Type.SHOT_SPREAD:
 			current_weapon.shot_spread *= max_level
 		UpgradeManager.Type.SHOT_LIFETIME:

@@ -33,7 +33,7 @@ func _setup_upgrade_buttons():
 	# Connect the button up signals of each button
 	for upgrade_type in upgrades:
 		upgrades[upgrade_type].button_up.connect(
-			func(): SignalBus.upgrade_button_pressed.emit(upgrade_type)
+			func(): SignalBus.debug_upgrade_button_pressed.emit(null, upgrade_type, true)
 		)
 
 

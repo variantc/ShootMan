@@ -49,7 +49,7 @@ func _on_upgrade_button_pressed(upgrade_node: UpgradeNode, upgrade_type: int):
 	if score_text.score >= upgrade_cost:
 		score_text.score -= upgrade_cost
 		var upgrade_info = UPGRADE_VALUES[upgrade_type]
-		SignalBus.apply_upgrade.emit(
+		SignalBus.upgrade_value_changed.emit(
 			upgrade_type, 
 			upgrade_info.amount,
 			upgrade_info.operation

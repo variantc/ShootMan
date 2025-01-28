@@ -29,37 +29,18 @@ func _ready():
 	
 
 func _on_debug_upgrade(upgrade_type: int):
-	match upgrade_type:
-		UpgradeManager.Type.SHOT_NUMBER:
-			current_weapon.shot_number += 1
-			current_weapon.shot_spread += 1
-		UpgradeManager.Type.SHOT_TIME:
-			current_weapon.shot_time -= 0.05
-		UpgradeManager.Type.SHOT_SPREAD:
-			current_weapon.shot_spread += 2.5
-		UpgradeManager.Type.SHOT_LIFETIME:
-			current_weapon.current_bullet.lifetime += 0.05
+	printerr("Debug upgrades not currently implemented")
+	#current_weapon.apply_upgrade(upgrade_type)
 	
 	
 func _on_upgrade_value_changed(upgrade_type: int, level : int, _operation : int = 0):
 	var max_level = 0
 	for n in world.claimed_upgrade_nodes:
-		max_level = max(n.level, max_level)
-	print_debug("--------------------------------")
-	print_debug("shots : " + str(current_weapon.shot_number))
-	print_debug("time : " + str(current_weapon.shot_time))
-	print_debug("--------------------------------")
+		var node = n as UpgradeNode
+		if upgrade_type == node.upgrade_type:
+			max_level = max(node.level, max_level)
 	
-	match upgrade_type:
-		UpgradeManager.Type.SHOT_NUMBER:
-			current_weapon.shot_number = max_level + 1
-			current_weapon.shot_spread = (max_level + 1)
-		UpgradeManager.Type.SHOT_TIME:
-			current_weapon.shot_time = start_weapon.shot_time - max_level * 0.05
-		UpgradeManager.Type.SHOT_SPREAD:
-			current_weapon.shot_spread *= max_level
-		UpgradeManager.Type.SHOT_LIFETIME:
-			current_weapon.lifetime = max_level
+	current_weapon.apply_upgrade(upgrade_type, max_level)
 	
 
 func _physics_process(delta):

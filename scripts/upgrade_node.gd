@@ -24,8 +24,8 @@ func _ready():
 	body_exited.connect(_on_body_exited)
 	area_entered.connect(_on_area_entered)
 	
-	# upgrade_type = UpgradeManager.Type.values().pick_random()
-	upgrade_type = UpgradeManager.Type.SHOT_TIME
+	#upgrade_type = UpgradeManager.Type.values().pick_random()
+	upgrade_type = UpgradeManager.Type.SHOT_NUMBER
 	upgrade_button.text = UpgradeManager.UPGRADE_NAMES[upgrade_type]
 	
 	start_health = health
@@ -61,7 +61,6 @@ func change_claim_state(set_claimed : bool):
 
 func take_damage(amount : float):
 	health -= amount
-	print_debug(health)
 	health_bar.value = 100 * health/start_health
 	if health <= 0:
 		change_claim_state(false)

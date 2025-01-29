@@ -15,9 +15,15 @@ var player : Player
 var target : Vector2
 var target_player = true
 
+var _actual_health: float  # The real current health
+var _displayed_health: float  # The health value being displayed/animated
+
 func _ready():
-	SignalBus.upgrade_node_claim_status_changed.connect(_on_upgrade_node_claim_state_changed)
+	_actual_health = health
+	_displayed_health = health
 	_start_health = health
+	
+	SignalBus.upgrade_node_claim_status_changed.connect(_on_upgrade_node_claim_state_changed)
 	
 	movement_resource = MovementResource.new(self, speed, ang_acc)
 	_randomise_shader_noise()
@@ -71,40 +77,48 @@ func enemy_setup(game_world: World, pos : Vector2):
 func hit(bullet : Bullet, bullet_direction : Vector2, bullet_speed : float):
 	_knock_back(bullet_direction, bullet_speed)
 	
-	var prev_health = health
-	var bullet_damage = health
-	health -= bullet.strength
-	_show_damage(prev_health, health)
+	var bullet_damage = bullet.strength
+	_actual_health -= bullet_damage
 	bullet.strength -= bullet_damage
 
+	_show_damage()
+	
 
 # directly destroy enemy
 func crash():
-	_show_damage(health, 0)
+	_actual_health = 0
+	_show_damage()
 
 
-func _show_damage(prev, current):
-	var dam_time = 0.3
-	# Create and configure a single tween
-	var tween = create_tween() as Tween
+var _current_damage_tween : Tween
+func _show_damage():
+	# If there's an existing tween running, kill it
+	if _current_damage_tween and _current_damage_tween.is_running():
+		_current_damage_tween.kill()
 	
-	if current <= 0:
+	var dam_time = 0.3
+	
+	# Create and configure a single tween
+	_current_damage_tween = create_tween() as Tween
+	
+	if _actual_health <= 0:
 		# Ensure queue_free() is only called after tween completes
-		tween.finished.connect(_remove_from_game)
+		_current_damage_tween.finished.connect(_remove_from_game)
 		_die()
 	
-	var start_health_left = prev / _start_health
+	var start_health_left = _displayed_health / _start_health
 	# Update shader to reflect new health
-	var health_left = max(current / _start_health, 0)
+	var target_health_left = max(_actual_health / _start_health, 0)
 	
-	tween.parallel()
+	# tween.parallel()
 	# Tween the shader health parameter and position simultaneously
-	tween.tween_method(_set_shader_hp_left, start_health_left, health_left, dam_time)\
+	_current_damage_tween.tween_method(_set_shader_hp_left, start_health_left, target_health_left, dam_time)\
 		.set_ease(Tween.EASE_OUT)\
 		.set_trans(Tween.TRANS_QUAD)
 
 
 func _set_shader_hp_left(hp_left: float):
+	_displayed_health = hp_left * _start_health   # Update displayed health in the tween
 	%Sprite2D.material.set_shader_parameter("hp_left", hp_left)
 
 

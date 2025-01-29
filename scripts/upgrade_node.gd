@@ -8,6 +8,8 @@ class_name UpgradeNode
 @export var upgrade_button : Button
 @export var health_bar : ProgressBar
 
+@export var chosen_type: UpgradeManager.Type = UpgradeManager.Type.RANDOM
+
 var claimed : bool = false
 var level : int = 0
 var health : float = 100
@@ -16,7 +18,7 @@ var start_health : float
 var upgrade_type : int
 
 
-func _ready():
+func _ready():	
 	upgrade_button.set_visible(false)
 	health_bar.set_visible(false)
 	%UpgradeLevelLabel.set_visible(false)
@@ -24,8 +26,10 @@ func _ready():
 	body_exited.connect(_on_body_exited)
 	area_entered.connect(_on_area_entered)
 	
-	#upgrade_type = UpgradeManager.Type.values().pick_random()
-	upgrade_type = UpgradeManager.Type.SHOT_NUMBER
+	upgrade_type = chosen_type
+	if chosen_type == UpgradeManager.Type.RANDOM:
+		upgrade_type = UpgradeManager.Type.values().pick_random()
+	#upgrade_type = UpgradeManager.Type.SHOT_NUMBER
 	upgrade_button.text = UpgradeManager.UPGRADE_NAMES[upgrade_type]
 	
 	start_health = health

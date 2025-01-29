@@ -2,11 +2,12 @@ extends Node
 class_name UpgradeManager
 
 
-static var Type = {
-	SHOT_NUMBER = 0,
-	SHOT_TIME = 1,
-	SHOT_SPREAD = 2,
-	SHOT_LIFETIME = 3
+enum Type {
+	SHOT_NUMBER,
+	SHOT_TIME,
+	SHOT_SPREAD,
+	SHOT_LIFETIME,
+	RANDOM
 }
 
 

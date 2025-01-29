@@ -74,6 +74,7 @@ stretch_mode = 1
 [node name="UpgradeNode" parent="." instance=ExtResource("18_lhl2h")]
 unique_name_in_owner = true
 position = Vector2(273, 167)
+chosen_type = 0
 
 [node name="UpgradeNode2" parent="." instance=ExtResource("18_lhl2h")]
 unique_name_in_owner = true

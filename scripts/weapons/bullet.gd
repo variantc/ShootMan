@@ -70,7 +70,7 @@ func split_bullets():
 			# Check if we want repeat scattering:
 			var sub_scatter = scatter-1 if repeat_scatter else 0
 			
-			var sub_bullet_stats = load("res://resources/bullet.tres") as WeaponResource
+			var sub_bullet_stats = load("res://resources/instances/starting_gun.tres") as WeaponResource
 			sub_bullet_stats.bullet_position = global_position
 			sub_bullet_stats.rotation = new_rot
 			sub_bullet_stats.speed = speed

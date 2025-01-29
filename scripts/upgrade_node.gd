@@ -2,6 +2,8 @@ extends Area2D
 class_name UpgradeNode
 
 
+@export var upgrade_line : Line2D
+
 @export var built_sprite : Texture2D
 @export var raw_sprite : Texture2D
 
@@ -15,8 +17,9 @@ var level : int = 0
 var health : float = 100
 var start_health : float
 
-var upgrade_type : int
+var upgrade_type : UpgradeManager.Type
 
+@export var player : Player
 
 func _ready():	
 	upgrade_button.set_visible(false)
@@ -28,7 +31,10 @@ func _ready():
 	
 	upgrade_type = chosen_type
 	if chosen_type == UpgradeManager.Type.RANDOM:
-		upgrade_type = UpgradeManager.Type.values().pick_random()
+		var types = UpgradeManager.Type.values() as Array
+		types.remove_at(types.size() - 1)
+		upgrade_type = types.pick_random()
+		print_debug(upgrade_type)
 	#upgrade_type = UpgradeManager.Type.SHOT_NUMBER
 	upgrade_button.text = UpgradeManager.UPGRADE_NAMES[upgrade_type]
 	
@@ -40,6 +46,13 @@ func _ready():
 		
 	# emit in ready to re-set on restart
 	SignalBus.upgrade_value_changed.emit(upgrade_type, level)
+
+
+func _physics_process(delta):
+	if claimed:
+		upgrade_line.points[1] = (player.global_position - self.global_position)
+	else:
+		upgrade_line.points[1] = Vector2.ZERO
 
 
 func change_claim_state(set_claimed : bool):

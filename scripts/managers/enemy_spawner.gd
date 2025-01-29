@@ -3,15 +3,22 @@ class_name EnemySpawner
 
 
 @export var world : World
+
+@export_group("Scenes")
 @export var enemy_standard_scene : PackedScene
 @export var enemy_spiral_scene : PackedScene
 @export var enemy_missile_scene : PackedScene
 @export var attack_group_scene : PackedScene
+
+@export_group("Spawn Times")
 @export var spawn_enemy_standard_time : float
 @export var spawn_enemy_spiral_time : float
 @export var spawn_enemy_missile_time : float
 @export var spawn_group_time : float
 @export var spawn_inc_time : float
+
+@export_group("Nests")
+@export var enemy_nest : Node2D
 
 var enemy_list : Array[EnemyStandard]
 
@@ -79,7 +86,10 @@ func _spawn_attack_group() -> void:
 func _spawn_enemy(enemy_scene : PackedScene) -> void:
 	var enemy = enemy_scene.instantiate() #as EnemyStandard
 	self.add_child(enemy)
+	# Previously spawn randomly just off screen:
 	_setup_enemy(enemy, _get_random_edge_position())
+	# Now use EnemyNest:
+	_setup_enemy(enemy, enemy_nest.global_position)
 	
 
 func _setup_enemy(enemy, spawn_pos : Vector2) -> void:

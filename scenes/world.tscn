@@ -46,7 +46,7 @@ script = ExtResource("1_hjijg")
 script = ExtResource("5_2b576")
 drop_scene = ExtResource("6_llsii")
 
-[node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("world")]
+[node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("world", "enemy_nest")]
 script = ExtResource("1_irc5a")
 world = NodePath("..")
 enemy_standard_scene = ExtResource("3_6vcwx")
@@ -58,6 +58,9 @@ spawn_enemy_spiral_time = 11.0
 spawn_enemy_missile_time = 17.0
 spawn_group_time = 120.0
 spawn_inc_time = 60.0
+enemy_nest = NodePath("../EnemyNest")
+
+[node name="EnemyNest" type="Node2D" parent="."]
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color(0.351563, 0.351563, 0.351563, 1)
@@ -71,14 +74,16 @@ offset_bottom = 33710.0
 texture = ExtResource("14_5ds7y")
 stretch_mode = 1
 
-[node name="UpgradeNode" parent="." instance=ExtResource("18_lhl2h")]
+[node name="UpgradeNode" parent="." node_paths=PackedStringArray("player") instance=ExtResource("18_lhl2h")]
 unique_name_in_owner = true
 position = Vector2(273, 167)
 chosen_type = 0
+player = NodePath("../Player")
 
-[node name="UpgradeNode2" parent="." instance=ExtResource("18_lhl2h")]
+[node name="UpgradeNode2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("18_lhl2h")]
 unique_name_in_owner = true
 position = Vector2(990, 488)
+player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_gkc74")]
 unique_name_in_owner = true

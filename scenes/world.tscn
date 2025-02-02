@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=22 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Script" path="res://scripts/managers/sound_manager.gd" id="1_hjijg"]
 [ext_resource type="Script" path="res://scripts/managers/enemy_spawner.gd" id="1_irc5a"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://scripts/managers/gui_controller.gd" id="15_jq3j3"]
 [ext_resource type="Resource" uid="uid://essjjlaf2xfv" path="res://resources/instances/starting_gun.tres" id="17_lw126"]
 [ext_resource type="PackedScene" uid="uid://c43atuift7o0d" path="res://scenes/upgrade_node.tscn" id="18_lhl2h"]
+[ext_resource type="Texture2D" uid="uid://rvpy0kpc6l3d" path="res://sprites/enemy_gate.png" id="21_g7jxy"]
 [ext_resource type="PackedScene" uid="uid://cfuxvhjeo2lal" path="res://scenes/enemies/enemy_missile.tscn" id="21_ivebk"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("upgrade_nodes")]
@@ -212,3 +213,7 @@ z_index = 99
 z_as_relative = false
 layout_mode = 2
 text = "Restart"
+
+[node name="EnemyGate" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("21_g7jxy")

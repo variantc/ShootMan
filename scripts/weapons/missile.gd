@@ -76,7 +76,7 @@ func _on_collision_area_entered(area):
 	if area is UpgradeNode:
 		var node = area as UpgradeNode
 		if node.claimed:
-			node.take_damage(60)
+			node.health_component.take_damage(60)
 			_explode()
 
 	

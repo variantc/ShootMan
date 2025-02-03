@@ -17,3 +17,5 @@ extends Node
 @warning_ignore("unused_signal") signal upgrade_button_pressed(upgrade_node : UpgradeNode, upgrade_type : int)
 @warning_ignore("unused_signal") signal debug_upgrade_button_pressed(upgrade_type : int)
 #@warning_ignore("unused_signal") signal apply_upgrade(upgrade_type: String, amount)
+
+@warning_ignore("unused_signal") signal all_health_removed(node : Node, health_left : bool)

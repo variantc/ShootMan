@@ -17,14 +17,26 @@
 [ext_resource type="Texture2D" uid="uid://dryrxenvvayv5" path="res://sprites/background_non_commercial.jpg" id="14_5ds7y"]
 [ext_resource type="Script" path="res://scenes/camera_2d.gd" id="15_3cbjm"]
 [ext_resource type="Script" path="res://scripts/managers/gui_controller.gd" id="15_jq3j3"]
+[ext_resource type="PackedScene" uid="uid://bjbwsewtllkgl" path="res://scenes/enemy_nest.tscn" id="15_w458h"]
 [ext_resource type="Resource" uid="uid://essjjlaf2xfv" path="res://resources/instances/starting_gun.tres" id="17_lw126"]
 [ext_resource type="PackedScene" uid="uid://c43atuift7o0d" path="res://scenes/upgrade_node.tscn" id="18_lhl2h"]
-[ext_resource type="Texture2D" uid="uid://rvpy0kpc6l3d" path="res://sprites/enemy_gate.png" id="21_g7jxy"]
 [ext_resource type="PackedScene" uid="uid://cfuxvhjeo2lal" path="res://scenes/enemies/enemy_missile.tscn" id="21_ivebk"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("upgrade_nodes")]
 script = ExtResource("1_rlksj")
 upgrade_nodes = [NodePath("UpgradeNode")]
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.351563, 0.351563, 0.351563, 1)
+visibility_layer = 4
+texture_filter = 1
+texture_repeat = 3
+offset_left = -3756.0
+offset_top = -3455.0
+offset_right = 38174.0
+offset_bottom = 33710.0
+texture = ExtResource("14_5ds7y")
+stretch_mode = 1
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 energy = 0.6
@@ -47,7 +59,7 @@ script = ExtResource("1_hjijg")
 script = ExtResource("5_2b576")
 drop_scene = ExtResource("6_llsii")
 
-[node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("world", "enemy_nest")]
+[node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("world", "spawn_nests")]
 script = ExtResource("1_irc5a")
 world = NodePath("..")
 enemy_standard_scene = ExtResource("3_6vcwx")
@@ -59,21 +71,12 @@ spawn_enemy_spiral_time = 11.0
 spawn_enemy_missile_time = 17.0
 spawn_group_time = 120.0
 spawn_inc_time = 60.0
-enemy_nest = NodePath("../EnemyNest")
+spawn_nests = [NodePath("EnemyNest"), NodePath("EnemyNest2")]
 
-[node name="EnemyNest" type="Node2D" parent="."]
+[node name="EnemyNest" parent="EnemySpawner" instance=ExtResource("15_w458h")]
 
-[node name="Background" type="TextureRect" parent="."]
-modulate = Color(0.351563, 0.351563, 0.351563, 1)
-visibility_layer = 4
-texture_filter = 1
-texture_repeat = 3
-offset_left = -3756.0
-offset_top = -3455.0
-offset_right = 38174.0
-offset_bottom = 33710.0
-texture = ExtResource("14_5ds7y")
-stretch_mode = 1
+[node name="EnemyNest2" parent="EnemySpawner" instance=ExtResource("15_w458h")]
+position = Vector2(1394, 744)
 
 [node name="UpgradeNode" parent="." node_paths=PackedStringArray("player") instance=ExtResource("18_lhl2h")]
 unique_name_in_owner = true
@@ -213,7 +216,3 @@ z_index = 99
 z_as_relative = false
 layout_mode = 2
 text = "Restart"
-
-[node name="EnemyGate" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("21_g7jxy")

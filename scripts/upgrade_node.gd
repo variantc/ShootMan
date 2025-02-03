@@ -8,14 +8,12 @@ class_name UpgradeNode
 @export var raw_sprite : Texture2D
 
 @export var upgrade_button : Button
-@export var health_bar : ProgressBar
+@export var health_component : HealthComponent
 
 @export var chosen_type: UpgradeManager.Type = UpgradeManager.Type.RANDOM
 
 var claimed : bool = false
 var level : int = 0
-var health : float = 100
-var start_health : float
 
 var upgrade_type : UpgradeManager.Type
 
@@ -23,7 +21,7 @@ var upgrade_type : UpgradeManager.Type
 
 func _ready():	
 	upgrade_button.set_visible(false)
-	health_bar.set_visible(false)
+	health_component.health_bar.set_visible(false)
 	%UpgradeLevelLabel.set_visible(false)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
@@ -34,11 +32,10 @@ func _ready():
 		var types = UpgradeManager.Type.values() as Array
 		types.remove_at(types.size() - 1)
 		upgrade_type = types.pick_random()
-		print_debug(upgrade_type)
 	#upgrade_type = UpgradeManager.Type.SHOT_NUMBER
 	upgrade_button.text = UpgradeManager.UPGRADE_NAMES[upgrade_type]
 	
-	start_health = health
+	SignalBus.all_health_removed.connect(_on_all_health_removed)
 	
 	upgrade_button.button_up.connect(
 			func(): SignalBus.upgrade_button_pressed.emit(self, upgrade_type)
@@ -47,6 +44,11 @@ func _ready():
 	# emit in ready to re-set on restart
 	SignalBus.upgrade_value_changed.emit(upgrade_type, level)
 
+
+func _on_all_health_removed(node : Node, health_left : bool):
+	if (node.get_parent() is UpgradeNode):
+		change_claim_state(health_left)
+	
 
 func _physics_process(delta):
 	if claimed:
@@ -72,16 +74,8 @@ func change_claim_state(set_claimed : bool):
 	%UpgradeLevelLabel.set_visible(claimed)
 	%UpgradeLevelLabel.text = "Level " + str(level)
 	
-	health_bar.set_visible(claimed)
-	health_bar.value = 100 * health/start_health
-
-
-func take_damage(amount : float):
-	health -= amount
-	health_bar.value = 100 * health/start_health
-	if health <= 0:
-		change_claim_state(false)
-		health = start_health
+	health_component.health_bar.set_visible(claimed)
+	health_component.health_bar.value = 100 * health_component.health/health_component.start_health
 
 
 # To detect bullets?
@@ -95,7 +89,7 @@ func _on_body_entered(body):
 		upgrade_button.set_visible(true)	
 	if body is EnemyStandard and claimed:
 		body.crash()
-		take_damage(60)
+		health_component.take_damage(60)
 	
 	
 func _on_body_exited(body):

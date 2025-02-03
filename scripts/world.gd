@@ -7,7 +7,6 @@ class_name World
 @export var upgrade_nodes : Array[UpgradeNode]
 var claimed_upgrade_nodes : Array[UpgradeNode]
 
-
 @onready var sound_manager := $SoundManager as SoundManager
 @onready var player := $Player as Player
 @onready var drop_spawner := $DropSpawner as DropSpawner

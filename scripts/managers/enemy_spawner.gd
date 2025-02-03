@@ -18,7 +18,7 @@ class_name EnemySpawner
 @export var spawn_inc_time : float
 
 @export_group("Nests")
-@export var enemy_nest : Node2D
+@export var spawn_nests : Array[Node2D]
 
 var enemy_list : Array[EnemyStandard]
 
@@ -89,6 +89,7 @@ func _spawn_enemy(enemy_scene : PackedScene) -> void:
 	# Previously spawn randomly just off screen:
 	_setup_enemy(enemy, _get_random_edge_position())
 	# Now use EnemyNest:
+	var enemy_nest = spawn_nests.pick_random()
 	_setup_enemy(enemy, enemy_nest.global_position)
 	
 

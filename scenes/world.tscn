@@ -74,6 +74,7 @@ spawn_inc_time = 60.0
 spawn_nests = [NodePath("EnemyNest"), NodePath("EnemyNest2")]
 
 [node name="EnemyNest" parent="EnemySpawner" instance=ExtResource("15_w458h")]
+position = Vector2(126, -71)
 
 [node name="EnemyNest2" parent="EnemySpawner" instance=ExtResource("15_w458h")]
 position = Vector2(1394, 744)

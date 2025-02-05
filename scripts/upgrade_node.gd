@@ -46,7 +46,7 @@ func _ready():
 
 
 func _on_all_health_removed(node : Node, health_left : bool):
-	if (node.get_parent() is UpgradeNode):
+	if node == self:
 		change_claim_state(health_left)
 	
 
@@ -61,7 +61,7 @@ func change_claim_state(set_claimed : bool):
 	claimed = set_claimed
 	
 	if not claimed:
-		SignalBus.upgrade_value_changed.emit(0, upgrade_type) 
+		SignalBus.upgrade_value_changed.emit(upgrade_type, 0) 
 	
 	var sprite = built_sprite if claimed else raw_sprite
 	%ResourceSprite.texture = sprite
@@ -75,7 +75,7 @@ func change_claim_state(set_claimed : bool):
 	%UpgradeLevelLabel.text = "Level " + str(level)
 	
 	health_component.health_bar.set_visible(claimed)
-	health_component.health_bar.value = 100 * health_component.health/health_component.start_health
+	health_component.set_health_bar()
 
 
 # To detect bullets?

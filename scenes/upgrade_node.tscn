@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://shaders/upgrade_node.gdshader" id="1_ug2pp"]
 [ext_resource type="Texture2D" uid="uid://cdddee3d6al15" path="res://sprites/upgrade_node_raw.png" id="2_7t7kl"]
 [ext_resource type="Script" path="res://scripts/upgrade_node.gd" id="2_t3o28"]
-[ext_resource type="Script" path="res://scripts/health_component.gd" id="4_qxh40"]
+[ext_resource type="PackedScene" uid="uid://cjbitcfgma4h7" path="res://scenes/components/health_component.tscn" id="4_5nccf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iw1s5"]
 shader = ExtResource("1_ug2pp")
@@ -34,25 +34,7 @@ raw_sprite = ExtResource("2_7t7kl")
 upgrade_button = NodePath("UpgradeButton")
 health_component = NodePath("HealthComponent")
 
-[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("health_bar")]
-script = ExtResource("4_qxh40")
-health_bar = NodePath("ProgressBar")
-
-[node name="ProgressBar" type="ProgressBar" parent="HealthComponent"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = 65.0
-offset_right = 50.0
-offset_bottom = 92.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(50, 13.5)
-step = 1.0
-fill_mode = 1
+[node name="HealthComponent" parent="." instance=ExtResource("4_5nccf")]
 
 [node name="ResourceSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

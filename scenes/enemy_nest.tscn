@@ -1,17 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjbwsewtllkgl"]
+[gd_scene load_steps=5 format=3 uid="uid://bjbwsewtllkgl"]
 
 [ext_resource type="Texture2D" uid="uid://rvpy0kpc6l3d" path="res://sprites/enemy_gate.png" id="1_2w6oy"]
+[ext_resource type="Script" path="res://scripts/enemy_nest.gd" id="1_a45e3"]
+[ext_resource type="PackedScene" uid="uid://cjbitcfgma4h7" path="res://scenes/components/health_component.tscn" id="2_ml6xq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yxkyu"]
 radius = 50.0
 
-[node name="EnemyNest" type="Node2D"]
+[node name="EnemyNest" type="Area2D" node_paths=PackedStringArray("health_component") groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_a45e3")
+health_component = NodePath("HealthComponent")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_ml6xq")]
 
 [node name="EnemyGate" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("1_2w6oy")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
 shape = SubResource("CircleShape2D_yxkyu")

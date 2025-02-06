@@ -17,8 +17,8 @@ class_name EnemySpawner
 @export var spawn_group_time : float
 @export var spawn_inc_time : float
 
-@export_group("Nests")
-@export var spawn_nests : Array[Node2D]
+
+var spawn_nests : Array[EnemyNest]
 
 var enemy_list : Array[EnemyStandard]
 
@@ -27,6 +27,13 @@ var spawn_enemy_spiral_counter = 0
 var spawn_enemy_missile_counter = 0
 var spawn_group_counter = 0
 var inc_counter = 0
+
+
+func _ready():
+	SignalBus.enemy_nest_destroyed.connect(_on_enemy_nest_destroyed)
+	var node_children = get_children()
+	for n in node_children:
+		spawn_nests.append(n as EnemyNest)
 
 
 func _process(delta):
@@ -123,3 +130,11 @@ func _get_random_edge_position() -> Vector2 :
 
 func remove_enemy_from_list(enemy : EnemyStandard) -> void:
 	enemy_list.remove_at(enemy_list.find(enemy))
+	
+
+func remove_nest_from_list(nest : EnemyNest) -> void:
+	spawn_nests.remove_at(spawn_nests.find(nest))
+	
+	
+func _on_enemy_nest_destroyed(nest : EnemyNest):
+	remove_nest_from_list(nest)

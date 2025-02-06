@@ -59,7 +59,7 @@ script = ExtResource("1_hjijg")
 script = ExtResource("5_2b576")
 drop_scene = ExtResource("6_llsii")
 
-[node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("world", "spawn_nests")]
+[node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("world")]
 script = ExtResource("1_irc5a")
 world = NodePath("..")
 enemy_standard_scene = ExtResource("3_6vcwx")
@@ -71,7 +71,6 @@ spawn_enemy_spiral_time = 11.0
 spawn_enemy_missile_time = 17.0
 spawn_group_time = 120.0
 spawn_inc_time = 60.0
-spawn_nests = [NodePath("EnemyNest"), NodePath("EnemyNest2")]
 
 [node name="EnemyNest" parent="EnemySpawner" instance=ExtResource("15_w458h")]
 position = Vector2(126, -71)

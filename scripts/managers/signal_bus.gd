@@ -19,3 +19,5 @@ extends Node
 #@warning_ignore("unused_signal") signal apply_upgrade(upgrade_type: String, amount)
 
 @warning_ignore("unused_signal") signal all_health_removed(node : Node, health_left : bool)
+
+@warning_ignore("unused_signal") signal enemy_nest_destroyed(nest : EnemyNest)

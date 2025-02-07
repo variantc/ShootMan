@@ -5,6 +5,15 @@
 [ext_resource type="Texture2D" uid="uid://cdddee3d6al15" path="res://sprites/upgrade_node_raw.png" id="2_7t7kl"]
 [ext_resource type="Script" path="res://scripts/upgrade_node.gd" id="2_t3o28"]
 [ext_resource type="PackedScene" uid="uid://cjbitcfgma4h7" path="res://scenes/components/health_component.tscn" id="4_5nccf"]
+[ext_resource type="Script" path="res://scripts/upgrade_line.gd" id="5_ii2fv"]
+
+[sub_resource type="Curve" id="Curve_oonmd"]
+min_value = 0.1
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.263736), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_jsoe3"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iw1s5"]
 shader = ExtResource("1_ug2pp")
@@ -13,17 +22,6 @@ shader_parameter/flash_colour = null
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aa4n7"]
 radius = 61.0
-
-[sub_resource type="Curve" id="Curve_oonmd"]
-min_value = 0.25
-max_value = 0.5
-_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0.263736), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ec4dp"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kod74"]
-noise = SubResource("FastNoiseLite_ec4dp")
 
 [node name="UpgradeNode" type="Area2D" node_paths=PackedStringArray("upgrade_line", "upgrade_button", "health_component")]
 collision_mask = 11
@@ -35,6 +33,13 @@ upgrade_button = NodePath("UpgradeButton")
 health_component = NodePath("HealthComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_5nccf")]
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+width_curve = SubResource("Curve_oonmd")
+default_color = Color(1, 0, 0, 1)
+gradient = SubResource("Gradient_jsoe3")
+script = ExtResource("5_ii2fv")
 
 [node name="ResourceSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -70,9 +75,3 @@ offset_right = 29.0
 offset_bottom = -67.0
 text = "Level 1"
 horizontal_alignment = 1
-
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 0, 0)
-width_curve = SubResource("Curve_oonmd")
-default_color = Color(1, 0, 0, 1)
-texture = SubResource("NoiseTexture2D_kod74")

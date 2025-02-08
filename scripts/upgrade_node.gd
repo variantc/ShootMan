@@ -2,7 +2,7 @@ extends Area2D
 class_name UpgradeNode
 
 
-@export var upgrade_line : Line2D
+@export var upgrade_line : UpgradeLine
 
 @export var built_sprite : Texture2D
 @export var raw_sprite : Texture2D
@@ -20,6 +20,10 @@ var upgrade_type : UpgradeManager.Type
 @export var player : Player
 
 func _ready():	
+	#TODO: REMOVE:
+	claimed = true
+	
+	
 	upgrade_button.set_visible(false)
 	health_component.health_bar.set_visible(false)
 	%UpgradeLevelLabel.set_visible(false)
@@ -52,7 +56,7 @@ func _on_all_health_removed(node : Node, health_left : bool):
 
 func _physics_process(delta):
 	if claimed:
-		upgrade_line.points[1] = (player.global_position - self.global_position)
+		upgrade_line.set_endpoint(player.global_position - self.global_position)
 	else:
 		upgrade_line.points[1] = Vector2.ZERO
 

@@ -8,12 +8,12 @@
 [ext_resource type="Script" path="res://scripts/upgrade_line.gd" id="5_ii2fv"]
 
 [sub_resource type="Curve" id="Curve_oonmd"]
-min_value = 0.1
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.263736), 0.0, 0.0, 0, 0]
-point_count = 2
+min_value = 0.2
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(0.470046, 0.978022), 5.0, 5.0, 0, 0, Vector2(0.562212, 0.967033), -5.0, -5.0, 0, 0, Vector2(1, 0.2), 0.0, 0.0, 0, 0]
+point_count = 4
 
-[sub_resource type="Gradient" id="Gradient_jsoe3"]
-colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
+[sub_resource type="Gradient" id="Gradient_ctcpy"]
+colors = PackedColorArray(0, 0, 0, 1, 0.0106667, 0.64, 0, 0.501961)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iw1s5"]
 shader = ExtResource("1_ug2pp")
@@ -26,7 +26,7 @@ radius = 61.0
 [node name="UpgradeNode" type="Area2D" node_paths=PackedStringArray("upgrade_line", "upgrade_button", "health_component")]
 collision_mask = 11
 script = ExtResource("2_t3o28")
-upgrade_line = NodePath("Line2D")
+upgrade_line = NodePath("UpgradeLine")
 built_sprite = ExtResource("1_0o85p")
 raw_sprite = ExtResource("2_7t7kl")
 upgrade_button = NodePath("UpgradeButton")
@@ -34,11 +34,10 @@ health_component = NodePath("HealthComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_5nccf")]
 
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 0, 0)
+[node name="UpgradeLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 125, 121)
 width_curve = SubResource("Curve_oonmd")
-default_color = Color(1, 0, 0, 1)
-gradient = SubResource("Gradient_jsoe3")
+gradient = SubResource("Gradient_ctcpy")
 script = ExtResource("5_ii2fv")
 
 [node name="ResourceSprite" type="Sprite2D" parent="."]

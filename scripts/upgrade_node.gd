@@ -20,10 +20,6 @@ var upgrade_type : UpgradeManager.Type
 @export var player : Player
 
 func _ready():	
-	#TODO: REMOVE:
-	claimed = true
-	
-	
 	upgrade_button.set_visible(false)
 	health_component.health_bar.set_visible(false)
 	%UpgradeLevelLabel.set_visible(false)
@@ -52,6 +48,7 @@ func _ready():
 func _on_all_health_removed(node : Node, health_left : bool):
 	if node == self:
 		change_claim_state(health_left)
+		upgrade_line.set_endpoint(Vector2.ZERO)
 	
 
 func _physics_process(delta):
@@ -59,6 +56,11 @@ func _physics_process(delta):
 		upgrade_line.set_endpoint(player.global_position - self.global_position)
 	else:
 		upgrade_line.points[1] = Vector2.ZERO
+		
+	if health_component.health < health_component.start_health:
+		upgrade_line.set_colour(UpgradeLine.WARNING_COLOUR)
+	else:
+		upgrade_line.set_colour(UpgradeLine.START_COLOUR)
 
 
 func change_claim_state(set_claimed : bool):

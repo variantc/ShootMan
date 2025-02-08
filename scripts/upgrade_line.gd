@@ -4,6 +4,9 @@ class_name UpgradeLine
 var timer := -0.5
 const POINT_SPACING := 5.0  # Distance between points
 
+static var START_COLOUR = Color.GREEN
+static var WARNING_COLOUR = Color.RED
+
 
 func _physics_process(delta):
 	timer += delta
@@ -55,3 +58,7 @@ func create_intermediate_points():
 	# Add end point
 	new_points.append(end_point)
 	points = new_points
+
+
+func set_colour(colour : Color):
+	default_color = colour * Color(1.0, 1.0, 1.0, 0.25)

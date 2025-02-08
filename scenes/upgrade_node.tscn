@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c43atuift7o0d"]
+[gd_scene load_steps=10 format=3 uid="uid://c43atuift7o0d"]
 
 [ext_resource type="Texture2D" uid="uid://d26n1sy223811" path="res://sprites/upgrade_node.png" id="1_0o85p"]
 [ext_resource type="Shader" path="res://shaders/upgrade_node.gdshader" id="1_ug2pp"]
@@ -9,11 +9,8 @@
 
 [sub_resource type="Curve" id="Curve_oonmd"]
 min_value = 0.2
-_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(0.470046, 0.978022), 5.0, 5.0, 0, 0, Vector2(0.562212, 0.967033), -5.0, -5.0, 0, 0, Vector2(1, 0.2), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(0.460829, 0.2), 0.0, 0.0, 0, 0, Vector2(0.576037, 0.2), 0.0, 0.0, 0, 0, Vector2(1, 0.2), 0.0, 0.0, 0, 0]
 point_count = 4
-
-[sub_resource type="Gradient" id="Gradient_ctcpy"]
-colors = PackedColorArray(0, 0, 0, 1, 0.0106667, 0.64, 0, 0.501961)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iw1s5"]
 shader = ExtResource("1_ug2pp")
@@ -36,8 +33,9 @@ health_component = NodePath("HealthComponent")
 
 [node name="UpgradeLine" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 125, 121)
+width = 7.0
 width_curve = SubResource("Curve_oonmd")
-gradient = SubResource("Gradient_ctcpy")
+default_color = Color(0, 0.72, 0.012, 0.239216)
 script = ExtResource("5_ii2fv")
 
 [node name="ResourceSprite" type="Sprite2D" parent="."]

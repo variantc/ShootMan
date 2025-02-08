@@ -1,20 +1,34 @@
 extends Line2D
 class_name UpgradeLine
 
-var timer := 0.0
+var timer := -0.5
 const POINT_SPACING := 5.0  # Distance between points
 
 
 func _physics_process(delta):
 	timer += delta
-	if timer >= 1.0:
-		timer = 0
+	if timer >= 1.5:
+		timer -= 2.0
 
-	#gradient.set_offset(1, clampf(timer, 0.05,0.95))
-	#print(gradient.get_offset(1))
-	#width = 10 * timer
+	
+	if timer < 0 or timer > 1.0:
+		width_curve.set_point_value(1, 0.2)
+		width_curve.set_point_value(2, 0.2)
+		width_curve.set_point_left_tangent(1, 0)
+		width_curve.set_point_left_tangent(2, 0)
+		width_curve.set_point_right_tangent(1, 0)
+		width_curve.set_point_right_tangent(2, 0)
+		
+	else:
+		width_curve.set_point_value(1, 1)
+		width_curve.set_point_value(2, 1)
+		width_curve.set_point_left_tangent(1, 5)
+		width_curve.set_point_left_tangent(2, -5)
+		width_curve.set_point_right_tangent(1, 5)
+		width_curve.set_point_right_tangent(2, -5)
+		
 	width_curve.set_point_offset(1, timer-0.05)
-	width_curve.set_point_offset(2, timer+0.05)
+	width_curve.set_point_offset(2, min(timer+0.05,1))
 
 
 func set_endpoint(end_point: Vector2):
@@ -41,4 +55,3 @@ func create_intermediate_points():
 	# Add end point
 	new_points.append(end_point)
 	points = new_points
-	print_debug("Created ", points.size(), " points along line")

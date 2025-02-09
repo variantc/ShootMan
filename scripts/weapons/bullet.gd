@@ -45,9 +45,7 @@ func _process(delta):
 
 
 func _on_area_entered(area):
-	print_debug("hit area")
 	if area.is_in_group("Enemy"):    # This is the enemy_nest??
-		print_debug("hit enemy group")
 		#area.hit(self, direction, speed)
 		area.hit()
 

@@ -25,16 +25,8 @@ func _ready():
 
 func _on_enemy_killed(enemy, audio):
 	sound_manager.play_sound(audio.stream)
-	
-	# TODO: Move to another script?:
-	# we want to check if the enemy has just been killed so that we don't
-	# spawn multiple drops for an enemy shot by two bullets at once
-	if enemy in enemy_spawner.enemy_list:
-		# remove from the enemy_list here:
-		enemy_spawner.remove_enemy_from_list(enemy)
-		drop_spawner.spawn_drop(enemy.global_position)
-	else:
-		print_debug("enemy not in enemy list?")
+	enemy_spawner.remove_enemy_from_list(enemy)
+	drop_spawner.spawn_drop(enemy.global_position)
 
 
 func _on_drop_pickedup(audio : AudioStreamPlayer2D):

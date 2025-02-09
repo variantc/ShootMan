@@ -16,6 +16,9 @@ var target_player = true
 var _actual_health: float  # The real current health
 var _displayed_health: float  # The health value being displayed/animated
 
+var is_dying := false
+
+
 func _ready():
 	_actual_health = health
 	_displayed_health = health
@@ -69,6 +72,9 @@ func enemy_setup(pos : Vector2):
 
 # bullet hit
 func hit(bullet : Bullet, bullet_direction : Vector2, bullet_speed : float):
+	if is_dying:   # ignore additional hits if already dying
+		return
+	
 	_knock_back(bullet_direction, bullet_speed)
 	
 	var bullet_damage = bullet.strength
@@ -130,9 +136,12 @@ func _knock_back(direction: Vector2, kb_speed: float):
 
 
 func _die():
-		#world.enemy_spawner.remove_enemy_from_list(self)
-		SignalBus.enemy_killed.emit(self, %AudioStreamPlayer2D)
-		# queue_free called in tween.finished signal
+	if is_dying:   # Don't trigger again causing multiple drops
+		return
+	
+	is_dying = true
+	SignalBus.enemy_killed.emit(self, %AudioStreamPlayer2D)
+	# queue_free called in tween.finished signal
 		
 		
 func _remove_from_game():

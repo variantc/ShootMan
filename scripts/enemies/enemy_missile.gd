@@ -31,7 +31,7 @@ func _move_and_rotate(delta, traget_pos):
 		Refs.player.global_position \
 			+ (to_target * radius_factor * radius).rotated(rotate_ang)
 	
-	if world.DEBUG:
+	if Refs.world.DEBUG:
 		%DebugLine.clear_points()
 		%DebugLine.global_position = Vector2.ZERO
 		%DebugLine.global_rotation = 0

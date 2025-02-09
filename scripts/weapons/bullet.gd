@@ -1,7 +1,6 @@
 extends Area2D
 class_name Bullet
 
-@onready var world : World
 
 var speed : float = 0.0
 var strength : float = 0.0
@@ -17,7 +16,6 @@ var bullet_stats : WeaponResource
 
 func _ready():
 	var root = get_tree().root
-	world = root.get_child(root.get_child_count() - 1)
 	body_entered.connect(_on_body_entered)
 	area_entered.connect(_on_area_entered)
 
@@ -66,7 +64,7 @@ func split_bullets():
 	if scatter > 0:
 		for i in range(scatter):
 			var new_bullet = Refs.player.bullet_scene.instantiate() as Bullet
-			world.add_child(new_bullet)
+			Refs.world.add_child(new_bullet)
 			# Calculate spread rotation
 			var scatter_angle = deg_to_rad(randf()*360)  # You can adjust this base spread angle
 			var new_rot = global_rotation + scatter_angle * (i - (scatter - 1) / 2.0)

@@ -9,7 +9,6 @@ class_name Missile
 var lifetime : float = 2
 var life_counter : float = 0
 
-var world : World
 var exploding : bool = false
 
 var movement_resource : MovementResource
@@ -17,7 +16,6 @@ var movement_resource : MovementResource
 
 func _ready():
 	var root = get_tree().root
-	world = root.get_child(root.get_child_count() - 1)
 	
 	%CollisionArea.body_entered.connect(_on_body_entered)
 	%ExplosionArea.body_entered.connect(_on_explosion_entered)

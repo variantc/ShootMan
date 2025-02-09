@@ -1,7 +1,6 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var world = get_parent() as World
 
 @export var bullet_scene : PackedScene
 @export var speed : float
@@ -36,7 +35,7 @@ func _on_debug_upgrade(upgrade_type: int):
 	
 func _on_upgrade_value_changed(upgrade_type: int, level : int, _operation : int = 0):
 	var max_level = 0
-	for n in world.claimed_upgrade_nodes:
+	for n in Refs.world.claimed_upgrade_nodes:
 		var node = n as UpgradeNode
 		if upgrade_type == node.upgrade_type:
 			max_level = max(node.level, max_level)

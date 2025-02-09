@@ -6,8 +6,6 @@ var spiral : float
 
 func _move_and_rotate(delta, target_pos):
 	spiral += delta / 10 	# a time-dependent var to make spiral
-	if world == null:
-		print("Error: EnemySpiral.world not assigned - has .enemy_setup() run?")
 	
 	var distance_to_target = global_position.distance_to(target_pos)
 	

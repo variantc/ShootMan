@@ -60,9 +60,8 @@ script = ExtResource("1_hjijg")
 script = ExtResource("5_2b576")
 drop_scene = ExtResource("6_llsii")
 
-[node name="EnemySpawner" type="Node" parent="." node_paths=PackedStringArray("world")]
+[node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("1_irc5a")
-world = NodePath("..")
 enemy_standard_scene = ExtResource("3_6vcwx")
 enemy_spiral_scene = ExtResource("7_gpqxu")
 enemy_missile_scene = ExtResource("21_ivebk")

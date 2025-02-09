@@ -10,8 +10,6 @@ var _start_health : float
 @onready var movement_component = $MovementComponent as MovementComponent
 @onready var movement_resource : MovementResource
 
-var world : World
-var player : Player
 var target : Vector2
 var target_player = true
 
@@ -58,17 +56,13 @@ func _process(delta):
 	
 	
 func _move_and_rotate(delta : float, target_pos : Vector2):
-	if world == null:
-		print("Error: EnemyStandard.world not assigned - has .enemy_setup() run?")
-	
 	movement_component.move_and_rotate(movement_resource, target_pos, delta)
 	# Set the rotation in the shader to adjust normals for lighting
 	# TODO: Change rotation offset?
 	%Sprite2D.material.set_shader_parameter("object_rotation", rotation - PI)
 	
 
-func enemy_setup(game_world: World, pos : Vector2):
-	self.world = game_world
+func enemy_setup(pos : Vector2):
 	global_position = pos
 	_check_for_closest_target()
 
@@ -153,7 +147,7 @@ func _on_upgrade_node_claim_state_changed(_node : UpgradeNode, _claimed : bool):
 
 func _check_for_closest_target() -> void:
 	var positions : Array[Vector2] 
-	for n in world.claimed_upgrade_nodes:
+	for n in Refs.world.claimed_upgrade_nodes:
 		positions.append(n.global_position)
 	positions.append(Refs.player.global_position)
 	target = Refs.get_closest_location(global_position, positions)

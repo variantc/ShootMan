@@ -1,8 +1,10 @@
 extends Node
 
 signal player_ready(player_node)
+signal world_ready(player_node)
 
 var player : Player
+var world : World
 	
 	
 func get_closest_location(my_loc : Vector2, other_locs : Array[Vector2]) -> Vector2:
@@ -22,3 +24,11 @@ func register_player(p_node : Player) -> void:
 		return
 	player = p_node
 	player_ready.emit(player)
+
+
+func register_world(w_node : World) -> void:
+	if world != null:
+		push_warning("Attempting to register world when one already exists")
+		return
+	world = w_node
+	world_ready.emit(world)

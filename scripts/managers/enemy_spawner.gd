@@ -1,9 +1,6 @@
 extends Node
 class_name EnemySpawner
 
-
-@export var world : World
-
 @export_group("Scenes")
 @export var enemy_standard_scene : PackedScene
 @export var enemy_spiral_scene : PackedScene
@@ -85,7 +82,6 @@ func _spawn_attack_group() -> void:
 	self.add_child(attack_group)
 	attack_group.global_position = %Player.global_position
 	for enemy : EnemyStandard in attack_group.get_children():
-		enemy.world = world
 		enemy_list.append(enemy)
 		#_setup_enemy(enemy, enemy.global_position)
 	
@@ -103,7 +99,7 @@ func _spawn_enemy(enemy_scene : PackedScene) -> void:
 func _setup_enemy(enemy, spawn_pos : Vector2) -> void:
 	SignalBus.enemy_spawned.emit(enemy)
 	enemy_list.append(enemy)
-	enemy.enemy_setup(world, spawn_pos)
+	enemy.enemy_setup(spawn_pos)
 	
 
 func _get_random_edge_position() -> Vector2 :

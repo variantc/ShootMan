@@ -19,7 +19,8 @@ var start_pos : Vector2
 
 
 func _ready():
-	#SignalBus.apply_upgrade.connect(_on_apply_upgrade)
+	Refs.register_player(self)
+	
 	SignalBus.upgrade_value_changed.connect(_on_upgrade_value_changed)
 	SignalBus.debug_upgrade_button_pressed.connect(_on_debug_upgrade)
 	start_pos = global_position

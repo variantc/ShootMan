@@ -6,6 +6,7 @@ class_name HealthComponent
 var start_health : float
 @export var health_bar : ProgressBar
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	start_health = health

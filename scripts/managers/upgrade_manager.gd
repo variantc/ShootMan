@@ -32,9 +32,11 @@ static var UPGRADE_VALUES = {
 	Type.SHOT_LIFETIME: {"amount": 0.25, "operation": Operation.ADD}
 }
 
-
-@export var score_text: ScoreText
+@export_group("Settings")
 @export var base_upgrade_cost := 0
+
+@export_group("References")
+@export var score_text: ScoreText
 @export var upgrade_audio_stream : AudioStream
 @export var failed_audio_stream : AudioStream
 

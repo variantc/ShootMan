@@ -33,7 +33,7 @@ func _physics_process(delta):
 	if exploding:
 		return
 	
-	%MovementComponent.move_and_rotate(movement_resource, world.player.global_position, delta)
+	%MovementComponent.move_and_rotate(movement_resource, Refs.player.global_position, delta)
 		
 	life_counter += delta
 	if life_counter > lifetime:

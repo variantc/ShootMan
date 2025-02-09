@@ -65,7 +65,7 @@ func _on_body_entered(body):
 func split_bullets():
 	if scatter > 0:
 		for i in range(scatter):
-			var new_bullet = world.player.bullet_scene.instantiate() as Bullet
+			var new_bullet = Refs.player.bullet_scene.instantiate() as Bullet
 			world.add_child(new_bullet)
 			# Calculate spread rotation
 			var scatter_angle = deg_to_rad(randf()*360)  # You can adjust this base spread angle

@@ -1,7 +1,7 @@
 extends Node
 
 
-@warning_ignore("unused_signal") signal drop_to_player(drop : DropStandard)
+#@warning_ignore("unused_signal") signal drop_to_player(drop : DropStandard)
 @warning_ignore("unused_signal") signal drop_picked_up(audio : AudioStreamPlayer2D)
 
 @warning_ignore("unused_signal") signal enemy_spawned(enemy : EnemyStandard)

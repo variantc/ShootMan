@@ -52,7 +52,7 @@ func _randomise_shader_noise():
 
 func _process(delta):
 	if target_player:
-		target = world.player.global_position
+		target = Refs.player.global_position
 		
 	_move_and_rotate(delta, target)
 	
@@ -155,7 +155,7 @@ func _check_for_closest_target() -> void:
 	var positions : Array[Vector2] 
 	for n in world.claimed_upgrade_nodes:
 		positions.append(n.global_position)
-	positions.append(world.player.global_position)
+	positions.append(Refs.player.global_position)
 	target = Refs.get_closest_location(global_position, positions)
-	if target != world.player.position:
+	if target != Refs.player.position:
 		target_player = false

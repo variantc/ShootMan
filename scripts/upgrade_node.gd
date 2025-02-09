@@ -48,7 +48,7 @@ func _ready():
 func _on_all_health_removed(node : Node, health_left : bool):
 	if node == self:
 		change_claim_state(health_left)
-		upgrade_line.set_endpoint(Vector2.ZERO)
+		upgrade_line.set_endpoint(Vector2.ZERO)		#reset line
 	
 
 func _physics_process(delta):
@@ -61,7 +61,7 @@ func _physics_process(delta):
 		upgrade_line.set_colour(UpgradeLine.WARNING_COLOUR)
 	else:
 		upgrade_line.set_colour(UpgradeLine.START_COLOUR)
-
+ 
 
 func change_claim_state(set_claimed : bool):
 	claimed = set_claimed
@@ -95,7 +95,7 @@ func _on_body_entered(body):
 		upgrade_button.set_visible(true)	
 	if body is EnemyStandard and claimed:
 		body.crash()
-		health_component.take_damage(60)
+		health_component.take_damage(10)
 	
 	
 func _on_body_exited(body):

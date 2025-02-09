@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_lli1i")
 id = "starting_gun"
-shot_time = 999.0
+shot_time = 1.0
 shot_number = 1
 shot_spread = 1.0
 projectile_type = 0

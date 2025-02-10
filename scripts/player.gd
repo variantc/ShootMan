@@ -67,4 +67,7 @@ func _check_collision(collision : KinematicCollision2D):
 		
 		
 func modulate_sprite(amount : float) -> void:
-	sprite.modulate = Color(amount,0,0,1)
+	if amount != 0:
+		sprite.modulate = Color(amount,0,0,1)
+	else:
+		sprite.modulate = Color.WHITE

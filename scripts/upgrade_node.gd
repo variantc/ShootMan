@@ -86,7 +86,8 @@ func change_claim_state(set_claimed : bool):
 
 # To detect bullets?
 func _on_area_entered(area):
-	print_debug(area.name + " area")
+	#print_debug(area.name + " area")
+	pass
 
 
 # To detect player and enemies?

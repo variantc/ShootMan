@@ -66,10 +66,12 @@ script = ExtResource("1_irc5a")
 enemy_standard_scene = ExtResource("3_6vcwx")
 enemy_spiral_scene = ExtResource("7_gpqxu")
 enemy_missile_scene = ExtResource("21_ivebk")
+enemy_laser_scene = ExtResource("22_lwws8")
 attack_group_scene = ExtResource("11_x2le3")
-spawn_enemy_standard_time = 3.0
+spawn_enemy_standard_time = 5.0
 spawn_enemy_spiral_time = 11.0
 spawn_enemy_missile_time = 17.0
+spawn_enemy_laser_time = 21.0
 spawn_group_time = 120.0
 spawn_inc_time = 60.0
 
@@ -223,6 +225,3 @@ z_index = 99
 z_as_relative = false
 layout_mode = 2
 text = "Restart"
-
-[node name="EnemyLaser" parent="." instance=ExtResource("22_lwws8")]
-position = Vector2(200, 506)

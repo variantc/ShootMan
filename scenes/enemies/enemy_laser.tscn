@@ -1,0 +1,111 @@
+[gd_scene load_steps=24 format=3 uid="uid://8n3rq2lhs8x4"]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy_laser.gd" id="1_wmbn4"]
+[ext_resource type="Shader" path="res://shaders/enemy_laser.gdshader" id="2_4400b"]
+[ext_resource type="Texture2D" uid="uid://bfw38rnw3gxpi" path="res://sprites/EnemyStandard_normal.png" id="3_0hgtk"]
+[ext_resource type="Texture2D" uid="uid://bhfub4uxufsw2" path="res://sprites/EnemyStandard_simple.png" id="3_x7vw1"]
+[ext_resource type="AudioStream" uid="uid://6hnj5kdm8shk" path="res://sounds/explosions/explosion (1).wav" id="4_skaf4"]
+[ext_resource type="AudioStream" uid="uid://rw6vkwrnn4jm" path="res://sounds/explosions/explosion (2).wav" id="5_foqbw"]
+[ext_resource type="AudioStream" uid="uid://b43dqhq60rc1g" path="res://sounds/explosions/explosion (3).wav" id="6_annmn"]
+[ext_resource type="AudioStream" uid="uid://dv2ay24mst4c7" path="res://sounds/explosions/explosion (4).wav" id="7_6t30x"]
+[ext_resource type="AudioStream" uid="uid://dbbxvnqc0l2b4" path="res://sounds/explosions/explosion (5).wav" id="8_7a3eh"]
+[ext_resource type="AudioStream" uid="uid://45ndai6jryhf" path="res://sounds/explosions/explosion (6).wav" id="9_wt8vf"]
+[ext_resource type="AudioStream" uid="uid://cwxjmr02t3n7u" path="res://sounds/explosions/explosion (7).wav" id="10_22r65"]
+[ext_resource type="PackedScene" uid="uid://cx2lutrqoqoro" path="res://scenes/components/movement_component.tscn" id="11_yw8ih"]
+
+[sub_resource type="Gradient" id="Gradient_62wa3"]
+offsets = PackedFloat32Array(0, 0.841808, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_5adrb"]
+offsets = PackedFloat32Array(0, 0.171598, 0.485207, 0.786982, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 0.831373, 1, 0, 0, 1, 1, 0, 0, 0.831373, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_va8me"]
+gradient = SubResource("Gradient_5adrb")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_awya0"]
+b = Vector2(800, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
+radius = 15.0
+
+[sub_resource type="Gradient" id="Gradient_3ffsw"]
+offsets = PackedFloat32Array(0, 0.0107991, 0.265659, 0.63067)
+colors = PackedColorArray(0.6461, 0.364, 0.91, 0, 1, 0.328, 0.04, 1, 0, 0, 0, 1, 0.98, 0.392, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bmvgt"]
+gradient = SubResource("Gradient_3ffsw")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fl1rm"]
+noise_type = 3
+frequency = 0.0067
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rs4ng"]
+noise = SubResource("FastNoiseLite_fl1rm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qy31"]
+shader = ExtResource("2_4400b")
+shader_parameter/mix_amount = 0.0
+shader_parameter/flash_colour = Color(1, 1, 1, 1)
+shader_parameter/hp_left = 1.0
+shader_parameter/normal_intensity = 1.0
+shader_parameter/light_direction = Vector2(1.5, -0.5)
+shader_parameter/light_color = Vector3(1, 1, 1)
+shader_parameter/object_rotation = 4.28
+shader_parameter/shade_color = Color(0.2808, 0.33904, 0.78, 1)
+shader_parameter/shade_intensity = 0.5
+shader_parameter/burn_gradient = SubResource("GradientTexture2D_bmvgt")
+shader_parameter/burn_noise = SubResource("NoiseTexture2D_rs4ng")
+shader_parameter/normal_map = ExtResource("3_0hgtk")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yj0ii"]
+streams_count = 7
+stream_0/stream = ExtResource("4_skaf4")
+stream_1/stream = ExtResource("5_foqbw")
+stream_2/stream = ExtResource("6_annmn")
+stream_3/stream = ExtResource("7_6t30x")
+stream_4/stream = ExtResource("8_7a3eh")
+stream_5/stream = ExtResource("9_wt8vf")
+stream_6/stream = ExtResource("10_22r65")
+
+[node name="EnemyLaser" type="CharacterBody2D" groups=["Enemy"]]
+visibility_layer = 2
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_wmbn4")
+speed = 1.0
+ang_acc = 1.0
+health = 1.0
+
+[node name="LaserLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 1000, 0)
+default_color = Color(1, 0, 0, 1)
+gradient = SubResource("Gradient_62wa3")
+texture = SubResource("GradientTexture2D_va8me")
+texture_mode = 1
+
+[node name="LaserArea" type="Area2D" parent="LaserLine"]
+
+[node name="LaserCollisionShape2D" type="CollisionShape2D" parent="LaserLine/LaserArea"]
+shape = SubResource("SegmentShape2D_awya0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gelfa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+material = SubResource("ShaderMaterial_1qy31")
+position = Vector2(3, 0)
+rotation = 1.5708
+texture = ExtResource("3_x7vw1")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_yj0ii")
+
+[node name="MovementComponent" parent="." instance=ExtResource("11_yw8ih")]

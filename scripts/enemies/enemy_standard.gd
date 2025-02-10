@@ -27,6 +27,7 @@ func _ready():
 	SignalBus.upgrade_node_claim_status_changed.connect(_on_upgrade_node_claim_state_changed)
 	
 	movement_resource = MovementResource.new(self, speed, ang_acc)
+	print_debug(movement_resource)
 	_randomise_shader_noise()
 
 

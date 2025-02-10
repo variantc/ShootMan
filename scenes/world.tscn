@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dvihe5bwamex7"]
+[gd_scene load_steps=23 format=3 uid="uid://dvihe5bwamex7"]
 
 [ext_resource type="Script" path="res://scripts/managers/sound_manager.gd" id="1_hjijg"]
 [ext_resource type="Script" path="res://scripts/managers/enemy_spawner.gd" id="1_irc5a"]
@@ -21,6 +21,7 @@
 [ext_resource type="Resource" uid="uid://essjjlaf2xfv" path="res://resources/instances/starting_gun.tres" id="17_lw126"]
 [ext_resource type="PackedScene" uid="uid://c43atuift7o0d" path="res://scenes/upgrade_node.tscn" id="18_lhl2h"]
 [ext_resource type="PackedScene" uid="uid://cfuxvhjeo2lal" path="res://scenes/enemies/enemy_missile.tscn" id="21_ivebk"]
+[ext_resource type="PackedScene" uid="uid://8n3rq2lhs8x4" path="res://scenes/enemies/enemy_laser.tscn" id="22_lwws8"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("upgrade_nodes")]
 script = ExtResource("1_rlksj")
@@ -222,3 +223,8 @@ z_index = 99
 z_as_relative = false
 layout_mode = 2
 text = "Restart"
+
+[node name="EnemyLaser" parent="." instance=ExtResource("22_lwws8")]
+position = Vector2(200, 506)
+speed = 10.0
+ang_acc = 10.0

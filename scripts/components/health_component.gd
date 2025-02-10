@@ -17,7 +17,6 @@ func take_damage(amount : float):
 	health -= amount
 	health_bar.value = 100 * health/start_health
 	if health <= 0:
-		print_debug(self.name)
 		SignalBus.all_health_removed.emit(self.get_parent(), false)
 		health = start_health
 

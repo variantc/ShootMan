@@ -226,5 +226,3 @@ text = "Restart"
 
 [node name="EnemyLaser" parent="." instance=ExtResource("22_lwws8")]
 position = Vector2(200, 506)
-speed = 10.0
-ang_acc = 10.0

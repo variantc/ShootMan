@@ -11,6 +11,7 @@ var current_weapon : WeaponResource
 
 @onready var movement_component = %MovementComponent as MovementComponent
 @onready var movement_resource : MovementResource
+@onready var sprite := %Sprite2D
 
 var counter := 0.0
 
@@ -26,7 +27,7 @@ func _ready():
 	
 	movement_resource = MovementResource.new(self, speed, ang_acc)
 	current_weapon = start_weapon.duplicate()
-	
+
 
 func _on_debug_upgrade(upgrade_type: int):
 	printerr("Debug upgrades not currently implemented")
@@ -63,3 +64,7 @@ func _move_and_rotate(delta) -> KinematicCollision2D:
 func _check_collision(collision : KinematicCollision2D):
 	if collision:
 		SignalBus.player_killed.emit()
+		
+		
+func modulate_sprite(amount : float) -> void:
+	sprite.modulate = Color(amount,0,0,1)

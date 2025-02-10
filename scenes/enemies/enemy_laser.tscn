@@ -72,14 +72,16 @@ stream_4/stream = ExtResource("8_7a3eh")
 stream_5/stream = ExtResource("9_wt8vf")
 stream_6/stream = ExtResource("10_22r65")
 
-[node name="EnemyLaser" type="CharacterBody2D" groups=["Enemy"]]
+[node name="EnemyLaser" type="CharacterBody2D" node_paths=PackedStringArray("laser_line", "laser_area") groups=["Enemy"]]
 visibility_layer = 2
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_wmbn4")
-speed = 1.0
+laser_line = NodePath("LaserLine")
+laser_area = NodePath("LaserLine/LaserArea")
+speed = 10.0
 ang_acc = 1.0
-health = 1.0
+health = 10.0
 
 [node name="LaserLine" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 1000, 0)
@@ -89,6 +91,7 @@ texture = SubResource("GradientTexture2D_va8me")
 texture_mode = 1
 
 [node name="LaserArea" type="Area2D" parent="LaserLine"]
+unique_name_in_owner = true
 
 [node name="LaserCollisionShape2D" type="CollisionShape2D" parent="LaserLine/LaserArea"]
 shape = SubResource("SegmentShape2D_awya0")

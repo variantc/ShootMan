@@ -48,7 +48,7 @@ script = ExtResource("2_chy2p")
 
 [node name="UpgradeManager" type="Node" parent="." node_paths=PackedStringArray("score_text")]
 script = ExtResource("4_88rj6")
-base_upgrade_cost = 5
+base_upgrade_cost = 1
 score_text = NodePath("../Camera2D/GUI/ScoreText")
 upgrade_audio_stream = ExtResource("4_xbfcx")
 failed_audio_stream = ExtResource("5_6jdvl")
@@ -86,6 +86,8 @@ position = Vector2(964, -861)
 
 [node name="EnemyNest4" parent="EnemySpawner" instance=ExtResource("15_w458h")]
 position = Vector2(126, 1350)
+
+[node name="UpgradeNodeSpawner" type="Node" parent="."]
 
 [node name="UpgradeNode" parent="." node_paths=PackedStringArray("player") instance=ExtResource("18_lhl2h")]
 unique_name_in_owner = true

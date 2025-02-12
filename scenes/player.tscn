@@ -1,13 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://bg3jhepeqaqn1"]
+[gd_scene load_steps=10 format=3 uid="uid://bg3jhepeqaqn1"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rrtky"]
 [ext_resource type="PackedScene" uid="uid://b8rvbitfa8jom" path="res://scenes/projectiles/bullet.tscn" id="2_qp317"]
+[ext_resource type="Shader" uid="uid://druxkcrg1f8uk" path="res://shaders/player_shader.tres" id="3_2uok2"]
 [ext_resource type="PackedScene" uid="uid://cx2lutrqoqoro" path="res://scenes/components/movement_component.tscn" id="4_4x1rb"]
 [ext_resource type="Texture2D" uid="uid://c2fgxpxjw2tun" path="res://sprites/player_01.png" id="4_7o64f"]
+[ext_resource type="Texture2D" uid="uid://b25ewf2aojw3w" path="res://sprites/player_01_normal.png" id="4_g30mq"]
 [ext_resource type="PackedScene" uid="uid://bfqikvscrc03s" path="res://scenes/components/shoot_component.tscn" id="5_rpwvy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
 radius = 15.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_spe4q"]
+shader = ExtResource("3_2uok2")
+shader_parameter/mix_amount = null
+shader_parameter/flash_colour = null
+shader_parameter/hp_left = 1.0
+shader_parameter/normal_intensity = 0.46
+shader_parameter/light_direction = Vector2(1.5, -0.5)
+shader_parameter/light_color = Vector3(1, 1, 1)
+shader_parameter/object_rotation = 0.0
+shader_parameter/shade_color = Color(0.4964, 0.68, 0.272, 0.976471)
+shader_parameter/shade_intensity = 0.461
+shader_parameter/normal_map = ExtResource("4_g30mq")
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 visibility_layer = 2
@@ -23,6 +38,7 @@ shape = SubResource("CircleShape2D_gelfa")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
+material = SubResource("ShaderMaterial_spe4q")
 position = Vector2(2, 0)
 rotation = 1.5708
 texture = ExtResource("4_7o64f")

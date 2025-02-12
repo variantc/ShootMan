@@ -1,42 +1,58 @@
 extends Node2D
 class_name WorldGenerator
 
-const CHUNK_SIZE = 1000  # Size of each chunk in pixels
-const MIN_DISTANCE_BETWEEN_POINTS = 200  # Minimum distance between spawned objects
-const UPGRADES_PER_CHUNK = 2
-const NESTS_PER_CHUNK = 3
+@export_group("Chunk Properties")
+@export var CHUNK_SIZE = 2000  # Size of each chunk in pixels
+@export var MIN_DISTANCE_BETWEEN_POINTS = 500  # Minimum distance between spawned objects
+@export var UPGRADES_PER_CHUNK = 2
+@export var NESTS_PER_CHUNK = 3
+@export var chunk_check_interval := 5
+var check_timer := 0.0
 
+@export_group("Scenes")
 @export var upgrade_node_scene : PackedScene
 @export var enemy_nest_scene : PackedScene
 
 var active_chunks = {}  # Dictionary to track generated chunks
 var rng = RandomNumberGenerator.new()
+var last_checked_chunk := Vector2.ZERO
+
 
 func _ready():
 	rng.randomize()
-	print_debug("WorldGenerator registering")
 	Refs.register_node(self)
-	print_debug("WorldGenerator connecting to signal")
 	Refs.enemy_spawner_ready.connect(_on_enemy_spawner_ready)
-	print_debug("WorldGenerator connected to signal")
+
+
+func _process(delta: float) -> void:
+	# Only check periodically to avoid constant chunk calculations
+	check_timer += delta
+	if check_timer >= chunk_check_interval:
+		check_timer = 0.0
+		if Refs.player:  # Make sure player exists
+			update_chunks(Refs.player.global_position)
 
 
 func _on_enemy_spawner_ready(_enemy_spawner):
-	print_debug("Signal received in WorldGenerator")
-	generate_chunk(Vector2.ZERO)
+	update_chunks(Vector2.ZERO)
 
 
 # Called when player moves to generate nearby chunks
 func update_chunks(player_position: Vector2):
 	var current_chunk = get_chunk_coords(player_position)
 	
-	# Generate chunks in a 3x3 area around player
-	for x in range(current_chunk.x - 1, current_chunk.x + 2):
-		for y in range(current_chunk.y - 1, current_chunk.y + 2):
-			var chunk_key = str(x) + "," + str(y)
-			if not active_chunks.has(chunk_key):
-				generate_chunk(Vector2(x, y))
-				active_chunks[chunk_key] = true
+	# Only regenerate if player has moved to a new chunk
+	if current_chunk != last_checked_chunk or current_chunk == Vector2.ZERO:
+		last_checked_chunk = current_chunk
+	
+		# Generate chunks in a 3x3 area around player
+		for x in range(current_chunk.x - 1, current_chunk.x + 2):
+			for y in range(current_chunk.y - 1, current_chunk.y + 2):
+				var chunk_key = str(x) + "," + str(y)
+				if not active_chunks.has(chunk_key):
+					generate_chunk(Vector2(x, y))
+					active_chunks[chunk_key] = true
+					
 
 # Convert world position to chunk coordinates
 func get_chunk_coords(pos: Vector2) -> Vector2:

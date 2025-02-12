@@ -17,7 +17,6 @@ var level : int = 0
 
 var upgrade_type : UpgradeManager.Type
 
-@export var player : Player
 
 func _ready():	
 	upgrade_button.set_visible(false)
@@ -53,7 +52,7 @@ func _on_all_health_removed(node : Node, health_left : bool):
 
 func _physics_process(delta):
 	if claimed:
-		upgrade_line.set_endpoint(player.global_position - self.global_position)
+		upgrade_line.set_endpoint(Refs.player.global_position - self.global_position)
 	else:
 		upgrade_line.points[1] = Vector2.ZERO
 		

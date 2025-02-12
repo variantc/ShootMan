@@ -30,10 +30,15 @@ var inc_counter = 0
 
 
 func _ready():
+	Refs.register_node(self)
 	SignalBus.enemy_nest_destroyed.connect(_on_enemy_nest_destroyed)
-	var node_children = get_children()
-	for n in node_children:
-		spawn_nests.append(n as EnemyNest)
+	#var node_children = get_children()
+	#for n in node_children:
+		#spawn_nests.append(n as EnemyNest)
+
+
+func register_nest(nest : EnemyNest):
+	spawn_nests.append(nest)
 
 
 func _process(delta):

@@ -16,7 +16,7 @@ var offset_to_player : Vector2
 
 
 func _ready():
-	Refs. register_world(self)
+	Refs.register_node(self)
 	
 	SignalBus.drop_picked_up.connect(_on_drop_pickedup)
 	SignalBus.enemy_killed.connect(_on_enemy_killed)

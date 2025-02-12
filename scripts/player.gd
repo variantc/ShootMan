@@ -19,7 +19,7 @@ var start_pos : Vector2
 
 
 func _ready():
-	Refs.register_player(self)
+	Refs.register_node(self)
 	
 	SignalBus.upgrade_value_changed.connect(_on_upgrade_value_changed)
 	SignalBus.debug_upgrade_button_pressed.connect(_on_debug_upgrade)

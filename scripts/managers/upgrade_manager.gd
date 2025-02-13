@@ -7,9 +7,24 @@ enum Type {
 	SHOT_TIME,
 	SHOT_SPREAD,
 	SHOT_LIFETIME,
+	SHOT_SPEED,
+	PLAYER_SPEED,
+	PLAYER_ANG_ACC,
 	RANDOM
 }
 
+enum WeaponType {
+	SHOT_NUMBER,
+	SHOT_TIME,
+	SHOT_SPREAD,
+	SHOT_LIFETIME,
+	SHOT_SPEED
+}
+
+enum PlayerType {
+	PLAYER_SPEED,
+	PLAYER_ANG_ACC
+}
 
 static var Operation = { 	# NOT YET USED
 	ADD = 0,
@@ -21,7 +36,10 @@ static var UPGRADE_NAMES = {
 	Type.SHOT_NUMBER: "+ Shot Number",
 	Type.SHOT_TIME: "- Reduce Shot Time",
 	Type.SHOT_SPREAD: "+ Shot Spread",
-	Type.SHOT_LIFETIME: "+ Shot Range" 
+	Type.SHOT_LIFETIME: "+ Shot Range",
+	Type.SHOT_SPEED: "+ Shot Range",
+	Type.PLAYER_SPEED: "+ Player Speed",
+	Type.PLAYER_ANG_ACC: "+ Player Turning"  
 }
 
 
@@ -29,7 +47,10 @@ static var UPGRADE_VALUES = {
 	Type.SHOT_NUMBER: {"amount": 1.0, "operation": Operation.ADD},
 	Type.SHOT_TIME: {"amount": -0.05, "operation": Operation.ADD},
 	Type.SHOT_SPREAD: {"amount": 10.0, "operation": Operation.ADD},
-	Type.SHOT_LIFETIME: {"amount": 0.25, "operation": Operation.ADD}
+	Type.SHOT_LIFETIME: {"amount": 0.25, "operation": Operation.ADD},
+	Type.SHOT_SPEED: {"amount": 50.0, "operation": Operation.ADD},
+	Type.PLAYER_SPEED: {"amount": 10.0, "operation": Operation.ADD},
+	Type.PLAYER_ANG_ACC: {"amount": 10.0, "operation": Operation.ADD}
 }
 
 @export_group("Settings")

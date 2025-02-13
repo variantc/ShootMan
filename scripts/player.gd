@@ -41,7 +41,15 @@ func _on_upgrade_value_changed(upgrade_type: int, level : int, _operation : int 
 		if upgrade_type == node.upgrade_type:
 			max_level = max(node.level, max_level)
 	
-	current_weapon.apply_upgrade(upgrade_type, max_level)
+	var upgrade_name = UpgradeManager.Type.keys()[upgrade_type]
+	
+	print_debug("upgrade pressed - level: " + str(max_level))
+	if upgrade_name in UpgradeManager.PlayerType.keys():
+		print_debug("applying movement resource upgrade")
+		movement_resource.apply_upgrade(upgrade_type, max_level)
+	elif upgrade_name in UpgradeManager.WeaponType.keys():
+		print_debug("applying weapon resource upgrade")
+		current_weapon.apply_upgrade(upgrade_type, max_level)
 	
 
 func _physics_process(delta):

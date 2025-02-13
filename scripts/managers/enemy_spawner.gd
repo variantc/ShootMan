@@ -109,6 +109,9 @@ func _spawn_enemy(enemy_scene : PackedScene) -> void:
 	_setup_enemy(enemy, _get_random_edge_position())
 	# Now use EnemyNest:
 	var enemy_nest = spawn_nests.pick_random()
+	if enemy_nest == null:
+		push_warning("No enemy nest to spawn to")
+		return
 	_setup_enemy(enemy, enemy_nest.global_position)
 	
 

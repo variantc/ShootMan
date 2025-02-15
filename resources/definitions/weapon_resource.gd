@@ -47,15 +47,15 @@ func apply_upgrade(upgrade_type : UpgradeManager.Type, level : int) -> void:
 		
 	match upgrade_type:
 		UpgradeManager.Type.SHOT_NUMBER:
-			shot_number = level + 1
-			shot_spread = level + 1
+			shot_number = initial_values[UpgradeManager.Type.SHOT_NUMBER] + level + 1
+			#shot_spread = level + 1
 			print_debug("adding shots: " + str(shot_number))
 		UpgradeManager.Type.SHOT_TIME:
 			shot_time = initial_values[UpgradeManager.Type.SHOT_TIME] - level * 0.05
 		UpgradeManager.Type.SHOT_SPREAD:
 			shot_spread = initial_values[UpgradeManager.Type.SHOT_SPREAD] * level
 		UpgradeManager.Type.SHOT_LIFETIME:
-			lifetime = level * 0.1
+			lifetime = initial_values[UpgradeManager.Type.SHOT_LIFETIME] + level * 0.1
 		UpgradeManager.Type.SHOT_SPEED:
 			speed = initial_values[UpgradeManager.Type.SHOT_SPEED] + level * 50
 			print_debug("adding shotspeed: " + str(speed))

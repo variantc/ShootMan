@@ -5,7 +5,7 @@ class_name WorldGenerator
 @export var CHUNK_SIZE = 1000  # Size of each chunk in pixels
 @export var MIN_DISTANCE_BETWEEN_POINTS = 500  # Minimum distance between spawned objects
 @export var UPGRADES_PER_CHUNK = 4
-@export var NESTS_PER_CHUNK = 1
+@export var NESTS_PER_CHUNK = 2
 @export var chunk_check_interval := 5
 var check_timer := 0.0
 
@@ -78,13 +78,11 @@ func generate_chunk(chunk_coords: Vector2):
 	for i in range(UPGRADES_PER_CHUNK):
 		if i < points.size():
 			spawn_upgrade(points[i])
-			print_debug("upgrade node at: " + str(points[i]))
 	
 	# Spawn enemy nests
 	for i in range(UPGRADES_PER_CHUNK, UPGRADES_PER_CHUNK + NESTS_PER_CHUNK):
 		if i < points.size():
 			spawn_nest(points[i])
-			print_debug("spawned nest at: " + str(points[i]))
 
 # Generate points using Poisson Disc Sampling
 func generate_poisson_points(origin: Vector2, size: float, min_dist: float, num_points: int) -> Array:

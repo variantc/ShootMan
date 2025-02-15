@@ -21,7 +21,7 @@ func _ready():
 	_setup_upgrade_buttons()
 	
 
-func _setup_upgrade_buttons():
+func _setup_upgrade_buttons():  	#TODO: FIX?
 	# Initialize dictionary in _ready when nodes are available
 	upgrades = {
 		UpgradeManager.Type.SHOT_NUMBER: %ShotButton,

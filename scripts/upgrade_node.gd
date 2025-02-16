@@ -19,6 +19,8 @@ var upgrade_type : UpgradeManager.Type
 
 
 func _ready():	
+	Refs.world_ready.connect(_on_world_ready)
+	
 	upgrade_button.set_visible(false)
 	health_component.health_bar.set_visible(false)
 	%UpgradeLevelLabel.set_visible(false)
@@ -39,9 +41,11 @@ func _ready():
 	upgrade_button.button_up.connect(
 			func(): SignalBus.upgrade_button_pressed.emit(self, upgrade_type)
 		)
-		
-	# emit in ready to re-set on restart
-	SignalBus.upgrade_value_changed.emit(upgrade_type, level)
+	
+
+func _on_world_ready(_world : World):	
+	# emit in ready to re-set on restart	
+	SignalBus.upgrade_value_changed.emit(self)
 
 
 func _on_all_health_removed(node : Node, health_left : bool):
@@ -65,8 +69,8 @@ func _physics_process(delta):
 func change_claim_state(set_claimed : bool):
 	claimed = set_claimed
 	
-	if not claimed:
-		SignalBus.upgrade_value_changed.emit(upgrade_type, 0) 
+	#if not claimed:
+		#SignalBus.upgrade_value_changed.emit(upgrade_type, 0, "UpgradeNode (unclaimed)") 
 	
 	var sprite = built_sprite if claimed else raw_sprite
 	%ResourceSprite.texture = sprite
@@ -74,7 +78,7 @@ func change_claim_state(set_claimed : bool):
 	SignalBus.upgrade_node_claim_status_changed.emit(self, claimed)
 	
 	level = level + 1 if claimed else 0
-	SignalBus.upgrade_value_changed.emit(upgrade_type, level)
+	SignalBus.upgrade_value_changed.emit(self)
 	
 	%UpgradeLevelLabel.set_visible(claimed)
 	%UpgradeLevelLabel.text = "Level " + str(level)

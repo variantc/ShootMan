@@ -65,6 +65,7 @@ drop_scene = ExtResource("6_llsii")
 
 [node name="WorldGenerator" type="Node2D" parent="."]
 script = ExtResource("2_yn72p")
+UPGRADES_PER_CHUNK = 3
 upgrade_node_scene = ExtResource("18_lhl2h")
 enemy_nest_scene = ExtResource("15_w458h")
 
@@ -188,10 +189,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -876.0
-offset_top = -892.0
-offset_right = 1124.0
-offset_bottom = 1108.0
+offset_left = -879.0
+offset_top = -905.0
+offset_right = 1121.0
+offset_bottom = 1095.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6

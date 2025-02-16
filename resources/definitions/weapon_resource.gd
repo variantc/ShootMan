@@ -63,8 +63,8 @@ func apply_upgrade(upgrade_type : UpgradeManager.Type, level : int) -> void:
 
 func reset_upgrades() -> void:
 	if not initial_values.is_empty():
-		shot_number = initial_values[UpgradeManager.Type.SHOT_TIME]
-		shot_time = initial_values[UpgradeManager.Type.SHOT_NUMBER]
+		shot_number = initial_values[UpgradeManager.Type.SHOT_NUMBER]
+		shot_time = initial_values[UpgradeManager.Type.SHOT_TIME]
 		shot_spread = initial_values[UpgradeManager.Type.SHOT_SPREAD]
 		lifetime = initial_values[UpgradeManager.Type.SHOT_LIFETIME]
 		speed = initial_values[UpgradeManager.Type.SHOT_SPEED]

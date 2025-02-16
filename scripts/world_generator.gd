@@ -2,7 +2,7 @@ extends Node2D
 class_name WorldGenerator
 
 @export_group("Chunk Properties")
-@export var CHUNK_SIZE = 1000  # Size of each chunk in pixels
+@export var CHUNK_SIZE = 1500  # Size of each chunk in pixels
 @export var MIN_DISTANCE_BETWEEN_POINTS = 500  # Minimum distance between spawned objects
 @export var UPGRADES_PER_CHUNK = 4
 @export var NESTS_PER_CHUNK = 2

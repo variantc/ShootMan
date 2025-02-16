@@ -53,6 +53,9 @@ static var UPGRADE_VALUES = {
 	Type.PLAYER_ANG_ACC: {"amount": 10.0, "operation": Operation.ADD}
 }
 
+var upgrade_levels = {}  # Track total level from all claimed nodes
+var claimed_nodes_levels = {}  # Track individual node contributions
+
 @export_group("Settings")
 @export var base_upgrade_cost := 0
 
@@ -64,6 +67,53 @@ static var UPGRADE_VALUES = {
 
 func _ready():
 	SignalBus.upgrade_button_pressed.connect(_on_upgrade_button_pressed)
+	SignalBus.upgrade_value_changed.connect(_on_upgrade_value_changed)
+	# Initialize tracking dictionaries
+	for type in Type.values():
+		if type != Type.RANDOM:
+			upgrade_levels[type] = 0
+			claimed_nodes_levels[type] = {}
+	Refs.register_node(self)
+
+
+func register_upgrade_node(node: UpgradeNode) -> void:
+	if node.upgrade_type in claimed_nodes_levels:
+		claimed_nodes_levels[node.upgrade_type][node.get_instance_id()] = 0
+
+
+func _on_upgrade_value_changed(upgrade_node):
+	var max_level = 0
+	for n in Refs.world.claimed_upgrade_nodes:
+		var node = n as UpgradeNode
+		if upgrade_node.upgrade_type == node.upgrade_type:
+			max_level = max(node.level, max_level)
+	
+	var upgrade_name = UpgradeManager.Type.keys()[upgrade_node.upgrade_type]
+	
+	update_node_level(upgrade_node, max_level)
+
+
+func update_node_level(node: UpgradeNode, level: int) -> void:
+	var type = node.upgrade_type
+	var node_id = node.get_instance_id()
+	
+	claimed_nodes_levels[type][node_id] = level
+	
+	var highest_level = 0
+	for node_level in claimed_nodes_levels[type].values():
+		highest_level = max(highest_level, node_level) 
+
+	upgrade_levels[type] = highest_level
+	apply_upgrade(type)
+
+
+func apply_upgrade(type: int) -> void:
+	var type_name = Type.keys()[type]
+	
+	if type_name in PlayerType.keys():
+		Refs.player.movement_resource.apply_upgrade(type, upgrade_levels[type])
+	elif type_name in WeaponType.keys():
+		Refs.player.current_weapon.apply_upgrade(type, upgrade_levels[type])
 
 
 func _on_upgrade_button_pressed(upgrade_node: UpgradeNode, upgrade_type: int):
@@ -72,13 +122,12 @@ func _on_upgrade_button_pressed(upgrade_node: UpgradeNode, upgrade_type: int):
 	var upgrade_cost = base_upgrade_cost * (upgrade_node.level + 1)
 	if score_text.score >= upgrade_cost:
 		score_text.score -= upgrade_cost
-		var upgrade_info = UPGRADE_VALUES[upgrade_type]
-		SignalBus.upgrade_value_changed.emit(
-			upgrade_type, 
-			upgrade_info.amount,
-			upgrade_info.operation
-		)
+		upgrade_levels[upgrade_type] += 1
+		
+		apply_upgrade(upgrade_type)
+		
 		%SoundManager.play_sound(upgrade_audio_stream)
 		upgrade_node.change_claim_state(true)
+		SignalBus.upgrade_level_changed.emit(upgrade_type, upgrade_levels[upgrade_type])
 	else:
 		%SoundManager.play_sound(failed_audio_stream)

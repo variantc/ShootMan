@@ -21,7 +21,6 @@ var start_pos : Vector2
 func _ready():
 	Refs.register_node(self)
 	
-	SignalBus.upgrade_value_changed.connect(_on_upgrade_value_changed)
 	SignalBus.debug_upgrade_button_pressed.connect(_on_debug_upgrade)
 	start_pos = global_position
 	
@@ -34,22 +33,22 @@ func _on_debug_upgrade(upgrade_type: int):
 	#current_weapon.apply_upgrade(upgrade_type)
 	
 	
-func _on_upgrade_value_changed(upgrade_type: int, level : int, _operation : int = 0):
-	var max_level = 0
-	for n in Refs.world.claimed_upgrade_nodes:
-		var node = n as UpgradeNode
-		if upgrade_type == node.upgrade_type:
-			max_level = max(node.level, max_level)
-	
-	var upgrade_name = UpgradeManager.Type.keys()[upgrade_type]
-	
-	print_debug("upgrade pressed - level: " + str(max_level))
-	if upgrade_name in UpgradeManager.PlayerType.keys():
-		print_debug("applying movement resource upgrade")
-		movement_resource.apply_upgrade(upgrade_type, max_level)
-	elif upgrade_name in UpgradeManager.WeaponType.keys():
-		print_debug("applying weapon resource upgrade")
-		current_weapon.apply_upgrade(upgrade_type, max_level)
+#func _on_upgrade_value_changed(upgrade_type: int, level : int, _operation : int = 0):
+	#var max_level = 0
+	#for n in Refs.world.claimed_upgrade_nodes:
+		#var node = n as UpgradeNode
+		#if upgrade_type == node.upgrade_type:
+			#max_level = max(node.level, max_level)
+	#
+	#var upgrade_name = UpgradeManager.Type.keys()[upgrade_type]
+	#
+	#print_debug("upgrade pressed - level: " + str(max_level))
+	#if upgrade_name in UpgradeManager.PlayerType.keys():
+		#print_debug("applying movement resource upgrade")
+		#movement_resource.apply_upgrade(upgrade_type, max_level)
+	#elif upgrade_name in UpgradeManager.WeaponType.keys():
+		#print_debug("applying weapon resource upgrade")
+		#current_weapon.apply_upgrade(upgrade_type, max_level)
 	
 
 func _physics_process(delta):

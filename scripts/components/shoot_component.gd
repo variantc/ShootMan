@@ -52,11 +52,5 @@ func _loop_for_shots(weapon_resource : WeaponResource):
 		var spawn_offset = Vector2.RIGHT.rotated(rot) * 20  # Adjust 20 to whatever offset you want
 		weapon_stats.projectile_position = parent.global_position + spawn_offset
 		weapon_stats.rotation = rot
-			
-		##TODO: Check updated
-		#if parent is Player:
-			#projectile_stats.mask = ENEMY_LAYER_MASK
-		#if parent is EnemyMissile:
-			#projectile_stats.mask = PLAYER_LAYER_MASK
 				
 		projectile.setup(weapon_stats)

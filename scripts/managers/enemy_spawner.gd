@@ -42,6 +42,8 @@ func register_nest(nest : EnemyNest):
 
 
 func _process(delta):
+	if Refs.world.NO_ENEMIES:
+		return
 	_run_spawn_enemy_standard_timer(delta)
 	_run_spawn_enemy_spiral_timer(delta)
 	_run_spawn_enemy_missile_timer(delta)

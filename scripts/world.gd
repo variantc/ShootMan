@@ -3,6 +3,7 @@ class_name World
 
 @export_category("DEBUG")
 @export var DEBUG : bool = false
+@export var NO_ENEMIES : bool = false
 
 @export var upgrade_nodes : Array[UpgradeNode]
 var claimed_upgrade_nodes : Array[UpgradeNode]

@@ -28,6 +28,7 @@
 [node name="World" type="Node2D" node_paths=PackedStringArray("upgrade_nodes")]
 script = ExtResource("1_rlksj")
 DEBUG = true
+NO_ENEMIES = true
 upgrade_nodes = [null]
 
 [node name="Background" type="TextureRect" parent="."]

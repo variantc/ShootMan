@@ -5,6 +5,9 @@ class_name ShootComponent
 @export var bullet_scene : PackedScene
 @export var missile_scene : PackedScene
 
+@export var start_weapon : WeaponResource
+var current_weapon : WeaponResource
+
 var counter : float = 0
 var parent : Node
 
@@ -14,17 +17,18 @@ const ENEMY_LAYER_MASK := 2
 
 func _ready():
 	parent = get_parent()
+	current_weapon = start_weapon.duplicate()
 	
-
-func shoot(delta, weapon_resource : WeaponResource):
-	if weapon_resource.shot_number == 0:
-		print("ERROR: Shot number is zero!")
+	
+func _physics_process(delta):
+	if current_weapon.shot_number == 0:
+		push_error("ERROR: Shot number is zero!")
 		return
 		
 	counter += delta
-	if counter > weapon_resource.shot_time:
+	if counter > current_weapon.shot_time:
 		counter = 0.0
-		_loop_for_shots(weapon_resource)
+		_loop_for_shots(current_weapon)
 		
 
 func _loop_for_shots(weapon_resource : WeaponResource):

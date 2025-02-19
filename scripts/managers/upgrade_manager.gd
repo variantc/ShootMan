@@ -42,17 +42,6 @@ static var UPGRADE_NAMES = {
 	Type.PLAYER_ANG_ACC: "+ Player Turning"  
 }
 
-
-static var UPGRADE_VALUES = {
-	Type.SHOT_NUMBER: {"amount": 1.0, "operation": Operation.ADD},
-	Type.SHOT_TIME: {"amount": -0.05, "operation": Operation.ADD},
-	Type.SHOT_SPREAD: {"amount": 10.0, "operation": Operation.ADD},
-	Type.SHOT_LIFETIME: {"amount": 0.25, "operation": Operation.ADD},
-	Type.SHOT_SPEED: {"amount": 50.0, "operation": Operation.ADD},
-	Type.PLAYER_SPEED: {"amount": 10.0, "operation": Operation.ADD},
-	Type.PLAYER_ANG_ACC: {"amount": 10.0, "operation": Operation.ADD}
-}
-
 var upgrade_levels = {}  # Track total level from all claimed nodes
 var claimed_nodes_levels = {}  # Track individual node contributions
 
@@ -113,7 +102,7 @@ func apply_upgrade(type: int) -> void:
 	if type_name in PlayerType.keys():
 		Refs.player.movement_resource.apply_upgrade(type, upgrade_levels[type])
 	elif type_name in WeaponType.keys():
-		Refs.player.current_weapon.apply_upgrade(type, upgrade_levels[type])
+		Refs.player.shoot_component.current_weapon.apply_upgrade(type, upgrade_levels[type])
 
 
 func _on_upgrade_button_pressed(upgrade_node: UpgradeNode, upgrade_type: int):

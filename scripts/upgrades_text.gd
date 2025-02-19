@@ -28,7 +28,7 @@ func _update_text() -> void:
 		text = ""
 		return
 	
-	var debug_text = "[b]Upgrade Levels:[/b]\n"
+	var debug_text = "Upgrade Levels:\n------------------------\n"
 	
 	for type in Refs.upgrade_manager.upgrade_levels.keys():
 		var type_name = UpgradeManager.Type.keys()[type]  # Get name from enum

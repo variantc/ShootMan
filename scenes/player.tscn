@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bg3jhepeqaqn1"]
+[gd_scene load_steps=11 format=3 uid="uid://bg3jhepeqaqn1"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rrtky"]
 [ext_resource type="PackedScene" uid="uid://b8rvbitfa8jom" path="res://scenes/projectiles/bullet.tscn" id="2_qp317"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c2fgxpxjw2tun" path="res://sprites/player_01.png" id="4_7o64f"]
 [ext_resource type="Texture2D" uid="uid://b25ewf2aojw3w" path="res://sprites/player_01_normal.png" id="4_g30mq"]
 [ext_resource type="PackedScene" uid="uid://bfqikvscrc03s" path="res://scenes/components/shoot_component.tscn" id="5_rpwvy"]
+[ext_resource type="Resource" uid="uid://essjjlaf2xfv" path="res://resources/instances/starting_gun.tres" id="8_8yqg6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gelfa"]
 radius = 15.0
@@ -55,3 +56,4 @@ unique_name_in_owner = true
 
 [node name="ShootComponent" parent="." instance=ExtResource("5_rpwvy")]
 unique_name_in_owner = true
+start_weapon = ExtResource("8_8yqg6")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c43atuift7o0d"]
+[gd_scene load_steps=12 format=3 uid="uid://c43atuift7o0d"]
 
 [ext_resource type="Texture2D" uid="uid://d26n1sy223811" path="res://sprites/upgrade_node.png" id="1_0o85p"]
 [ext_resource type="Shader" path="res://shaders/upgrade_node.gdshader" id="1_ug2pp"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/upgrade_node.gd" id="2_t3o28"]
 [ext_resource type="PackedScene" uid="uid://cjbitcfgma4h7" path="res://scenes/components/health_component.tscn" id="4_5nccf"]
 [ext_resource type="Script" path="res://scripts/upgrade_line.gd" id="5_ii2fv"]
+[ext_resource type="PackedScene" uid="uid://bfqikvscrc03s" path="res://scenes/components/shoot_component.tscn" id="7_5l1iw"]
+[ext_resource type="Resource" uid="uid://essjjlaf2xfv" path="res://resources/instances/starting_gun.tres" id="8_tvtsb"]
 
 [sub_resource type="Curve" id="Curve_oonmd"]
 min_value = 0.2
@@ -73,3 +75,6 @@ offset_right = 29.0
 offset_bottom = -67.0
 text = "Level 1"
 horizontal_alignment = 1
+
+[node name="ShootComponent" parent="." instance=ExtResource("7_5l1iw")]
+start_weapon = ExtResource("8_tvtsb")

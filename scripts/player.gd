@@ -6,9 +6,8 @@ class_name Player
 @export var speed : float
 @export var ang_acc : float
 
-@export var start_weapon : WeaponResource
-var current_weapon : WeaponResource
 
+@onready var shoot_component = %ShootComponent as ShootComponent
 @onready var movement_component = %MovementComponent as MovementComponent
 @onready var movement_resource : MovementResource
 @onready var sprite := %Sprite2D
@@ -25,7 +24,6 @@ func _ready():
 	start_pos = global_position
 	
 	movement_resource = MovementResource.new(self, speed, ang_acc)
-	current_weapon = start_weapon.duplicate()
 
 
 func _on_debug_upgrade(upgrade_type: int):
@@ -55,8 +53,6 @@ func _physics_process(delta):
 	# Movement component now returns KinematicCollision2D since we're using
 	# move_and_collide.  This will move and check
 	_check_collision(_move_and_rotate(delta))
-	
-	%ShootComponent.shoot(delta, current_weapon)
 	
 	
 func _move_and_rotate(delta) -> KinematicCollision2D:

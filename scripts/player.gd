@@ -19,40 +19,18 @@ var start_pos : Vector2
 
 func _ready():
 	Refs.register_node(self)
-	
-	SignalBus.debug_upgrade_button_pressed.connect(_on_debug_upgrade)
 	start_pos = global_position
 	
 	movement_resource = MovementResource.new(self, speed, ang_acc)
 
 
-func _on_debug_upgrade(upgrade_type: int):
-	printerr("Debug upgrades not currently implemented")
-	#current_weapon.apply_upgrade(upgrade_type)
-	
-	
-#func _on_upgrade_value_changed(upgrade_type: int, level : int, _operation : int = 0):
-	#var max_level = 0
-	#for n in Refs.world.claimed_upgrade_nodes:
-		#var node = n as UpgradeNode
-		#if upgrade_type == node.upgrade_type:
-			#max_level = max(node.level, max_level)
-	#
-	#var upgrade_name = UpgradeManager.Type.keys()[upgrade_type]
-	#
-	#print_debug("upgrade pressed - level: " + str(max_level))
-	#if upgrade_name in UpgradeManager.PlayerType.keys():
-		#print_debug("applying movement resource upgrade")
-		#movement_resource.apply_upgrade(upgrade_type, max_level)
-	#elif upgrade_name in UpgradeManager.WeaponType.keys():
-		#print_debug("applying weapon resource upgrade")
-		#current_weapon.apply_upgrade(upgrade_type, max_level)
-	
-
 func _physics_process(delta):
 	# Movement component now returns KinematicCollision2D since we're using
 	# move_and_collide.  This will move and check
 	_check_collision(_move_and_rotate(delta))
+	
+	var direction = Vector2.RIGHT.rotated(global_rotation)
+	%ShootComponent.shoot(delta, direction)
 	
 	
 func _move_and_rotate(delta) -> KinematicCollision2D:

@@ -57,6 +57,10 @@ var claimed_nodes_levels = {}  # Track individual node contributions
 func _ready():
 	SignalBus.upgrade_button_pressed.connect(_on_upgrade_button_pressed)
 	SignalBus.upgrade_value_changed.connect(_on_upgrade_value_changed)
+	
+	# NOT USED AT THE MOMENT:
+	SignalBus.debug_upgrade_button_pressed.connect(_on_debug_upgrade)
+	
 	# Initialize tracking dictionaries
 	for type in Type.values():
 		if type != Type.RANDOM:
@@ -103,6 +107,10 @@ func apply_upgrade(type: int) -> void:
 		Refs.player.movement_resource.apply_upgrade(type, upgrade_levels[type])
 	elif type_name in WeaponType.keys():
 		Refs.player.shoot_component.current_weapon.apply_upgrade(type, upgrade_levels[type])
+
+
+func _on_debug_upgrade():
+	push_warning("UpgradeManager._on_debug_upgrade not implemented")
 
 
 func _on_upgrade_button_pressed(upgrade_node: UpgradeNode, upgrade_type: int):

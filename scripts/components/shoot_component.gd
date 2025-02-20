@@ -14,13 +14,26 @@ var parent : Node
 const PLAYER_LAYER_MASK := 1
 const ENEMY_LAYER_MASK := 2
 
+var _target_direction : Vector2
 
 func _ready():
 	parent = get_parent()
 	current_weapon = start_weapon.duplicate()
 	
 	
-func _physics_process(delta):
+func shoot(delta : float, target_direction : Vector2) -> void:
+	_target_direction = target_direction
+	
+	if Refs.world.DEBUG:
+		# Visualize the shooting direction
+		Refs.debug_draw_direction(
+			"shoot_component_" + str(get_instance_id()),
+			parent.global_position,
+			_target_direction,
+			150.0,
+			"direction"
+		)
+	
 	if current_weapon.shot_number == 0:
 		push_error("ERROR: Shot number is zero!")
 		return
@@ -32,13 +45,13 @@ func _physics_process(delta):
 		
 
 func _loop_for_shots(weapon_resource : WeaponResource):
+	var base_rotation = _target_direction.angle()
 	var rad_spread = weapon_resource.shot_spread * PI/180
 	
 	for i in range(weapon_resource.shot_number):
-		var rot = parent.global_rotation
+		var rot = base_rotation
 		if weapon_resource.shot_number > 1:
-			rot = parent.global_rotation - (rad_spread)/2 + i * rad_spread/(weapon_resource.shot_number-1)
-			
+			rot = base_rotation - (rad_spread)/2 + i * rad_spread/(weapon_resource.shot_number-1)
 			
 		var projectile
 

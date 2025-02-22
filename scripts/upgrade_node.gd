@@ -9,6 +9,7 @@ class_name UpgradeNode
 
 @export var upgrade_button : Button
 @export var health_component : HealthComponent
+@export var shoot_component : ShootComponent
 
 @export var chosen_type: UpgradeManager.Type = UpgradeManager.Type.RANDOM
 
@@ -64,6 +65,10 @@ func _physics_process(delta):
 		upgrade_line.set_colour(UpgradeLine.WARNING_COLOUR)
 	else:
 		upgrade_line.set_colour(UpgradeLine.START_COLOUR)
+	
+	if claimed:
+		var direction = Vector2(cos(randf_range(0, TAU)), sin(randf_range(0, TAU)))
+		shoot_component.shoot(delta, direction)
  
 
 func change_claim_state(set_claimed : bool):

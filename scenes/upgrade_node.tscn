@@ -22,7 +22,7 @@ shader_parameter/flash_colour = null
 [sub_resource type="CircleShape2D" id="CircleShape2D_aa4n7"]
 radius = 61.0
 
-[node name="UpgradeNode" type="Area2D" node_paths=PackedStringArray("upgrade_line", "upgrade_button", "health_component")]
+[node name="UpgradeNode" type="Area2D" node_paths=PackedStringArray("upgrade_line", "upgrade_button", "health_component", "shoot_component")]
 collision_mask = 11
 script = ExtResource("2_t3o28")
 upgrade_line = NodePath("UpgradeLine")
@@ -30,6 +30,7 @@ built_sprite = ExtResource("1_0o85p")
 raw_sprite = ExtResource("2_7t7kl")
 upgrade_button = NodePath("UpgradeButton")
 health_component = NodePath("HealthComponent")
+shoot_component = NodePath("ShootComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_5nccf")]
 health = 30.0

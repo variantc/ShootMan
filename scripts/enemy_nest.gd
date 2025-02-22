@@ -28,6 +28,6 @@ func hit():
 
 
 func _on_area_entered(area):
-	# Do we want to do something on bullet hit - kill it?
-	if Refs.world.DEBUG:
-		print_debug(area.name + " area")
+	if area is Bullet:
+		var bullet : Bullet = area
+		bullet.split_bullets()

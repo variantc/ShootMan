@@ -11,6 +11,9 @@ var enemy_spawner : EnemySpawner
 var upgrade_manager : UpgradeManager
 
 
+##########################################################################
+# UTILITY FUNCTIONS
+##########################################################################
 func get_closest_location(my_loc : Vector2, other_locs : Array[Vector2]) -> Vector2:
 	var d : float = INF
 	var closest := Vector2(INF, INF)
@@ -20,6 +23,7 @@ func get_closest_location(my_loc : Vector2, other_locs : Array[Vector2]) -> Vect
 			closest = v
 			d = d_temp
 	return closest
+
 
 ##########################################################################
 # SINGLETON HANGLING

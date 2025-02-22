@@ -74,14 +74,19 @@ func register_upgrade_node(node: UpgradeNode) -> void:
 		claimed_nodes_levels[node.upgrade_type][node.get_instance_id()] = 0
 
 
-func _on_upgrade_value_changed(upgrade_node):
+func _on_upgrade_value_changed(upgrade_node : UpgradeNode):
 	var max_level = 0
 	for n in Refs.world.claimed_upgrade_nodes:
 		var node = n as UpgradeNode
 		if upgrade_node.upgrade_type == node.upgrade_type:
 			max_level = max(node.level, max_level)
 	
-	var upgrade_name = UpgradeManager.Type.keys()[upgrade_node.upgrade_type]
+	#var upgrade_name = UpgradeManager.Type.keys()[upgrade_node.upgrade_type]
+	
+	upgrade_node.shoot_component.current_weapon.apply_upgrade(
+		UpgradeManager.Type.SHOT_TIME, 
+		upgrade_node.level
+		)
 	
 	update_node_level(upgrade_node, max_level)
 

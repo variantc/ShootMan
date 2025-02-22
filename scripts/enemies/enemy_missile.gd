@@ -5,7 +5,6 @@ class_name EnemyMissile
 @export var radius: float = 350.0
 @export var orbit_speed: float = 0.05
 
-@export var current_weapon : WeaponResource
 
 var orbit_direction : int = 1
 var radius_factor : float = 1.0
@@ -21,7 +20,9 @@ func _ready():
 
 func _process(delta: float) -> void:
 	_move_and_rotate(delta, target)
-	%ShootComponent.shoot(delta, current_weapon)
+	
+	var direction = Vector2.RIGHT.rotated(global_rotation + orbit_direction * PI/2)
+	%ShootComponent.shoot(delta, direction)
 	
 	
 func _move_and_rotate(delta, traget_pos):

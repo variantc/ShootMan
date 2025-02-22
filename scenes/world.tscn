@@ -27,7 +27,6 @@
 [node name="World" type="Node2D" node_paths=PackedStringArray("upgrade_nodes")]
 script = ExtResource("1_rlksj")
 DEBUG = true
-NO_ENEMIES = true
 upgrade_nodes = [null]
 
 [node name="Background" type="TextureRect" parent="."]
@@ -219,3 +218,6 @@ z_index = 99
 z_as_relative = false
 layout_mode = 2
 text = "Restart"
+
+[node name="EnemyMissile" parent="." instance=ExtResource("21_ivebk")]
+position = Vector2(288, 550)

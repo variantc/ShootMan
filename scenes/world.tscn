@@ -77,7 +77,7 @@ enemy_laser_scene = ExtResource("22_lwws8")
 attack_group_scene = ExtResource("11_x2le3")
 spawn_enemy_standard_time = 5.0
 spawn_enemy_spiral_time = 11.0
-spawn_enemy_missile_time = 17.0
+spawn_enemy_missile_time = 1.0
 spawn_enemy_laser_time = 21.0
 spawn_group_time = 120.0
 spawn_inc_time = 60.0
@@ -218,6 +218,3 @@ z_index = 99
 z_as_relative = false
 layout_mode = 2
 text = "Restart"
-
-[node name="EnemyMissile" parent="." instance=ExtResource("21_ivebk")]
-position = Vector2(288, 550)
